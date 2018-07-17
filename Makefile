@@ -17,7 +17,7 @@ SOURCE_DOCS = $(wildcard $(INPUT_PATH)/*.md)
 FILE_NAME = $(notdir $(SOURCE_DOCS))
 BUNDLE_NAME = BundlePaper
 # Remove command
-RM=/bin/rm
+RM=/bin/rm -rf
 PANDOC=/usr/local/bin/pandoc
 
 #FORMATS TO EXPORT
@@ -45,6 +45,13 @@ EXPORTED_DOCS=\
  $(EXPORTED_EPUB) \
  $(EXPORTED_ICML)
 
+#Exported bundle file names
+EXPORTED_BUNDLES=\
+$(OUTPUT_PATH)/$(BUNDLE_NAME).pdf\
+$(OUTPUT_PATH)/$(BUNDLE_NAME).html\
+$(OUTPUT_PATH)/$(BUNDLE_NAME).docx\
+$(OUTPUT_PATH)/$(BUNDLE_NAME).epub\
+$(OUTPUT_PATH)/$(BUNDLE_NAME).icml
 
 #PANDOC document publishing options
 # DOCUMENTCLASS can be {article, paper, book, memoir, report}
@@ -55,8 +62,7 @@ EXPORTED_DOCS=\
 # Cross-references requires to have pandoc-crossref installed and the use of -F pandoc-crossref BEFORE running the citations filter
 # Citations & Bibliography with -F pandoc-citeproc (.bib file must be specified in the document's YAML frontmatter
 
-# OTHER 'PER DOCUMENT FORMAT' OPTIONS
-
+# PANDOC 'PER DOCUMENT' FORMAT OPTIONS
 PANDOC_OPTIONS=\
 	--from markdown+implicit_figures+superscript+subscript+table_captions\
 	--variable documentclass=article\
@@ -65,14 +71,12 @@ PANDOC_OPTIONS=\
 	--toc-depth=2\
 	-F pandoc-crossref\
 	-F pandoc-citeproc
-
 PANDOC_HTML_OPTIONS=\
 	--to html5\
 	--template=templates/template.html\
 	--css=templates/template.css\
 	--katex\
 	--self-contained
-
 PANDOC_PDF_OPTIONS=
 PANDOC_DOCX_OPTIONS=
 PANDOC_EPUB_OPTIONS=\
@@ -95,13 +99,30 @@ $(OUTPUT_PATH)/%.epub : $(INPUT_PATH)/%.md
 $(OUTPUT_PATH)/%.icml :$(INPUT_PATH)/%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_ICML_OPTIONS) -o $@ $<
 
-#Export options for bundling files
 
+#Export options for exporting all files as one single file
 $(OUTPUT_PATH)/$(BUNDLE_NAME).pdf : $(SOURCE_DOCS)
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $^
-# Targets and dependencies
 
-.PHONY: all clean
+$(OUTPUT_PATH)/$(BUNDLE_NAME).docx : $(SOURCE_DOCS)
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_DOCX_OPTIONS) -o $@ $^
+
+$(OUTPUT_PATH)/$(BUNDLE_NAME).html : $(SOURCE_DOCS)
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_HTML_OPTIONS) -o $@ $^
+	
+$(OUTPUT_PATH)/$(BUNDLE_NAME).epub : $(SOURCE_DOCS)
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_DOCX_OPTIONS) -o $@ $^
+
+$(OUTPUT_PATH)/$(BUNDLE_NAME).icml : $(SOURCE_DOCS)
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_DOCX_OPTIONS) -o $@ $^
+
+
+
+
+# Targets and dependencies
+.PHONY: all clean clean-files clean-bundles final-docs bundle
+
+all: final-docs
 
 pdf: $(EXPORTED_PDF) $(SOURCE_DOCS)
 html5: $(EXPORTED_HTML5) $(SOURCE_DOCS)
@@ -110,14 +131,19 @@ ebook: $(EXPORTED_EPUB) $(SOURCE_DOCS)
 indesign: $(EXPORTED_ICML) $(SOURCE_DOCS)
 final-docs : pdf html5 word ebook indesign
 
+bundle: pdf-bundle html5-bundle word-bundle epub-bundle indesign-bundle
 pdf-bundle: $(OUTPUT_PATH)/$(BUNDLE_NAME).pdf $(SOURCE_DOCS)
+html5-bundle: $(OUTPUT_PATH)/$(BUNDLE_NAME).html $(SOURCE_DOCS)
+word-bundle: $(OUTPUT_PATH)/$(BUNDLE_NAME).docx $(SOURCE_DOCS)
+epub-bundle: $(OUTPUT_PATH)/$(BUNDLE_NAME).epub $(SOURCE_DOCS)
+indesign-bundle: $(OUTPUT_PATH)/$(BUNDLE_NAME).icml $(SOURCE_DOCS)
 
 #Clean output files
-clean:
-	- $(RM) $(EXPORTED_DOCS)
-
+clean: clean-files clean-bundles
+clean-files:
+	-$(RM) $(EXPORTED_DOCS)
+clean-bundles:
+	-$(RM) $(EXPORTED_BUNDLES)
 #USEFUL RULES
 #Rule to print any variable. To use write 'make print-VARIABLE' in the terminal
 print-%  : ; @echo $* = $($*)
-
-
