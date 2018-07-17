@@ -31,20 +31,9 @@ date: 2018
 
 ## Parallel transport
 
-- [ ] Parallel transport procedure![Parallel Transport](/resources/refImages/ParallelTransport-Vector.png)
-- [ ] the parallel transport method applied to a surface ![Parallel Transport Applied](resources/refImages/ParallelTransport-DesignOfGeodesics.png)
-
 ## Evolution method
 
-- [ ] Evolution method explanation ![x](resources/refImages/Evolution-Method-Evolution-of-geodesics.png)
-- [ ] Evolution method -> distance from geodesics ![x](resources/refImages/Evolution-Method-Computing-Next-Geodesics.png)
-- [ ] Distance between Geodesics ![x](resources/refImages/Distances-between-geodesics.png)
-- [ ] Optimization ![x](resources/refImages/Evolution-Method-Optimization.png)
-
 ## Geodesic vector fields
-
-- [ ] Geodesic vector field user-guided generation ![x](resources/refImages/Geodesic-Vector-Field-Algorithm.png)
-- [ ] Geodesic vector field sharpening ![x](resources/refImages/Geodesic-Vector-Field-Sharpening.png)
 
 # List of graphs to create
 

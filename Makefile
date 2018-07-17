@@ -15,7 +15,7 @@ INPUT_PATH= input
 
 SOURCE_DOCS = $(wildcard $(INPUT_PATH)/*.md)
 FILE_NAME = $(notdir $(SOURCE_DOCS))
-
+BUNDLE_NAME = BundlePaper
 # Remove command
 RM=/bin/rm
 PANDOC=/usr/local/bin/pandoc
@@ -24,19 +24,19 @@ PANDOC=/usr/local/bin/pandoc
 #Added individual variables for each format to be able to make only one desired format at a time, or all at once using just 'make'.
 
 EXPORTED_PDF=\
- $(OUTPUT_PATH)/$(FILE_NAME:.md=.pdf)
+ $(addprefix $(OUTPUT_PATH)/,$(FILE_NAME:.md=.pdf))
 
 EXPORTED_HTML5=\
- $(OUTPUT_PATH)/$(FILE_NAME:.md=.html)
+ $(addprefix $(OUTPUT_PATH)/,$(FILE_NAME:.md=.html))
 
 EXPORTED_EPUB=\
- $(OUTPUT_PATH)/$(FILE_NAME:.md=.epub)
+ $(addprefix $(OUTPUT_PATH)/,$(FILE_NAME:.md=.epub))
 
 EXPORTED_WORD=\
- $(OUTPUT_PATH)/$(FILE_NAME:.md=.docx)
+ $(addprefix $(OUTPUT_PATH)/,$(FILE_NAME:.md=.docx))
 
 EXPORTED_ICML=\
- $(OUTPUT_PATH)/$(FILE_NAME:.md=.icml)
+ $(addprefix $(OUTPUT_PATH)/,$(FILE_NAME:.md=.icml))
 
 EXPORTED_DOCS=\
  $(EXPORTED_HTML5) \
@@ -95,21 +95,22 @@ $(OUTPUT_PATH)/%.epub : $(INPUT_PATH)/%.md
 $(OUTPUT_PATH)/%.icml :$(INPUT_PATH)/%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_ICML_OPTIONS) -o $@ $<
 
+#Export options for bundling files
+
+$(OUTPUT_PATH)/$(BUNDLE_NAME).pdf : $(SOURCE_DOCS)
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $^
 # Targets and dependencies
 
 .PHONY: all clean
 
+pdf: $(EXPORTED_PDF) $(SOURCE_DOCS)
+html5: $(EXPORTED_HTML5) $(SOURCE_DOCS)
+word: $(EXPORTED_WORD) $(SOURCE_DOCS)
+ebook: $(EXPORTED_EPUB) $(SOURCE_DOCS)
+indesign: $(EXPORTED_ICML) $(SOURCE_DOCS)
 final-docs : pdf html5 word ebook indesign
 
-pdf: $(EXPORTED_PDF) $(SOURCE_DOCS)
-
-html5: $(EXPORTED_HTML5) $(SOURCE_DOCS)
-
-word: $(EXPORTED_WORD) $(SOURCE_DOCS)
-
-ebook: $(EXPORTED_EPUB) $(SOURCE_DOCS)
-
-indesign: $(EXPORTED_ICML) $(SOURCE_DOCS)
+pdf-bundle: $(OUTPUT_PATH)/$(BUNDLE_NAME).pdf $(SOURCE_DOCS)
 
 #Clean output files
 clean:
