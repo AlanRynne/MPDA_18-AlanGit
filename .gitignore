@@ -1,5 +1,5 @@
 #Files to ignore from git
-resources/bibliography/
+research/bibliography/
 output/
 .DS_Store
 
