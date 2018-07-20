@@ -1,10 +1,9 @@
 #Files to ignore from git
 research/bibliography/
-output/*.pdf
-output/*.html
-output/*.epub
-output/*.icml
-output/*.docx
+!output/
+output/*
+
+
 .DS_Store
 .vscode
 

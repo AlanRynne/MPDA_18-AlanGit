@@ -20,4 +20,4 @@ To output in article format:
 
 Other commands for publishing a single file format are available (check the lower part of the makefile)
 
-All output files will be saved in the `output/` folder
+All output files will be saved in the `output/` folder. If it is not generated
