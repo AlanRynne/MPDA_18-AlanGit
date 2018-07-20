@@ -8,12 +8,16 @@ citecolor: NavyBlue
 urlcolor: NavyBlue
 header-includes:
   \usepackage[multiple]{footmisc}
+  \usepackage{svg}
+  \usepackage{svgcolor}
 papersize: A4
 margin-left: 1in
 margin-right: 1in
 margin-top: 1in
 margin-bottom: 1in
 fontsize: 10pt
+toc: true
+toc-depth: 2
 lof: true
 lot: true
 
@@ -23,19 +27,32 @@ subtitle: "MPDA'18 Master Thesis —— UPC-ETSAV"
 institute: UPC-ETSAV
 author: Alan Rynne Vidal [^email]$\, \,$[^affil]
 date: Sept 2017
-abstract: 
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+abstract:
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 thanks:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: input/MarkdownPaper.bib
+bibliography: /Users/alan/GitHub/MPDA_18-AlanGit/input/MarkdownPaper.bib
+output: 
+  pdf_document: 
+    latex_engine: xelatex
 ---
 
 [^email]: ***E-mail:*** alan@rynne.es
-
 [^affil]: ***Affiliation***: Universitat Politècnica de Barcelona - Escola de Architectura Superior del Vallès (UPC-ETSAV)
 
+[//]: # (This may be the most platform independent comment)
+
+
 # Introduction
+
+## Basic terminology
+
+Geodesic curves
+: A geodesic curve $g$ is a locally shortest path on a surface $S$.  
+
+Jacobi field $\mathbb{v}(s)$
+:  Paste definition here
 
 ## Geodesic patterns
 
@@ -56,9 +73,12 @@ What are geodesic patterns?
 
 > * Long Thin panels that bend about their weak axis
 > * Zero geodesic curvature
-> * Represent the shortest path between two points on a surface
+> * Represent the shortest path between two points on a surface  
+
 
 ### Constant width property [^3]
+
+[^3]: This is just some random footnote in the paper.
 
 > * Panels whose original, unfolded shape is a rectangle.
 > * The only way this can happen is if the entire surface is developable.
@@ -67,12 +87,11 @@ What are geodesic patterns?
 >   * Panels will not be exactly rectangular when unfolded
 >   * ***Requirement:*** Geodesic curves that guide the panels must have approximately constant distance from thier neighbourhood curves.
 
-[^3]: This is just some random footnote in the paper.
-
 ### Developable (or 'pure-bending') property
 
 > * Bending panels on surfaces changes the distances in points only by a small amount so,
-> * A certain amount of twiting is also present in this aplications.\
+> * A certain amount of twiting is also present in thi`
+> s aplications.\
 > ***Some methods in this chapter  do not take into account this property.***
 
 ## Problem Statement
@@ -123,17 +142,20 @@ Two main concepts are covered in this section, both proposed by [@Pottmann2010-k
 
 ### The *evolution method*
 
-As depicted in [@Fig:evolutionMethod]: Starting from a source geodesic somewhere in the surface:
+As depicted in: Starting from a source geodesic somewhere in the surface:
 
 * Evolve a pattern of geodesics iteratively computing 'next' geodesics.
+
 * 'Next' geodesics must fullfil the condition of being at approximately constant distance from its predecesor.
+
 * If the deviation from its predecesor is too great, breakpoints are introduced and continued as a *'piecewise geodesic'.*
 
-![The evolution method](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:evolutionMethod}
+* 'Next geodesics' are computed using Jacobi Fields
 
 ### Piecewise-geodesic vectorfields
 
-XXX
+![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png)
+![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png)
 
 # Panels from curve patterns
 
@@ -169,7 +191,7 @@ Therefore, the procedure was modified in the following way:
 > 2. Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
 > 3. Fill the holes in the rulings by interpolation (???)
 > 4. On each ruling:
->    1. Determine points $A_i(x)$ and $B_i(x)$ which are the closest to eodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
+>    1. Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
 > 5. Optimize globaly the positions of points $A_i(x)$ and $B_i(x)$ such that
 >     1. Trim curves are *smooth*
 >     2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
@@ -195,6 +217,7 @@ For each geodesic, the associated surface is constructed according to [@Fig:bino
 
 ![Binormal Method for panels & T.N.B. frame](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:binormalMethod}
 
+
 ## Method Comparison
 
 See [@tbl:stressComparisson] for more info...
@@ -218,6 +241,7 @@ This applies to both methods defining panels.[@fig:panelStress]
 > $$\varepsilon=\frac{1}{2}(d/2\rho)^2 + \cdots.$$ {#eq:eqLabel3}  
 
 **MISSING MORE INFO ON STRESS ANALYISIS**
+
 
 # Final analysis cost, quality
 
@@ -272,7 +296,7 @@ LaTeX formulas and reference them (like [@Eq:eqLabel] or multiple at once like [
 References are placed using the format `[@type:label]`, being `label` the unique name of the desired reference on the format, and `type` the type of reference, in the following format:
 
 * Images: `{#fig:LABEL}`
-* Tables: `{#tbl:LABEL}`
+* Tables: `{#tbl:LABEL}`v
 * Equations: `{#eq:LABEL}`
 * Sections: `{#sec:LABEL}`
   * If sections are added, they will change all the reference names to include their corresponding sectionsd
@@ -280,9 +304,9 @@ References are placed using the format `[@type:label]`, being `label` the unique
 
 ### Distances between geodesics ([@Eq:geodesicD;@eq:geodesicD2])
 
-$$g^+(s) = g(s) + \varepsilon\mathbf{v}(s) + \varepsilon^2(\ldots)$${#eq:geodesicD}
+> $$g^+(s) = g(s) + \varepsilon\mathbf{v}(s) + \varepsilon^2(\ldots)$${#eq:geodesicD}
 
-$$\mathbf{v}(s)=\omega(s) \cdot R_{\pi/2}(g'(s)),\quad where\quad \omega'' + K\omega = 0.$${#eq:geodesicD2}
+> $$\mathbf{v}(s)=\omega(s) \cdot R_{\pi/2}(g'(s)),\quad where\quad \omega'' + K\omega = 0.$${#eq:geodesicD2}
 
 Tables are also an option:
 
@@ -304,6 +328,33 @@ HTML figure disposition is also available, with customization options like width
 Difference between width-settings, nocaption option, etc... [@Fig:coolFig] is a full figure reference, but you can also reference just one of the images, like [@Fig:cfa;[@Fig:cfb;[@Fig:cfc].
 </div>
 
+And some very nice diagrams too, using the Mermaid library
+
+[comment]: # (To render mermaid in PDF's as vector images replace 'mermaid' for '{.mermaid format=pdf}')
+
+```mermaid
+gantt
+    title A Gantt Diagram
+    dateFormat  YYYY-MM-DD
+    section Section
+    A task           :a1, 2014-01-01, 30d
+    Another task     :after a1  , 20d
+    section Another
+    Task in sec      :2014-01-12  , 12d
+    another task      : 24d
+```
+: A code block
+
+[comment2]: # (This is another comment)
+
+```mermaid
+graph LR
+    A[Hard edge] -->|Link text| B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+```
+
 # References that must be used
 
 * [@eigensatz2010paneling]
@@ -318,5 +369,6 @@ Difference between width-settings, nocaption option, etc... [@Fig:coolFig] is a 
 * [@Rose2007developable]
 * [@Weinand2006TimberRib]
 * [@Wallner2010tiling]
+* [Geodesic Lines Grasshopper implementation](https://www.grasshopper3d.com/forum/topics/geodesic-distance-from-points-on-mesh)
 
 # References

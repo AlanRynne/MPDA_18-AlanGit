@@ -12,6 +12,7 @@ date: 2018
 - [ ] Summarize all keypoints
 - [ ] Implement Parallel Transport
 - [ ] Talk to Gerard about
+  - [ ] **MONEY**
   - [ ] Autoría de los capítulos
   - [ ] Studio 2 Paper
   - [ ] ??
@@ -39,3 +40,7 @@ date: 2018
 
 - [ ] Cost/Quality comparison chart
 - [ ] ...
+
+# References
+
+I added this reference section here to check the 

@@ -4,10 +4,9 @@
 # <http://johnmacfarlane.net/pandoc/>
 #
 # Run "make" (or "make pdf") to convert to PDF format
-# Run "make" (or "make all") to convertm to all other formats
-
 #
 # Run "make clean" to delete converted files
+
 
 # Convert all files in this directory that have a .md suffix
 OUTPUT_PATH= output
@@ -69,6 +68,7 @@ PANDOC_OPTIONS=\
 	-N\
 	--toc\
 	--toc-depth=2\
+	-F mermaid-filter\
 	-F pandoc-crossref\
 	-F pandoc-citeproc
 PANDOC_HTML_OPTIONS=\
@@ -81,7 +81,10 @@ PANDOC_PDF_OPTIONS=
 PANDOC_DOCX_OPTIONS=
 PANDOC_EPUB_OPTIONS=\
 	--to epub
-PANDOC_ICML_OPTIONS=
+PANDOC_ICML_OPTIONS=\
+	--filter=pandocsvg.py\
+	--standalone\
+	--katex
 
 #Export options per format
 $(OUTPUT_PATH)/%.html : $(INPUT_PATH)/%.md
