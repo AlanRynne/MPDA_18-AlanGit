@@ -408,6 +408,10 @@ graph LR
 * [@Rose2007developable]
 * [@Weinand2006TimberRib]
 * [@Wallner2010tiling]
+* [@jia2017curves]
+* [@pottmann2015architectural]
+* [@pottmann2010architectural]
+* [@pottmann2008geometry]
 * [Geodesic Lines Grasshopper implementation](https://www.grasshopper3d.com/forum/topics/geodesic-distance-from-points-on-mesh)
 
 # References
