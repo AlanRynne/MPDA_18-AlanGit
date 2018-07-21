@@ -10,6 +10,7 @@ header-includes:
   \usepackage[multiple]{footmisc}
   \usepackage{svg}
   \usepackage{svgcolor}
+  \usepackage{algorithms}
 papersize: A4
 margin-left: 1in
 margin-right: 1in
@@ -44,15 +45,14 @@ output:
 
 [//]: # (This may be the most platform independent comment)
 
-
 # Introduction
 
-## Basic terminology
+## Basic terminology 
 
-Geodesic curves
+Geodesic curve $\rightarrow g$
 : A geodesic curve $g$ is a locally shortest path on a surface $S$.  
 
-Jacobi field $\mathbb{v}(s)$
+Jacobi field $\rightarrow\mathbf{v}(s)$
 :  Paste definition here
 
 ## Geodesic patterns
@@ -115,9 +115,12 @@ Look for a system of geodesic curves in a freeform surface which:
 
 # Algorithmic ways of generating geodesics
 
-## Geodesic curves on a surface
+## Start point + Directon problem
 
-## Geodesic curves on a mesh
+
+## Start point + End point problem
+
+
 
 # Design strategies for geodesic systems
 
@@ -153,10 +156,46 @@ As depicted in: Starting from a source geodesic somewhere in the surface:
 
 * 'Next geodesics' are computed using Jacobi Fields
 
+### Distances between geodesics
+
+1. No straight forward solution.
+    1. Only for rotational surfaces (surfaces with evenly distriuted meridian curves).
+2. **But** a first-order aproximation of this distance can be approximated:
+
+> Starting at time $t=0$ with a geodesic curve $g(s)$, parametrized by arc-length $s$, and let it move within the surface.  
+> A snapshot at time $t=\varepsilon$ yields a geodesic $g^+$ near $g$.
+
+$$g^+(s)=g(s)+\varepsilon\mathbf{v}(s) + \varepsilon^2(\ldots)$${#eq:nextGeodesic}
+
+The derivative vector field $\mathbf v$ is called a *Jacobi field*. We may asume it is orthogonal to $g(s)$ and it is expressed in terms of the geodesic tangent vector $g'$ as:
+
+$$\mathbf v(s) = w(s)\cdot R_{\pi/2}(g'(s)),\quad\text{where}\; w'' + Kw = 0$${#eq:jacobiField}
+
+Since the distance between infinitesimally close geodesics are governed by [@Eq:jacobiField], that equation also goberns the width of a strip bounded by two geodesics at a small finite distance.
+
+Using this principle, you can develop strips whose width $w(s)$ fulfills the Jacobi equation $w(s)=\alpha \cosh(s \sqrt{|K|})$[^question] for some value $K<0$.  
+Gluing them together will result in a surface of approximate Gaussian curvature.
+
+[^question]: **Question:** What is $\alpha$ in this formula? Missing image
+
+<div id="fig:geoDistMultiple">
+
+![](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=50%}
+![](../resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
+
+Geodesic distances on sphere
+
+</div>
+
+#### Algorithm pseudocode:
+
+$$PENDING$$
+
 ### Piecewise-geodesic vectorfields
 
-![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png)
-![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png)
+![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
+
+![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
 
 # Panels from curve patterns
 
@@ -198,7 +237,7 @@ Therefore, the procedure was modified in the following way:
 >     2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
 >     3. The ruling segments $A_i(x)B_i(x)$ lies close to the *original surface* $\Phi$
 
-![Tangent developable method examples\label{tangentDevExamples}](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png)
+![Tangent developable method examples\label{tangentDevExamples}](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:tangentDevMethod}
 
 ## The Bi-Normal Method
 
@@ -343,8 +382,7 @@ gantt
     section Another
     Task in sec      :2014-01-12  , 12d
     another task      : 24d
-```
-: A code block
+``` 
 
 [comment2]: # (This is another comment)
 
