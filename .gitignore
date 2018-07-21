@@ -1,9 +1,6 @@
 #Files to ignore from git
 research/bibliography/
-!output/
-output/*
-
-
+input/*.pdf
 .DS_Store
 .vscode
 

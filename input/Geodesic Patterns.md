@@ -32,10 +32,11 @@ abstract:
 thanks:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: /Users/alan/GitHub/MPDA_18-AlanGit/input/MarkdownPaper.bib
-output: 
+bibliography: MPDABibliography.bib
+output:
   pdf_document: 
     latex_engine: xelatex
+    
 ---
 
 [^email]: ***E-mail:*** alan@rynne.es
