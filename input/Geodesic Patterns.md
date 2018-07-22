@@ -36,8 +36,7 @@ keywords: architectural geometry, geodesic patterns, geodesics, paneling, surfac
 bibliography: MPDABibliography.bib
 output:
   pdf_document: 
-    latex_engine: xelatex
-    
+    latex_engine: xelatex  
 ---
 
 [^email]: ***E-mail:*** alan@rynne.es
@@ -91,8 +90,7 @@ What are geodesic patterns?
 ### Developable (or 'pure-bending') property
 
 > * Bending panels on surfaces changes the distances in points only by a small amount so,
-> * A certain amount of twiting is also present in thi`
-> s aplications.\
+> * A certain amount of twiting is also present in this aplications.\
 > ***Some methods in this chapter  do not take into account this property.***
 
 ## Problem Statement
@@ -117,10 +115,7 @@ Look for a system of geodesic curves in a freeform surface which:
 
 ## Start point + Directon problem
 
-
 ## Start point + End point problem
-
-
 
 # Design strategies for geodesic systems
 

@@ -1,4 +1,4 @@
-# Master Thesis ReadMe!
+# Master Thesis Read Me!
 
 This repository contains all of my master thesis work on geodesic patterns.
 
@@ -16,8 +16,7 @@ To output in article format:
 > Enter `make final-docs` to convert the .md file into HTML5,PDF,DOCX,EPUB and ICML.  
 > or  
 > Enter `make pdf` to generate just the pdf version.
-
-
+`
 Other commands for publishing a single file format are available (check the lower part of the makefile)
 
 All output files will be saved in the `output/` folder. If it is not generated
