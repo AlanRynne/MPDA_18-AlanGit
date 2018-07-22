@@ -6,12 +6,15 @@ date: 2018
 
 # To-Do List
 
+
 - [ ] Decide about images
-  - [ ] Parallel Transport...etc...
+- [ ] Parallel Transport...etc...
 - [ ] Finish reading references
 - [ ] Summarize all keypoints
 - [ ] Implement Parallel Transport
-- [ ] Talk to Gerard about
+
+***Talk to Gerard about***
+
   - [ ] **MONEY**
   - [ ] Autoría de los capítulos
   - [ ] Studio 2 Paper
@@ -21,7 +24,9 @@ date: 2018
   - [ ] Level of detail in algorithms
   - [ ] Geodesic generation
   - [ ] Construction
-- [ ] **GEODESIC GENERATION**
+
+***GEODESIC GENERATION***
+ 
   - [ ] Geodesic = Shortest Path?
   - [ ] Best option would be starting with point and vector.
   - [ ] Shortest path could be easily implemented
