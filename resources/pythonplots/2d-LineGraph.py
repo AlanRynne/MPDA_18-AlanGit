@@ -5,6 +5,11 @@ from bokeh.io import export, export_svgs, export_png
 import pandas as pd
 import io
 
+# TO-DO 
+# Implement input and output arguments
+# Connect into makefile
+
+
 #Read CSV file and convert it to CDS
 df = pd.read_csv('resources/rawData/testData.csv')
 cds_df = ColumnDataSource(df)
