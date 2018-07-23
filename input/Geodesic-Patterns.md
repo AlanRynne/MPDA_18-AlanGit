@@ -1,36 +1,38 @@
 ---
-link-citations: true
-link-references: true
-colorlinks: true
-
-linkcolor: NavyBlue
-toccolor: Red
-citecolor: yellow
-urlcolor: Green
-
+# Latex Engine
 latex_engine: xelatex
+# Include Latex Packages
 header-includes:
   \usepackage[multiple]{footmisc}
   \usepackage{svg}
   \usepackage{svgcolor}
-
- 
-documentclass: paper
+# Latex Template Options
+documentclass: article
 classoption: oneside
-
+# Paper geometry options
 papersize: A4
 margin-left: 1in
 margin-right: 1in
 margin-top: 1in
 margin-bottom: 1in
 fontsize: 10pt
-
+# Table of Contents
 toc: true
 toc-depth: 2
+# List of figures & tables
 lof: true
 lot: true
+# Make links in citations & references
+link-citations: true
+link-references: true
+colorlinks: true
+# Color citations & references
+linkcolor: NavyBlue
+toccolor: Red
+citecolor: yellow
+urlcolor: Green
 
-
+# Document meta-data
 title: "Geodesic Patterns for Free-form Architecture"
 subtitle: "MPDA'18 Master Thesis —— UPC-ETSAV"
 institute: UPC-ETSAV
@@ -41,30 +43,24 @@ abstract:
 thanks:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: input/MPDABibliography.bib
-
+bibliography: ../input/MPDABibliography.bib
 ---
 
 [^email]: ***E-mail:*** alan@rynne.es
 [^affil]: ***Affiliation***: Universitat Politècnica de Barcelona - Escola de Architectura Superior del Vallès (UPC-ETSAV)
 
-[//]: # (This may be the most platform independent comment)
-
 # Introduction
-
-
 
 # Background
 
-
 # What are geodesics?
 
-## Basic terminology 
+## Basic terminology
 
-Geodesic curve $\rightarrow g$
+Geodesic curve
 : A geodesic curve $g$ is a locally shortest path on a surface $S$.  
 
-Jacobi field $\rightarrow\mathbf{v}(s)$
+Jacobi field
 :  Paste definition here
 
 ## Geodesic patterns
@@ -187,22 +183,22 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 
 <div id="fig:geoDistMultiple">
 
-![](resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=50%}
-![](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
+![](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=50%}
+![](../resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
 
 Geodesic distances on sphere
 
 </div>
 
-#### Algorithm pseudocode:
+#### Algorithm pseudocode
 
 $$PENDING$$
 
 ### Piecewise-geodesic vectorfields
 
-![Geodesic Vector Fields](resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
+![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
 
-![Geodesic Vector Field sharpening](resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
+![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
 
 # Panels from curve patterns
 
@@ -264,7 +260,6 @@ For each geodesic, the associated surface is constructed according to [@Fig:bino
 
 ![Binormal Method for panels & T.N.B. frame](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:binormalMethod}
 
-
 ## Method Comparison
 
 See [@tbl:stressComparisson] for more info...
@@ -282,13 +277,10 @@ This applies to both methods defining panels.[@fig:panelStress]
 ## Stress formulas
 
 > $$ \rho=1/{\sqrt K}, $$  {#eq:eqLabel}
-
 > $$ d/2\rho\leq C,\quad with\quad C=\sqrt{\sigma _{max}/E}, $$ {#eq:eqLabel2}
-
 > $$\varepsilon=\frac{1}{2}(d/2\rho)^2 + \cdots.$$ {#eq:eqLabel3}  
 
-**MISSING MORE INFO ON STRESS ANALYISIS**
-
+###### MISSING MORE INFO ON STRESS ANALYISIS
 
 # Final analysis cost, quality
 
@@ -352,7 +344,6 @@ References are placed using the format `[@type:label]`, being `label` the unique
 ### Distances between geodesics ([@Eq:geodesicD;@eq:geodesicD2])
 
 > $$g^+(s) = g(s) + \varepsilon\mathbf{v}(s) + \varepsilon^2(\ldots)$${#eq:geodesicD}
-
 > $$\mathbf{v}(s)=\omega(s) \cdot R_{\pi/2}(g'(s)),\quad where\quad \omega'' + K\omega = 0.$${#eq:geodesicD2}
 
 Tables are also an option:
@@ -368,19 +359,20 @@ Tables are also an option:
 HTML figure disposition is also available, with customization options like width, per image captions, etc...
 
 <div id="fig:coolFig">
-![](https://dummyimage.com/150x150/f9f3f9/f1f1f1.png){#fig:cfa width=30%}
-![](https://dummyimage.com/300x150/f9f3f9/f1f1f1.png){#fig:cfb width=60%}
-![](https://dummyimage.com/50x150/f9f3f9/f1f1f1.png){#fig:cfc width=10%}
 
-Difference between width-settings, nocaption option, etc... [@Fig:coolFig] is a full figure reference, but you can also reference just one of the images, like [@Fig:cfa;[@Fig:cfb;[@Fig:cfc].
+![](https://dummyimage.com/82x150/f9f3f9/ababab.png){#fig:cfa  width=14%}
+![](https://dummyimage.com/500x150/f9f3f9/ababab.png){#fig:cfb width=85%}
+
+Difference between width-settings:
 </div>
+
+![](https://dummyimage.com/582x150/f9f3f9/ababab.png){#fig:cfc}
 
 And some very nice diagrams too, using the Mermaid library
 
 [comment]: # (To render mermaid in PDF's as vector images replace 'mermaid' for '{.mermaid format=pdf}')
 
 [comment2]: # (This is another comment)
-
 
 # References that must be used
 
@@ -401,5 +393,11 @@ And some very nice diagrams too, using the Mermaid library
 * [@pottmann2010architectural]
 * [@pottmann2008geometry]
 * [Geodesic Lines Grasshopper implementation](https://www.grasshopper3d.com/forum/topics/geodesic-distance-from-points-on-mesh)
+* [Non-optimized geodesic planks building](http://www.architectmagazine.com/technology/detail/la-cigarra-cafe-entry-pavilion_o)
+* [Non-optimized geodesic planks stairwell](https://www.frameweb.com/news/cun-design-bridges-tradition-modernity-with-bamboo)
+* [Discrete Geodesic Nets for Modeling Developable Surfaces](https://www.youtube.com/watch?v=rd5mg6VsfnA)
+* [Video](https://vimeo.com/273000923)
+* Add this paper to bib: [Discrete Geodesic Nets](https://arxiv.org/pdf/1707.08360.pdf)
+* 
 
 # References
