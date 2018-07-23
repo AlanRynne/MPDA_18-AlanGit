@@ -17,7 +17,7 @@ cds_df = ColumnDataSource(df)
 # Set plot properties 
 plotTitle='PlotTitle' #Plot title should come freom the .CSV filename
 paletteName= 'Spectral'
-plotPalette = bp.all_palettes[paletteName][len(df.columns)]
+plotPalette = bp.brewer['Spectral'][10]
 p = Figure(tools='', title='First Bokeh Plot', x_axis_label='Horizontal Title', y_axis_label='Vertical Title', plot_height=400, plot_width=400)
 
 fontStyle = 'italic'
@@ -45,14 +45,14 @@ p.legend.margin = 0
 ## Plot the data
 for x in range(0, len(df.columns)):
     if x%2==0:
-        p.line(df.columns[x],df.columns[x+1], source=df, color=plotPalette[x/2], line_width=3, legend=' '+list(df)[x])
-        p.circle_cross(df.columns[x],df.columns[x+1], source=df, color=plotPalette[x/2], size=10, fill_alpha=0.5)
+        p.line(df.columns[x],df.columns[x+1], source=df, color=plotPalette[x], line_width=3, legend=' '+list(df)[x])
+        p.circle_cross(df.columns[x],df.columns[x+1], source=df, color=plotPalette[x], size=10, fill_alpha=0.5)
 
 
 # Setup export
 # HTML
-output_file('resources/images/html/%s.html' % plotTitle)
 show(p)
+output_file('resources/images/html/%s.html' % plotTitle)
 # SVG
 p.output_backend = "svg"
 export_svgs(p, filename="resources/images/svg/%s.svg" % plotTitle)
