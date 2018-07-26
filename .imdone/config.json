@@ -26,6 +26,14 @@
     {
       "name": "HELP",
       "hidden": false
+    },
+    {
+      "name": "lof",
+      "hidden": false
+    },
+    {
+      "name": "lot",
+      "hidden": false
     }
   ],
   "marked": {

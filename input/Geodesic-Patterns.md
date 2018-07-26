@@ -22,8 +22,8 @@ fontsize: 10pt
 toc: true
 toc-depth: 2
 # List of figures & tables
-#lof: true
-#lot: true
+#lof: true id:10
+#lot: true id:11
 # Make links in citations & references
 link-citations: true
 link-references: true
