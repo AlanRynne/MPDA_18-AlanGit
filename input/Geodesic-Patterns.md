@@ -1,13 +1,15 @@
 ---
 # Latex Engine
 latex_engine: xelatex
+
 # Include Latex Packages
 header-includes:
   \usepackage[multiple]{footmisc}
   \usepackage{svg}
   \usepackage{svgcolor}
+
 # Latex Template Options
-documentclass: article
+documentclass: paper
 classoption: oneside
 # Paper geometry options
 papersize: A4
@@ -20,15 +22,15 @@ fontsize: 10pt
 toc: true
 toc-depth: 2
 # List of figures & tables
-lof: true
-lot: true
+#lof: true
+#lot: true
 # Make links in citations & references
 link-citations: true
 link-references: true
 colorlinks: true
 # Color citations & references
 linkcolor: NavyBlue
-toccolor: Red
+toccolor: NavyBlue
 citecolor: yellow
 urlcolor: Green
 
@@ -168,23 +170,23 @@ As depicted in: Starting from a source geodesic somewhere in the surface:
 > Starting at time $t=0$ with a geodesic curve $g(s)$, parametrized by arc-length $s$, and let it move within the surface.  
 > A snapshot at time $t=\varepsilon$ yields a geodesic $g^+$ near $g$.
 
-$$g^+(s)=g(s)+\varepsilon\mathbf{v}(s) + \varepsilon^2(\ldots)$${#eq:nextGeodesic}
+$$g^+(s)=g(s)+\varepsilon\mathbf{v}(s)+\varepsilon^2(\ldots)$${#eq:nextGeodesic}
 
 The derivative vector field $\mathbf v$ is called a *Jacobi field*. We may asume it is orthogonal to $g(s)$ and it is expressed in terms of the geodesic tangent vector $g'$ as:
 
-$$\mathbf v(s) = w(s)\cdot R_{\pi/2}(g'(s)),\quad\text{where}\; w'' + Kw = 0$${#eq:jacobiField}
+$$\mathbf{v}(s)=w(s)\cdot{R_{\pi/2}(g'(s))},\quad\text{where}\;w''+Kw=0$${#eq:jacobiField}
 
 Since the distance between infinitesimally close geodesics are governed by [@Eq:jacobiField], that equation also goberns the width of a strip bounded by two geodesics at a small finite distance.
 
-Using this principle, you can develop strips whose width $w(s)$ fulfills the Jacobi equation $w(s)=\alpha \cosh(s \sqrt{|K|})$[^question] for some value $K<0$.  
+Using this principle, you can develop strips whose width $w(s)$ fulfills the Jacobi equation $w(s)=\alpha\cosh(s\sqrt{|K|})$[^question] for some value $K<0$.  
 Gluing them together will result in a surface of approximate Gaussian curvature.
 
 [^question]: **Question:** What is $\alpha$ in this formula? Missing image
 
 <div id="fig:geoDistMultiple">
-
-![](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=50%}
-![](../resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
+ 
+![Distances between geodesics](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=49%}
+![Distances between geodesics](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
 
 Geodesic distances on sphere
 
@@ -196,9 +198,9 @@ $$PENDING$$
 
 ### Piecewise-geodesic vectorfields
 
-![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
+![Geodesic Vector Fields](resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
 
-![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
+![Geodesic Vector Field sharpening](resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
 
 # Panels from curve patterns
 
@@ -276,9 +278,9 @@ This applies to both methods defining panels.[@fig:panelStress]
 
 ## Stress formulas
 
-> $$ \rho=1/{\sqrt K}, $$  {#eq:eqLabel}
-> $$ d/2\rho\leq C,\quad with\quad C=\sqrt{\sigma _{max}/E}, $$ {#eq:eqLabel2}
-> $$\varepsilon=\frac{1}{2}(d/2\rho)^2 + \cdots.$$ {#eq:eqLabel3}  
+> $$ \rho=1/{\sqrt{K}}, $$  {#eq:eqLabel}
+> $$ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}},$$ {#eq:eqLabel2}
+> $$\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots$$ {#eq:eqLabel3}  
 
 ###### MISSING MORE INFO ON STRESS ANALYISIS
 
@@ -370,10 +372,6 @@ Difference between width-settings:
 
 And some very nice diagrams too, using the Mermaid library
 
-[comment]: # (To render mermaid in PDF's as vector images replace 'mermaid' for '{.mermaid format=pdf}')
-
-[comment2]: # (This is another comment)
-
 # References that must be used
 
 * [@eigensatz2010paneling]
@@ -398,6 +396,5 @@ And some very nice diagrams too, using the Mermaid library
 * [Discrete Geodesic Nets for Modeling Developable Surfaces](https://www.youtube.com/watch?v=rd5mg6VsfnA)
 * [Video](https://vimeo.com/273000923)
 * Add this paper to bib: [Discrete Geodesic Nets](https://arxiv.org/pdf/1707.08360.pdf)
-* 
 
 # References
