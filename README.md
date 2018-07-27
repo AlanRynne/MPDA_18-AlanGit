@@ -9,8 +9,6 @@ ALL input files should go into `input/` folder.
 * FOLDER->`resources/pythonplots/`: This folder should contain all of the python scritps that should be processed before the paper
 * FOLDER->`resources/rawData/`: Should contain all the data files needed for the plots in CSV format.
 
-Testing fetch& merge also!!!
-
 Output behaviour is controled by the Makefile.
 
 To output in article format:
@@ -22,5 +20,3 @@ To output in article format:
 Other commands for publishing a single file format are available (check the lower part of the makefile)
 
 All output files will be saved in the `output/` folder.
-
-Testing fetch & merge
