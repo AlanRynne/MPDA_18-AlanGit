@@ -42,8 +42,6 @@ author: Alan Rynne Vidal [^email]$\, \,$[^affil]
 date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-thanks:
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
 bibliography: ../input/MPDABibliography.bib
 ---
@@ -53,17 +51,36 @@ bibliography: ../input/MPDABibliography.bib
 
 # Introduction
 
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+
 # Background
 
-# What are geodesics?
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-## Basic terminology
+# Geodesic curves
 
-Geodesic curve
-: A geodesic curve $g$ is a locally shortest path on a surface $S$.  
+In differential geometry, a *geodesic curve* is the generalization of a straight line into curved spaces (see [@fig:geodesicBug]).
 
-Jacobi field
-:  Paste definition here
+Also, in the presence of  an *affine connection*, a geodesic is defined to be a curve whose tangent vectors remain parallel if they are transported along it. We will explore the notion of vector *parallel transport* in the following sections.
+
+For triangle meshes, shortest polylines cross edges at ***equal angles***.
+
+Finding the truly shortest geodesic paths requires the computation of distance fields [see @Do_Carmo2016-kx;@Kimmel1998-ut]
+
+
+![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](../resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
+
+## Algorithmic ways of generating geodesics
+
+The computation of geodesics on smooth surfaces is aclassical topic, and can be reduced to two different solutions, depending on the initial conditions of the problem, you can either generate a geodesic on a surface given ***a starting point and a direction*** *or* given ***the starting point and end point*** of the desired geodesic.
+
+### Start point + Directon problem
+
+Finding a geodesic on a surface given a start point and a direction is equivalent to solving an initial value problem for a 2nd order ODE.
+
+### Start point + End point problem
+
+This method is equivalent to solving a *boundary value problem*.
 
 ## Geodesic patterns
 
@@ -86,9 +103,7 @@ What are geodesic patterns?
 > * Zero geodesic curvature
 > * Represent the shortest path between two points on a surface  
 
-### Constant width property [^3]
-
-[^3]: This is just some random footnote in the paper.
+### Constant width property
 
 > * Panels whose original, unfolded shape is a rectangle.
 > * The only way this can happen is if the entire surface is developable.
@@ -105,27 +120,19 @@ What are geodesic patterns?
 
 ## Problem Statement
 
-### Problem 1
-
-Look for a system of geodesic curves that covers a freeform surface in a way that:
+Problem 1
+: Look for a system of geodesic curves that covers a freeform surface in a way that:
 
 1. They have approximate constant distance with it's neighbours.
 2. This curves will serve as guiding curves for the panels.
 3. The panels are to cover the surface with ***no overlap*** and ***only small gaps***
 
-### Problem 2
-
-Look for a system of geodesic curves in a freeform surface which:
+Problem 2
+: Look for a system of geodesic curves in a freeform surface which:
 
 1. Serve as the boundaries of wooden panels.
 2. The panel's deveopment is ***nearly straight***.
 3. Those panels cover the surface with ***no gaps***
-
-# Algorithmic ways of generating geodesics
-
-## Start point + Directon problem
-
-## Start point + End point problem
 
 # Design strategies for geodesic systems
 
@@ -133,17 +140,35 @@ Look for a system of geodesic curves in a freeform surface which:
 
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points ocurrs at a prescribed location.
 
-> In differential geometry, the concept of *parallel transport* (see [@fig:partrans]) of a vector ***V*** along a curve ***S*** contained in a surface means moving that vector along ***S*** such that:
+> In differential geometry, the concept of *parallel transport* (see [@fig:parTrans]) of a vector ***V*** along a curve ***S*** contained in a surface means moving that vector along ***S*** such that:
 >
 > 1. It remains tangent to the surface
 > 2. It changes as little as possible in direction
 > 3. It is a known fact that the length of the vector remains unchanged
 
-![Parallel Transport](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:partrans}
+![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](../resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
 
-> ***MISSING PARALLEL TRANSPORT PROCEDURE***
+![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:parTransProc}
 
-Following this procedure, *extremal distances between adjacent geodesics occur near the chosen curve.*
+### Procedure
+
+Given a surface $S$ represented as a triangular mesh (V,E,F):
+
+[29/Jul/18 - 17:00:25]: # (Not really sure about step 1 dividing completely the surface, must talk with enrique about it)
+
+1. Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2 .
+2. Divide the curve into equaly spaced points $p$ with distance $W$.
+3. Place an vector $\mathbf v$  onto $p_0$
+4. Parallel transport that vector along $g_x$ as described in [@fig:parTransProc].
+5. For each point $p_i$, generate geodesic curves $g_i$ and $g_-i$ using  vector $\mathbf{v}_i$ and  $\mathbf{-v}_i$ respectively.
+  1. Both geodesics form a single, continuous geodesic flowing on the surface.
+
+> Following this procedure, *extremal distances between adjacent geodesics occur near the chosen curve.* Meaning:
+> 
+> 1. For surfaces of **positive curvature**, the parallel transport method will yield a 1-geodesic pattern on which the *maximum distance* between curves will be $W$.
+> 2. On the other hand, for surfaces of **negative curvature**, the method will yield a 1-geodesic pattern with $W$ being the *closest (or minimum)* distance between them.
+
+The placement of the first geodesic curve and the selection of the initial vector are not trivial tasks. For surfaces with high variations of surfaces, the results might be unpredictable and, as such, this method is only suitable for surfaces with nearly constant curvature. Other solutions might involve cutting the surface into patches of nearly-constant curvature, and applying the *parallel transport method* independently on each patch.
 
 ## Design by evolution & segmentation
 
@@ -186,7 +211,7 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 <div id="fig:geoDistMultiple">
  
 ![Distances between geodesics](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=49%}
-![Distances between geodesics](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
+![Distances between geodesics](../resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
 
 Geodesic distances on sphere
 
@@ -198,9 +223,9 @@ $$PENDING$$
 
 ### Piecewise-geodesic vectorfields
 
-![Geodesic Vector Fields](resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
+![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
 
-![Geodesic Vector Field sharpening](resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
+![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
 
 # Panels from curve patterns
 
