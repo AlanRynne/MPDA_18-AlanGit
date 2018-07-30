@@ -54,6 +54,8 @@ bibliography: input/MPDABibliography.bib
 
 This section explains the different algorithmic aproaches that can be taken in order to completely cover any given freeform surface with panels, ideally wood or metal, which are of approximately the same width and rectantular (or nearly rectangular) when flat and that achieve a surface paneling that is not only cost-effective but also watertight.
 
+> To be continued...
+
 # Background
 
 > There is very little backgrounnd on this topic without entering direclty into Orlando's topic `Ruled Surfaces`.
@@ -74,11 +76,13 @@ There are no programs that develop this technique "out of the box", but it it ba
 3. Houdini
 4. 3DMax
 
-There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields; which are widely used in this chapter. Some of those libraries are:
+There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields (which are widely used in this chapter) and other libraries oriented to general scientific and mathematical computing, which are usefull when numerical optimization is needed during the process. Some of those libraries are:
 
 1. [LibiGL](http://libigl.github.io/libigl/)(C++ with Python bindings)
 2. [CGal](https://www.cgal.org/) (C++)
 3. [OpenMesh](https://www.openmesh.org/) (C++ with Python bindings)
+4. [NumPy](http://www.numpy.org) (Python Computing Library)
+5. [SciPy](http://www.scipi.org) (Python Scientific Computing Library )
 
 # Geodesic curves
 
@@ -90,7 +94,6 @@ For triangle meshes, shortest polylines cross edges at ***equal angles***.
 
 Finding the truly shortest geodesic paths requires the computation of distance fields [see @Do_Carmo2016-kx;@Kimmel1998-ut]
 
-
 ![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
 
 ## Algorithmic ways of generating geodesics
@@ -99,13 +102,19 @@ The computation of geodesics on smooth surfaces is aclassical topic, and can be 
 
 ### Start point + Directon problem
 
-Finding a geodesic on a surface given a start point and a direction is equivalent to solving an initial value problem for a 2nd order ODE.
+Finding a geodesic on a surface given a start point and a direction is equivalent to solving an initial value problem for a 2nd order ODE (???)
+
+> MUST COME UP WITH A BETTER EXPLANATION FOR THIS
 
 ### Start point + End point problem
 
 This method is equivalent to solving a *boundary value problem*.
 
-## Geodesic patterns
+# Geodesic surfaces
+
+> This is very well explained in p.170 of Denis Shelden thesis (Gerard's suggestion). Explanation is inspired by that section.
+
+# Geodesic patterns
 
 What are geodesic patterns?
 
@@ -233,8 +242,8 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 
 <div id="fig:geoDistMultiple">
  
-![Distances between geodesics](resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=49%}
-![Distances between geodesics](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=50%}
+![Distances between geodesics](resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=30%}
+![Distances between geodesics](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
 
 Geodesic distances on sphere
 

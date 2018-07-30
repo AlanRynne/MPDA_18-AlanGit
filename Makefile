@@ -87,7 +87,8 @@ PANDOC_HTML_OPTIONS=\
 	--katex\
 	--self-contained
 PANDOC_PDF_OPTIONS=
-PANDOC_DOCX_OPTIONS=
+PANDOC_DOCX_OPTIONS=\
+	--reference-doc=templates/reference.docx
 PANDOC_EPUB_OPTIONS=\
 	--to epub
 PANDOC_ICML_OPTIONS=\
