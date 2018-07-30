@@ -77,7 +77,9 @@ PANDOC_OPTIONS=\
 	-N\
 	-F mermaid-filter\
 	-F pandoc-crossref\
-	-F pandoc-citeproc
+	-F pandoc-citeproc\
+	--toc\
+	--toc-depth=2
 PANDOC_HTML_OPTIONS=\
 	--to html5\
 	--template=templates/template.html\
@@ -85,7 +87,8 @@ PANDOC_HTML_OPTIONS=\
 	--katex\
 	--self-contained
 PANDOC_PDF_OPTIONS=
-PANDOC_DOCX_OPTIONS=
+PANDOC_DOCX_OPTIONS=\
+	--reference-doc=templates/reference.docx
 PANDOC_EPUB_OPTIONS=\
 	--to epub
 PANDOC_ICML_OPTIONS=\
