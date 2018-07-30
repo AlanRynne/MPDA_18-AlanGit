@@ -76,11 +76,13 @@ There are no programs that develop this technique "out of the box", but it it ba
 3. Houdini
 4. 3DMax
 
-There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields; which are widely used in this chapter. Some of those libraries are:
+There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields (which are widely used in this chapter) and other libraries oriented to general scientific and mathematical computing, which are usefull when numerical optimization is needed during the process. Some of those libraries are:
 
 1. [LibiGL](http://libigl.github.io/libigl/)(C++ with Python bindings)
 2. [CGal](https://www.cgal.org/) (C++)
 3. [OpenMesh](https://www.openmesh.org/) (C++ with Python bindings)
+4. [NumPy](http://www.numpy.org) (Python Computing Library)
+5. [SciPy](http://www.scipi.org) (Python Scientific Computing Library )
 
 # Geodesic curves
 
@@ -107,11 +109,10 @@ Finding a geodesic on a surface given a start point and a direction is equivalen
 ### Start point + End point problem
 
 This method is equivalent to solving a *boundary value problem*.
+
 # Geodesic surfaces
 
 > This is very well explained in p.170 of Denis Shelden thesis (Gerard's suggestion). Explanation is inspired by that section.
-
-
 
 # Geodesic patterns
 
