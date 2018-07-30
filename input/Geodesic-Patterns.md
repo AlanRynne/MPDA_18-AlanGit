@@ -67,6 +67,21 @@ This section explains the different algorithmic aproaches that can be taken in o
 4. MAYBE?? Include non-optimized builidng examples to demonstrate the method's usefulness.
 5. Looking for other built examples or previous/further research on the subject.
 
+## Computer programs using this technique
+
+There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
+
+1. Rhino + Grasshopper
+2. Revit + Dynamo
+3. Houdini
+4. 3DMax
+
+There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields; which are widely used in this chapter. Some of those libraries are:
+
+1. [LibiGL](http://libigl.github.io/libigl/)(C++ with Python bindings)
+2. [CGal](https://www.cgal.org/) (C++)
+3. [OpenMesh](https://www.openmesh.org/) (C++ with Python bindings)
+
 # Geodesic curves
 
 In differential geometry, a *geodesic curve* is the generalization of a straight line into curved spaces (see [@fig:geodesicBug]).
