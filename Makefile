@@ -77,7 +77,9 @@ PANDOC_OPTIONS=\
 	-N\
 	-F mermaid-filter\
 	-F pandoc-crossref\
-	-F pandoc-citeproc
+	-F pandoc-citeproc\
+	--toc\
+	--toc-depth=2
 PANDOC_HTML_OPTIONS=\
 	--to html5\
 	--template=templates/template.html\
@@ -100,7 +102,7 @@ PANDOC_REVEALJS_OPTIONS=\
 
 #Export options per format
 $(OUTPUT_PATH)%.html : $(INPUT_PATH)%.md
-	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_HTML_OPTIONS) -o $@ $<
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_HTML_OPTIONS) -o $(OUTPUT_PATH)index.html $<
 $(OUTPUT_PATH)%.pdf : $(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $<
 $(OUTPUT_PATH)%.docx : $(INPUT_PATH)%.md
