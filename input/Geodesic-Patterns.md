@@ -7,13 +7,14 @@ header-includes:
   \usepackage[multiple]{footmisc}
   \usepackage{svg}
   \usepackage{svgcolor}
+  \usepackage{url}
 
 # Latex Template Options
 documentclass: paper
 classoption: oneside
 # Paper geometry options
 papersize: A4
-margin-left: 1in
+margin-left: 1inp
 margin-right: 1in
 margin-top: 1in
 margin-bottom: 1in
@@ -51,11 +52,15 @@ bibliography: ../input/MPDABibliography.bib
 
 # Introduction
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+This section explains the different algorithmic aproaches that can be taken in order to completely cover any given freeform surface with panels, ideally wood or metal, which are of approximately the same width and rectantular (or nearly rectangular) when flat and that achieve a surface paneling that is not only cost-effective but also watertight. 
+
+
 
 # Background
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+> There is very little backgrounnd on this topic without entering direclty into Orlando's topic `Ruled Surfaces`.
+> Some background that must be included:
+> 1. Burj Khalifa interior panelling []
 
 # Geodesic curves
 
@@ -223,9 +228,9 @@ $$PENDING$$
 
 ### Piecewise-geodesic vectorfields
 
-![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo}
+![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo width=50%}
 
-![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp}
+![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp width=50%}
 
 # Panels from curve patterns
 
@@ -412,9 +417,14 @@ And some very nice diagrams too, using the Mermaid library
 * [@Weinand2006TimberRib]
 * [@Wallner2010tiling]
 * [@jia2017curves]
-* [@pottmann2015architectural]
+* [@pottmann-2015-ag]
 * [@pottmann2010architectural]
 * [@pottmann2008geometry]
+* [@meredith2012burj]
+* [@kensek2000plank]
+* [@bailin2011curvepatterns]
+* [@jia2017curves]
+* [@pottmann2011webs]
 * [Geodesic Lines Grasshopper implementation](https://www.grasshopper3d.com/forum/topics/geodesic-distance-from-points-on-mesh)
 * [Non-optimized geodesic planks building](http://www.architectmagazine.com/technology/detail/la-cigarra-cafe-entry-pavilion_o)
 * [Non-optimized geodesic planks stairwell](https://www.frameweb.com/news/cun-design-bridges-tradition-modernity-with-bamboo)
