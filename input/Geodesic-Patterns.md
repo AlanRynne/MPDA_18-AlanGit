@@ -50,6 +50,8 @@ bibliography: ../input/MPDABibliography.bib
 [^email]: ***E-mail:*** alan@rynne.es
 [^affil]: ***Affiliation***: Universitat Politècnica de Barcelona - Escola de Architectura Superior del Vallès (UPC-ETSAV)
 
+> *You can download the latest PDF version* [***HERE***](https://alanrynne.github.io/MPDA_18-MasterThesis/output/Geodesic-Patterns.pdf)
+
 # Introduction
 
 This section explains the different algorithmic aproaches that can be taken in order to completely cover any given freeform surface with panels, ideally wood or metal, which are of approximately the same width and rectantular (or nearly rectangular) when flat and that achieve a surface paneling that is not only cost-effective but also watertight. 
