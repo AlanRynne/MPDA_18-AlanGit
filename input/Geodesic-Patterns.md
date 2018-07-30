@@ -14,7 +14,7 @@ documentclass: paper
 classoption: oneside
 # Paper geometry options
 papersize: A4
-margin-left: 1inp
+margin-left: 1in
 margin-right: 1in
 margin-top: 1in
 margin-bottom: 1in
