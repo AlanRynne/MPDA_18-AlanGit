@@ -47,21 +47,38 @@ bibliography: input/MPDABibliography.bib
 [^email]: ***E-mail:*** alan@rynne.es
 [^affil]: ***Affiliation***: Universitat Politècnica de Barcelona - Escola de Architectura Superior del Vallès (UPC-ETSAV)
 
-
 # Introduction
 
 > *You can download the latest PDF version* [***HERE***](https://alanrynne.github.io/MPDA_18-MasterThesis/output/Geodesic-Patterns.pdf)
-> > *And the latest DOCX version* [***HERE***](https://alanrynne.github.io/MPDA_18-MasterThesis/output/Geodesic-Patterns.docx)
+> *And the latest DOCX version* [***HERE***](https://alanrynne.github.io/MPDA_18-MasterThesis/output/Geodesic-Patterns.docx)
 
-This section explains the different algorithmic aproaches that can be taken in order to completely cover any given freeform surface with panels, ideally wood or metal, which are of approximately the same width and rectantular (or nearly rectangular) when flat and that achieve a surface paneling that is not only cost-effective but also watertight. 
-
-
+This section explains the different algorithmic aproaches that can be taken in order to completely cover any given freeform surface with panels, ideally wood or metal, which are of approximately the same width and rectantular (or nearly rectangular) when flat and that achieve a surface paneling that is not only cost-effective but also watertight.
 
 # Background
 
 > There is very little backgrounnd on this topic without entering direclty into Orlando's topic `Ruled Surfaces`.
 > Some background that must be included:
-> 1. Burj Khalifa interior panelling []
+
+1. Burj Khalifa interior panelling [@meredith2012burj]
+2. Ghery's architecture in general uses same width metal sheets to cover entire buildings, although I am not shure if that is not Orlando's subject either...
+3. Denis Shelden thesis on constructability of gherys architecture [@shelden2002digital]
+4. MAYBE?? Include non-optimized builidng examples to demonstrate the method's usefulness.
+5. Looking for other built examples or previous/further research on the subject.
+
+## Computer programs using this technique
+
+There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
+
+1. Rhino + Grasshopper
+2. Revit + Dynamo
+3. Houdini
+4. 3DMax
+
+There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields; which are widely used in this chapter. Some of those libraries are:
+
+1. [LibiGL](http://libigl.github.io/libigl/)(C++ with Python bindings)
+2. [CGal](https://www.cgal.org/) (C++)
+3. [OpenMesh](https://www.openmesh.org/) (C++ with Python bindings)
 
 # Geodesic curves
 
