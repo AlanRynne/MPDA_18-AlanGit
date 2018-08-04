@@ -493,4 +493,3 @@ Difference between width-settings:
 * [Discrete Geodesic Nets for Modeling Developable Surfaces](https://www.youtube.com/watch?v=rd5mg6VsfnA)
 * [Video](https://vimeo.com/273000923)
 * Add this paper to bib: [Discrete Geodesic Nets](https://arxiv.org/pdf/1707.08360.pdf)
-
