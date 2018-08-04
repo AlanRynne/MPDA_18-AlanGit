@@ -8,10 +8,14 @@ header-includes:
   \usepackage{svg}
   \usepackage{svgcolor}
   \usepackage{url}
+  \usepackage{xcolor}
+
+  \usepackage{algorithm}
+  \usepackage{algorithmic}
 
 # Latex Template Options
 documentclass: paper
-classoption: oneside
+classoption: twoside
 # Paper geometry options
 papersize: A4
 margin-left: 1in
@@ -35,8 +39,7 @@ urlcolor: Green
 # Document meta-data
 title: "Geodesic Patterns for Free-form Architecture"
 subtitle: "MPDA'18 Master Thesis —— UPC-ETSAV"
-institute: UPC-ETSAV
-author: Alan Rynne Vidal [^email]$\, \,$[^affil]
+author: Alan Rynne Vidal
 date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
@@ -44,8 +47,11 @@ keywords: architectural geometry, geodesic patterns, geodesics, paneling, surfac
 bibliography: input/MPDABibliography.bib
 ---
 
-[^email]: ***E-mail:*** alan@rynne.es
-[^affil]: ***Affiliation***: Universitat Politècnica de Barcelona - Escola de Architectura Superior del Vallès (UPC-ETSAV)
+\listoffigures
+
+[03/Aug/18 - 16:24:30]: # (XXX)
+
+\listofalgorithms
 
 # Introduction
 
@@ -58,6 +64,7 @@ This section explains the different algorithmic aproaches that can be taken in o
 
 # Background
 
+
 > There is very little backgrounnd on this topic without entering direclty into Orlando's topic `Ruled Surfaces`.
 > Some background that must be included:
 
@@ -67,7 +74,7 @@ This section explains the different algorithmic aproaches that can be taken in o
 4. MAYBE?? Include non-optimized builidng examples to demonstrate the method's usefulness.
 5. Looking for other built examples or previous/further research on the subject.
 
-## Computer programs using this technique
+# Computer programs using this technique
 
 There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
 
@@ -98,21 +105,24 @@ Finding the truly shortest geodesic paths requires the computation of distance f
 
 ## Algorithmic ways of generating geodesics
 
-The computation of geodesics on smooth surfaces is aclassical topic, and can be reduced to two different solutions, depending on the initial conditions of the problem, you can either generate a geodesic on a surface given ***a starting point and a direction*** *or* given ***the starting point and end point*** of the desired geodesic.
+The computation of geodesics on smooth surfaces is aclassical topic, and can be reduced to two different solutions, depending on the initial conditions of the problem, you can basically find two tipes of problems [@bailin2011curvepatterns]:
 
-### Start point + Directon problem
+Initial value problem
+: given a point $p \in S$ and a vector $v \in T_pS$, find a geodesic which is incident with $p$, such that the tangent vector fo $g$ at $p$ is $v$.
 
-Finding a geodesic on a surface given a start point and a direction is equivalent to solving an initial value problem for a 2nd order ODE (???)
+Boundary value problem
+: given two points $p_1, p_2 \in S$ find a geodesic $g$ connecting $p_1$ and $p_2$.
 
-> MUST COME UP WITH A BETTER EXPLANATION FOR THIS
+Both problems have different ways of being solved either numerically, graphically or by the means of simulations. The initial value problem can be solved using the concept of *straightest geodesics* [@Polthier1998-dn], whereas the boundary value problem has a very close relation with the computation of *shortest paths* between two points on a surface.
 
-### Start point + End point problem
+> It is important to note that, during this chapter, all surfaces are discretized as triangular meshes (V,E,F) of sufficient precision.  
+> **What would that precision be?? %?? distance to reference surf??**
 
-This method is equivalent to solving a *boundary value problem*.
-
-# Geodesic surfaces
+# Developable surfaces
 
 > This is very well explained in p.170 of Denis Shelden thesis (Gerard's suggestion). Explanation is inspired by that section.
+
+It is also important to introduce the concept of the *developable surface*, a special kind of surface that have substantial and variable normal curvature while guaranteeing zero gaussian curvature, and as such, this surfaces can be *unrolled* into a flat plane with no deformation of the surface. This surfaces have been an extremely important design element in the practice of known architect Frank Ghery and explained in [@shelden2002digital].
 
 # Geodesic patterns
 
@@ -184,16 +194,29 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 
 ### Procedure
 
-Given a surface $S$ represented as a triangular mesh (V,E,F):
+[29/Jul/18 - 17:00:25]: # (Algorithms will not show in any ouptut but PDF!!!)
 
-[29/Jul/18 - 17:00:25]: # (Not really sure about step 1 dividing completely the surface, must talk with enrique about it)
-
-1. Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2 .
-2. Divide the curve into equaly spaced points $p$ with distance $W$.
-3. Place an vector $\mathbf v$  onto $p_0$
-4. Parallel transport that vector along $g_x$ as described in [@fig:parTransProc].
-5. For each point $p_i$, generate geodesic curves $g_i$ and $g_-i$ using  vector $\mathbf{v}_i$ and  $\mathbf{-v}_i$ respectively.
-  1. Both geodesics form a single, continuous geodesic flowing on the surface.
+\begin{algorithm}
+\label{parTransPatterns}
+\caption{Geodesic patterns by parallel transport}
+\algsetup{indent=2em}
+\floatname{algorithm}{Procedure}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\begin{algorithmic}[1]
+\REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F)
+\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
+\STATE Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2.
+\STATE Divide the curve into $N$ equally spaced points $p$ with distance $W$.
+\STATE Place an vector $\mathbf v$  onto $p_0$
+\STATE Parallel transport that vector along $g_x$ as described in [@fig:parTransProc].
+\FORALL {points $p_i$ where i = 0,...,M}
+  \STATE Generate geodesic curve $+g_i$ and $-g_i$ using vector $\mathbf{v}_i$ and $\mathbf{-v}_i$ respectively.
+  \STATE Join $+g_i$ and $-g_i$ together to obtaing $g_i$
+  \STATE Add $g_i$ to output.
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
 
 > Following this procedure, *extremal distances between adjacent geodesics occur near the chosen curve.* Meaning:
 > 
@@ -227,11 +250,11 @@ As depicted in: Starting from a source geodesic somewhere in the surface:
 > Starting at time $t=0$ with a geodesic curve $g(s)$, parametrized by arc-length $s$, and let it move within the surface.  
 > A snapshot at time $t=\varepsilon$ yields a geodesic $g^+$ near $g$.
 
-$$g^+(s)=g(s)+\varepsilon\mathbf{v}(s)+\varepsilon^2(\ldots)$${#eq:nextGeodesic}
+> $$g^+(s)=g(s)+\varepsilon\mathbf{v}(s)+\varepsilon^2(\ldots)$${#eq:nextGeodesic}
 
 The derivative vector field $\mathbf v$ is called a *Jacobi field*. We may asume it is orthogonal to $g(s)$ and it is expressed in terms of the geodesic tangent vector $g'$ as:
 
-$$\mathbf{v}(s)=w(s)\cdot{R_{\pi/2}(g'(s))},\quad\text{where}\;w''+Kw=0$${#eq:jacobiField}
+> $$\mathbf{v}(s)=w(s)\cdot{R_{\pi/2}(g'(s))},\quad\text{where}\;w''+Kw=0$${#eq:jacobiField}
 
 Since the distance between infinitesimally close geodesics are governed by [@Eq:jacobiField], that equation also goberns the width of a strip bounded by two geodesics at a small finite distance.
 
@@ -246,14 +269,30 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 ![Distances between geodesics](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
 
 Geodesic distances on sphere
-
 </div>
 
-#### Algorithm pseudocode
+#### Obtaining the 'next' geodesic
 
-$$PENDING$$
+Input:
+: A freeform surface $S$, a desired width $W$ and a starting geodesic curve $g_0$
 
-### Piecewise-geodesic vectorfields
+Output:
+: The 'next' computed geodesic on $S$
+
+Pseudocode:
+: Given a valid $S$, $W$ and $g_0$:
+
+  1. Sample the curve $g_0$ at uniformly distritbuted arc-length parameters $x_i$.
+  2. Compute a a set of geodesics $h_i \perp g_0$ startingt points $p(x_i)$ on $g_0$.
+  3. Select a width function $\omega(s)$ that is closest to a desired target width function $W(s)$(Width function can return a fixed value or a computed value using curvature. It could be further improved accomodate other measures).
+  4. Select a Jacobi field $\mathbf v(s)$ using $\omega(s)$ as stated in [@Eq:jacobiField].
+  5. 'Walk' the lengh of the vector $\mathbf v(s)$ on $h_i$ to obtain $\chi_i$. These points approximate position of the *next geodesic* "g^+_i". 
+  6. The previous step can have a very big error margin, therefore we must compute $g^+_i$:
+      1. Select a point $\chi_i$ and name it $\chi_0$.
+      2. We can compute the next geodesic by minimizing the error between the width function $\omega(s)$ and the *signed distance* of the computed $g^+_i$ to $g_0$.
+  7. Return computed geodesic $g^+_i$
+
+## Piecewise-geodesic vectorfields
 
 ![Geodesic Vector Fields](resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo width=50%}
 
@@ -339,7 +378,7 @@ This applies to both methods defining panels.[@fig:panelStress]
 > $$ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}},$$ {#eq:eqLabel2}
 > $$\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots$$ {#eq:eqLabel3}  
 
-###### MISSING MORE INFO ON STRESS ANALYISIS
+### MISSING MORE INFO ON STRESS ANALYISIS**
 
 # Final analysis cost, quality
 
@@ -425,11 +464,7 @@ HTML figure disposition is also available, with customization options like width
 Difference between width-settings:
 </div>
 
-![](https://dummyimage.com/582x150/f9f3f9/ababab.png){#fig:cfc}
-
-And some very nice diagrams too, using the Mermaid library
-
-# References that must be used
+# References
 
 * [@eigensatz2010paneling]
 * [@Chen1996-ii]
@@ -459,4 +494,3 @@ And some very nice diagrams too, using the Mermaid library
 * [Video](https://vimeo.com/273000923)
 * Add this paper to bib: [Discrete Geodesic Nets](https://arxiv.org/pdf/1707.08360.pdf)
 
-# References
