@@ -1,7 +1,7 @@
 ---
 # Latex Engine
 latex_engine: xelatex
-
+nocite: '@*'
 # Include Latex Packages
 header-includes:
   \usepackage[multiple]{footmisc}
@@ -14,7 +14,7 @@ header-includes:
   \usepackage{algorithmic}
 
 # Latex Template Options
-documentclass: paper
+documentclass: article
 classoption: twoside
 # Paper geometry options
 papersize: A4
@@ -47,8 +47,36 @@ date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: input/MPDABibliography.bib
+bibliography: ../input/MPDABibliography.bib
 ---
+
+1. [Introduction](#introduction)
+2. [Background](#background)
+3. [Computer programs using this technique](#computer-programs-using-this-technique)
+4. [Geodesic curves](#geodesic-curves)
+  1. [Algorithmic ways of generating geodesics](#algorithmic-ways-of-generating-geodesics)
+5. [Developable surfaces](#developable-surfaces)
+6. [Geodesic patterns](#geodesic-patterns)
+  1. [Properties to aim for in panels](#properties-to-aim-for-in-panels)
+  2. [Problem Statement](#problem-statement)
+7. [Design strategies for geodesic systems](#design-strategies-for-geodesic-systems)
+  1. [Design by parallel transport](#design-by-parallel-transport)
+  2. [Design by evolution & segmentation](#design-by-evolution--segmentation)
+  3. [Piecewise-geodesic vectorfields](#piecewise-geodesic-vectorfields)
+8. [Panels from curve patterns](#panels-from-curve-patterns)
+  1. [Tangent-developable method](#tangent-developable-method)
+  2. [The Bi-Normal Method](#the-bi-normal-method)
+  3. [Method Comparison](#method-comparison)
+9. [Stress and strain in panels](#stress-and-strain-in-panels)
+  1. [Stress formulas](#stress-formulas)
+10. [Final analysis cost, quality](#final-analysis-cost-quality)
+  1. [Frequent measures used in the topic](#frequent-measures-used-in-the-topic)
+  2. [Cost variables](#cost-variables)
+  3. [Quality variables](#quality-variables)
+  4. [Variable weighting method](#variable-weighting-method)
+11. [References](#references)
+  1. [Must include as bibtex references](#must-include-as-bibtex-references)
+  2. [Main refs](#main-refs)
 
 \listoffigures
 
@@ -58,12 +86,11 @@ bibliography: input/MPDABibliography.bib
 
 # Introduction
 
-This section explains the different algorithmic aproaches that can be taken in order to completely cover any given freeform surface with panels, ideally wood or metal, which are of approximately the same width and rectantular (or nearly rectangular) when flat and that achieve a surface paneling that is not only cost-effective but also watertight. 
+This section explains the different algorithmic aproaches that can be taken in order to completely cover any given freeform surface with panels, ideally wood or metal, which are of approximately the same width and rectantular (or nearly rectangular) when flat and that achieve a surface paneling that is not only cost-effective but also watertight.
 
 > To be continued...
 
 # Background
-
 
 > There is very little backgrounnd on this topic without entering direclty into Orlando's topic `Ruled Surfaces`.
 > Some background that must be included:
@@ -247,8 +274,8 @@ As depicted in: Starting from a source geodesic somewhere in the surface:
     1. Only for rotational surfaces (surfaces with evenly distriuted meridian curves).
 2. **But** a first-order aproximation of this distance can be approximated:
 
-> Starting at time $t=0$ with a geodesic curve $g(s)$, parametrized by arc-length $s$, and let it move within the surface.  
-> A snapshot at time $t=\varepsilon$ yields a geodesic $g^+$ near $g$.
+Starting at time $t=0$ with a geodesic curve $g(s)$, parametrized by arc-length $s$, and let it move within the surface.  
+A snapshot at time $t=\varepsilon$ yields a geodesic $g^+$ near $g$.
 
 > $$g^+(s)=g(s)+\varepsilon\mathbf{v}(s)+\varepsilon^2(\ldots)$${#eq:nextGeodesic}
 
@@ -271,7 +298,7 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 Geodesic distances on sphere
 </div>
 
-#### Obtaining the 'next' geodesic
+### Obtaining the 'next' geodesic
 
 Input:
 : A freeform surface $S$, a desired width $W$ and a starting geodesic curve $g_0$
@@ -291,6 +318,15 @@ Pseudocode:
       1. Select a point $\chi_i$ and name it $\chi_0$.
       2. We can compute the next geodesic by minimizing the error between the width function $\omega(s)$ and the *signed distance* of the computed $g^+_i$ to $g_0$.
   7. Return computed geodesic $g^+_i$
+
+Any given surface can be completely covered in this maner by recursivly computing the next geodesic using the previous, given some margin of error.
+
+<div id="fig:evMthdExmpl">
+![](https://dummyimage.com/300x150/f9f9f9/f1f1f1.png){#fig:evolSurf width=30%}
+![](https://dummyimage.com/299x150/f9f9f9/f1f1f1.png){#fig:evolSurf2 width=30%}
+
+Surface covered by a 1-geodesic pattern using the evolution method. [@Fig:evolSurf] shows ***normal*** implementation; while [@fig:evolSurf2] implements the piece-wise geodesic concept. Both images use the same parameters
+</div>
 
 ## Piecewise-geodesic vectorfields
 
@@ -360,7 +396,7 @@ For each geodesic, the associated surface is constructed according to [@Fig:bino
 
 ## Method Comparison
 
-See [@tbl:stressComparisson] for more info...
+See XXX for more info...
 
 # Stress and strain in panels
 
@@ -410,83 +446,10 @@ Quality should be defined as:
 
 Explanation of the weighting of variables?
 
-# Math Section
-
- Some nomenclature and formula clarification for the non-mathematicians!?
-
-## Nomenclature guide
-
-1. $\rho$
-2. $\tau$
-3. $\Phi$
-4. $\Psi$
-5. $s$
-6. $V,T,N,B$
-7. $\theta$
-8. $\sigma$
-9. $\text{Add more...}$
-
-## Formulas & referencing guide
-
-LaTeX formulas and reference them (like [@Eq:eqLabel] or multiple at once like [@Eq:eqLabel2;@eq:eqLabel3]) can be inserted using `$$` and formated using Symbols.PDF found in the 'resources' folder.
-
-References are placed using the format `[@type:label]`, being `label` the unique name of the desired reference on the format, and `type` the type of reference, in the following format:
-
-* Images: `{#fig:LABEL}`
-* Tables: `{#tbl:LABEL}`v
-* Equations: `{#eq:LABEL}`
-* Sections: `{#sec:LABEL}`
-  * If sections are added, they will change all the reference names to include their corresponding sectionsd
-* Code blocks: `{#lst:LABEL}`
-
-### Distances between geodesics ([@Eq:geodesicD;@eq:geodesicD2])
-
-> $$g^+(s) = g(s) + \varepsilon\mathbf{v}(s) + \varepsilon^2(\ldots)$${#eq:geodesicD}
-> $$\mathbf{v}(s)=\omega(s) \cdot R_{\pi/2}(g'(s)),\quad where\quad \omega'' + K\omega = 0.$${#eq:geodesicD2}
-
-Tables are also an option:
-
-| **Tangent-Developable Method**                        | **Bi-Normal Method**                                             |
-| ----------------------------------------------------- | ---------------------------------------------------------------- |
-| Tries tor reproduce panels achievable by pure bending | Simple, obvious way of mathematically defining panels            |
-| Panels produced remain tangent to the surface         | **Unclear** if the panels should follow this shape.              |
-| Follows a manufacturing goal                          | Panel surfaces are mathematically exact                          |
-|                                                       | Panels are admissible  from the viewpoint of stresses and strain |
-: Comparisson between panel generation methods {#tbl:stressComparisson}
-
-HTML figure disposition is also available, with customization options like width, per image captions, etc...
-
-<div id="fig:coolFig">
-
-![](https://dummyimage.com/82x150/f9f3f9/ababab.png){#fig:cfa  width=14%}
-![](https://dummyimage.com/500x150/f9f3f9/ababab.png){#fig:cfb width=85%}
-
-Difference between width-settings:
-</div>
-
 # References
 
-* [@eigensatz2010paneling]
-* [@Chen1996-ii]
-* [@Kahlert2010-wd]
-* [@Surazhsky2005-al]
-* [@Arsan2015-jc]
-* [@Pottmann2010-ku]
-* [@Polthier1998-dn]
-* [@Do_Carmo2016-kx]
-* [@Kimmel1998-ut]
-* [@Rose2007developable]
-* [@Weinand2006TimberRib]
-* [@Wallner2010tiling]
-* [@jia2017curves]
-* [@pottmann-2015-ag]
-* [@pottmann2010architectural]
-* [@pottmann2008geometry]
-* [@meredith2012burj]
-* [@kensek2000plank]
-* [@bailin2011curvepatterns]
-* [@jia2017curves]
-* [@pottmann2011webs]
+## Must include as bibtex references
+
 * [Geodesic Lines Grasshopper implementation](https://www.grasshopper3d.com/forum/topics/geodesic-distance-from-points-on-mesh)
 * [Non-optimized geodesic planks building](http://www.architectmagazine.com/technology/detail/la-cigarra-cafe-entry-pavilion_o)
 * [Non-optimized geodesic planks stairwell](https://www.frameweb.com/news/cun-design-bridges-tradition-modernity-with-bamboo)
@@ -494,3 +457,4 @@ Difference between width-settings:
 * [Video](https://vimeo.com/273000923)
 * Add this paper to bib: [Discrete Geodesic Nets](https://arxiv.org/pdf/1707.08360.pdf)
 
+## Main refs
