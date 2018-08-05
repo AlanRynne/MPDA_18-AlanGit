@@ -50,34 +50,6 @@ keywords: architectural geometry, geodesic patterns, geodesics, paneling, surfac
 bibliography: ../input/MPDABibliography.bib
 ---
 
-1. [Introduction](#introduction)
-2. [Background](#background)
-3. [Computer programs using this technique](#computer-programs-using-this-technique)
-4. [Geodesic curves](#geodesic-curves)
-  1. [Algorithmic ways of generating geodesics](#algorithmic-ways-of-generating-geodesics)
-5. [Developable surfaces](#developable-surfaces)
-6. [Geodesic patterns](#geodesic-patterns)
-  1. [Properties to aim for in panels](#properties-to-aim-for-in-panels)
-  2. [Problem Statement](#problem-statement)
-7. [Design strategies for geodesic systems](#design-strategies-for-geodesic-systems)
-  1. [Design by parallel transport](#design-by-parallel-transport)
-  2. [Design by evolution & segmentation](#design-by-evolution--segmentation)
-  3. [Piecewise-geodesic vectorfields](#piecewise-geodesic-vectorfields)
-8. [Panels from curve patterns](#panels-from-curve-patterns)
-  1. [Tangent-developable method](#tangent-developable-method)
-  2. [The Bi-Normal Method](#the-bi-normal-method)
-  3. [Method Comparison](#method-comparison)
-9. [Stress and strain in panels](#stress-and-strain-in-panels)
-  1. [Stress formulas](#stress-formulas)
-10. [Final analysis cost, quality](#final-analysis-cost-quality)
-  1. [Frequent measures used in the topic](#frequent-measures-used-in-the-topic)
-  2. [Cost variables](#cost-variables)
-  3. [Quality variables](#quality-variables)
-  4. [Variable weighting method](#variable-weighting-method)
-11. [References](#references)
-  1. [Must include as bibtex references](#must-include-as-bibtex-references)
-  2. [Main refs](#main-refs)
-
 \listoffigures
 
 [03/Aug/18 - 16:24:30]: # (XXX)
