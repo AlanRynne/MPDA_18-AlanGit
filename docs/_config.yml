@@ -1,8 +1,1 @@
-markdown: Pandoc
-gems:
-  - jekyll-pandoc
-pandoc:
-  extensions:
-    - normalize
-    - smart
-    - mathjax
+markdown: kramdown
