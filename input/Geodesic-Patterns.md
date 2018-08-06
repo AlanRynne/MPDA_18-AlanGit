@@ -35,7 +35,6 @@ linkcolor: NavyBlue
 toccolor: NavyBlue
 citecolor: yellow
 urlcolor: Green
-toc:
 # Document meta-data
 title: "Geodesic Patterns for Free-form Architecture"
 subtitle: "MPDA'18 Master Thesis —— UPC-ETSAV"
