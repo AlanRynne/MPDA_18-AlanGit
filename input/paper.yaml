@@ -1,0 +1,40 @@
+---
+# Latex Engine
+latex_engine: xelatex
+nocite: '@*'
+# Include Latex Packages
+header-includes:
+  \usepackage[multiple]{footmisc}
+  \usepackage{svg}
+  \usepackage{svgcolor}
+  \usepackage{url}
+  \usepackage{xcolor}
+  \usepackage{algorithm}
+  \usepackage{algorithmic}
+
+# Latex Template Options
+documentclass: paper
+classoption: twoside
+# Paper geometry options
+papersize: A4
+margin-left: 1in
+margin-right: 1in
+margin-top: 1in
+margin-bottom: 1in
+fontsize: 10pt
+# Table of Contents
+toc: true
+toc-depth: 2
+# List of figures & tables
+#lof: true id:10
+#lot: true id:11
+# Make links in citations & references
+link-citations: true
+link-references: true
+colorlinks: true
+# Color citations & references
+linkcolor: NavyBlue
+toccolor: NavyBlue
+citecolor: Yellow
+urlcolor: Green
+---

@@ -1,44 +1,4 @@
 ---
-# Latex Engine
-latex_engine: xelatex
-nocite: '@*'
-# Include Latex Packages
-header-includes:
-  \usepackage[multiple]{footmisc}
-  \usepackage{svg}
-  \usepackage{svgcolor}
-  \usepackage{url}
-  \usepackage{xcolor}
-
-  \usepackage{algorithm}
-  \usepackage{algorithmic}
-
-# Latex Template Options
-documentclass: article
-classoption: twoside
-# Paper geometry options
-papersize: A4
-margin-left: 1in
-margin-right: 1in
-margin-top: 1in
-margin-bottom: 1in
-fontsize: 10pt
-# Table of Contents
-toc: true
-toc-depth: 2
-# List of figures & tables
-#lof: true id:10
-#lot: true id:11
-# Make links in citations & references
-link-citations: true
-link-references: true
-colorlinks: true
-# Color citations & references
-linkcolor: NavyBlue
-toccolor: NavyBlue
-citecolor: yellow
-urlcolor: Green
-
 # Document meta-data
 title: "Geodesic Patterns for Free-form Architecture"
 subtitle: "MPDA'18 Master Thesis —— UPC-ETSAV"
@@ -47,7 +7,7 @@ date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: ../input/MPDABibliography.bib
+bibliography: input/MPDABibliography.bib
 ---
 
 \listoffigures
@@ -418,9 +378,13 @@ Quality should be defined as:
 
 Explanation of the weighting of variables?
 
-# References
+# Conclusions & further work
 
-## Must include as bibtex references
+...
+
+# References {.unnumbered}
+
+## Must include as bibtex references {.unnumbered}
 
 * [Geodesic Lines Grasshopper implementation](https://www.grasshopper3d.com/forum/topics/geodesic-distance-from-points-on-mesh)
 * [Non-optimized geodesic planks building](http://www.architectmagazine.com/technology/detail/la-cigarra-cafe-entry-pavilion_o)
@@ -429,4 +393,4 @@ Explanation of the weighting of variables?
 * [Video](https://vimeo.com/273000923)
 * Add this paper to bib: [Discrete Geodesic Nets](https://arxiv.org/pdf/1707.08360.pdf)
 
-## Main refs
+## Main refs {.unnumbered}
