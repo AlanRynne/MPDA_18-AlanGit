@@ -13,7 +13,7 @@ BUNDLE_NAME = BundlePaper
 OUTPUT_PATH= output/
 INPUT_PATH= input/
 SLIDES_PATH= slides/
-
+PDF_YAML = input/paper.yaml
 SOURCE_DOCS = $(wildcard $(INPUT_PATH)*.md)
 SLIDES_DOCS = $(wildcard $(SLIDES_PATH)*.md)
 
@@ -105,7 +105,7 @@ PANDOC_REVEALJS_OPTIONS=\
 $(OUTPUT_PATH)%.html : $(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_HTML_OPTIONS) -o $(OUTPUT_PATH)index.html $<
 $(OUTPUT_PATH)%.pdf : $(INPUT_PATH)%.md
-	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $<
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $(PDF_YAML) $<
 $(OUTPUT_PATH)%.docx : $(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_DOCX_OPTIONS) -o $@ $<
 $(OUTPUT_PATH)%.rtf : $(INPUT_PATH)%.md

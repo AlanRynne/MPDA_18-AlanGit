@@ -1,10 +1,9 @@
 #Files to ignore from git
 research/bibliography/
-research/Grasshopper Files
-resources/illustrator
+research/Grasshopper Files/
+resources/illustrator/
 
 input/*.pdf
 .DS_Store
 .vscode
 
-Geodesic-Patterns.html

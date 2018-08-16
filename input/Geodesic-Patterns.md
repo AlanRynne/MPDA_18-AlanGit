@@ -1,40 +1,4 @@
 ---
-# Latex Engine
-latex_engine: xelatex
-nocite: '@*'
-# Include Latex Packages
-header-includes:
-  \usepackage[multiple]{footmisc}
-  \usepackage{svg}
-  \usepackage{svgcolor}
-  \usepackage{url}
-  \usepackage{xcolor}
-
-  \usepackage{algorithm}
-  \usepackage{algorithmic}
-
-# Latex Template Options
-documentclass: article
-classoption: twoside
-# Paper geometry options
-papersize: A4
-margin-left: 1in
-margin-right: 1in
-margin-top: 1in
-margin-bottom: 1in
-fontsize: 10pt
-# List of figures & tables
-#lof: true id:10
-#lot: true id:11
-# Make links in citations & references
-link-citations: true
-link-references: true
-colorlinks: true
-# Color citations & references
-linkcolor: NavyBlue
-toccolor: NavyBlue
-citecolor: yellow
-urlcolor: Green
 # Document meta-data
 title: "Geodesic Patterns for Free-form Architecture"
 subtitle: "MPDA'18 Master Thesis —— UPC-ETSAV"
@@ -44,6 +8,7 @@ abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
 bibliography: input/MPDABibliography.bib
+nocite: '@*'
 ---
 
 # Introduction
@@ -70,10 +35,12 @@ This section explains the different algorithmic aproaches that can be taken in o
 
 There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
 
-1. Rhino + Grasshopper
-2. Revit + Dynamo
-3. Houdini
-4. 3DMax
+1. [Rhino+Grasshopper](http://www.rhino3d.com)
+2. [Revit + Dynamo](http://www.dynamobim.com)
+3. [IOGram](http://www.iogram.ca) (Currently in beta, it's the 'new kid on the block' of parametric design)
+4. [Houdini](https://www.sidefx.com/)
+5. [3DMax](https://www.autodesk.eu/products/3ds-max/overview)
+
 
 There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields (which are widely used in this chapter) and other libraries oriented to general scientific and mathematical computing, which are usefull when numerical optimization is needed during the process. Some of those libraries are:
 
@@ -93,7 +60,7 @@ For triangle meshes, shortest polylines cross edges at ***equal angles***.
 
 Finding the truly shortest geodesic paths requires the computation of distance fields [see @Do_Carmo2016-kx;@Kimmel1998-ut]
 
-![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
+![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](../resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
 
 ## Algorithmic ways of generating geodesics
 
@@ -110,11 +77,24 @@ Both problems have different ways of being solved either numerically, graphicall
 > It is important to note that, during this chapter, all surfaces are discretized as triangular meshes (V,E,F) of sufficient precision.  
 > **What would that precision be?? %?? distance to reference surf??**
 
+![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic cuves of a torus, although $g_1$ is more than double the length of $g_0$.](../resources/images/svg/ShortestGeodesics.svg){#fig:shortGeo}
+
 # Developable surfaces
 
 > This is very well explained in p.170 of Denis Shelden thesis (Gerard's suggestion). Explanation is inspired by that section.
 
 It is also important to introduce the concept of the *developable surface*, a special kind of surface that have substantial and variable normal curvature while guaranteeing zero gaussian curvature, and as such, this surfaces can be *unrolled* into a flat plane with no deformation of the surface. This surfaces have been an extremely important design element in the practice of known architect Frank Ghery and explained in [@shelden2002digital].
+
+There are several ways of generating a developable surface using a curve in space. 
+
+1. Select the starting point of the curve
+2. Obtain the perpendicular frame of the curve at the specified parameter.
+3. Deconstruct the frame into it's $X,Y$ & $Z$ vectors.
+4. Select one of the vectors at all the sample points
+5. Draw a line using the selected vector at the start point of the curve.
+6. XXXXXX
+
+![Developable surface generated using curve $g_1$ of [@fig:shortGeo]. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](../resources/images/svg/DevelopableFromCurve.svg){#fig:devFromCurve}
 
 # Geodesic patterns
 
@@ -172,6 +152,8 @@ Problem 2
 
 ## Design by parallel transport
 
+![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](../resources/images/svg/SpherePT.svg){#fig:SpherePT}
+
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points ocurrs at a prescribed location.
 
 > In differential geometry, the concept of *parallel transport* (see [@fig:parTrans]) of a vector ***V*** along a curve ***S*** contained in a surface means moving that vector along ***S*** such that:
@@ -180,9 +162,10 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 > 2. It changes as little as possible in direction
 > 3. It is a known fact that the length of the vector remains unchanged
 
-![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
+![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](../resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
 
-![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:parTransProc}
+
+![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](../resources/images/svg/ParallelTransportMethod.svg){#fig:parTransProc}
 
 ### Procedure
 
@@ -221,6 +204,13 @@ The placement of the first geodesic curve and the selection of the initial vecto
 
 Two main concepts are covered in this section, both proposed by [@Pottmann2010-ku]: the first, what is called the *evolution method*, and a second method based on *piecewise-geodesic* vector fields.
 
+<div id="fig:evolExample1">
+![](../resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
+![](../resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
+
+Surface covered by a 1-geodesic pattern using the evolution method without introducint greakpoints. [@Fig:evolSurf] shows an overview of the result; while [@fig:evolSurf2] highlights the intersection point of several geodesic curves. This problem will be adressed by introducing the concept of 'piece-wise' geodesic curves; which are curves that are not geodesics, but are composed of segments of several connected geodesic curves.
+</div>
+
 ### The *evolution method*
 
 As depicted in: Starting from a source geodesic somewhere in the surface:
@@ -229,7 +219,7 @@ As depicted in: Starting from a source geodesic somewhere in the surface:
 
 * 'Next' geodesics must fullfil the condition of being at approximately constant distance from its predecesor.
 
-* If the deviation from its predecesor is too great, breakpoints are introduced and continued as a *'piecewise geodesic'.*
+* If the deviation from its predecesor is too great, breakpoints are introduced and continued as a *'piecewise geodesic'*.
 
 * 'Next geodesics' are computed using Jacobi Fields
 
@@ -257,8 +247,8 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 
 <div id="fig:geoDistMultiple">
  
-![Distances between geodesics](resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=30%}
-![Distances between geodesics](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
+![Distances between geodesics](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=30%}
+![Distances between geodesics](../resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
 
 Geodesic distances on sphere
 </div>
@@ -295,9 +285,9 @@ Surface covered by a 1-geodesic pattern using the evolution method. [@Fig:evolSu
 
 ## Piecewise-geodesic vectorfields
 
-![Geodesic Vector Fields](resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo width=50%}
+![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo width=50%}
 
-![Geodesic Vector Field sharpening](resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp width=50%}
+![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp width=50%}
 
 # Panels from curve patterns
 
@@ -339,7 +329,9 @@ Therefore, the procedure was modified in the following way:
 >     2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
 >     3. The ruling segments $A_i(x)B_i(x)$ lies close to the *original surface* $\Phi$
 
-![Tangent developable method examples\label{tangentDevExamples}](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:tangentDevMethod}
+This adjustments to the algorithm allow for the modeling of panels that meet the requirements of developability and approximately constant width, although it must be noted computation times increase, as double the  ammount of geodesic curves need to be generated, and subsequently, the desired width function needs to be half the desired width of the panels. [@Fig:tangentDevMethod] shows the result of computing such panels and the subsequent gaps between the generated panels; these gaps need to be kept within a certain width in order to produce a succesfull watertight panelization of the original surface. Furthermore, material restrictions such as bending or torsion where not taken into account during the construction of the panels.
+
+![Panels computed using the using the tangent developable method.](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:tangentDevMethod}
 
 ## The Bi-Normal Method
 
@@ -357,7 +349,7 @@ The second method for defining panels, once an appropriate system of geodesics h
 The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
 For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
 
-![Binormal Method for panels & T.N.B. frame](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:binormalMethod}
+![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](../resources/images/svg/PTPanels&DistanceToMesh.png){#fig:binormalMethod}
 
 ## Method Comparison
 
@@ -411,9 +403,13 @@ Quality should be defined as:
 
 Explanation of the weighting of variables?
 
-# References
+# Conclusions & further work
 
-## Must include as bibtex references
+...
+
+# References {.unnumbered}
+
+## Must include as bibtex references {.unnumbered}
 
 * [Geodesic Lines Grasshopper implementation](https://www.grasshopper3d.com/forum/topics/geodesic-distance-from-points-on-mesh)
 * [Non-optimized geodesic planks building](http://www.architectmagazine.com/technology/detail/la-cigarra-cafe-entry-pavilion_o)
@@ -422,4 +418,4 @@ Explanation of the weighting of variables?
 * [Video](https://vimeo.com/273000923)
 * Add this paper to bib: [Discrete Geodesic Nets](https://arxiv.org/pdf/1707.08360.pdf)
 
-## Main refs
+## Main refs {.unnumbered}
