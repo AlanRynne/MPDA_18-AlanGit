@@ -8,6 +8,7 @@ abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
 bibliography: ../input/MPDABibliography.bib
+nocite: '@*'
 ---
 
 \listoffigures
@@ -87,6 +88,17 @@ Both problems have different ways of being solved either numerically, graphicall
 
 It is also important to introduce the concept of the *developable surface*, a special kind of surface that have substantial and variable normal curvature while guaranteeing zero gaussian curvature, and as such, this surfaces can be *unrolled* into a flat plane with no deformation of the surface. This surfaces have been an extremely important design element in the practice of known architect Frank Ghery and explained in [@shelden2002digital].
 
+There are several ways of generating a developable surface using a curve in space. 
+
+1. Select the starting point of the curve
+2. Obtain the perpendicular frame of the curve at the specified parameter.
+3. Deconstruct the frame into it's $X,Y$ & $Z$ vectors.
+4. Select one of the vectors at all the sample points
+5. Draw a line using the selected vector at the start point of the curve.
+6. XXXXXX
+
+![Developable surface generated using curve $g_1$ of [@fig:shortGeo]. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](../resources/images/svg/DevelopableFromCurve.svg){#fig:devFromCurve}
+
 # Geodesic patterns
 
 What are geodesic patterns?
@@ -143,7 +155,7 @@ Problem 2
 
 ## Design by parallel transport
 
-![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](../resources/images/svg/SpherePT.svg){#fig:Code}
+![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](../resources/images/svg/SpherePT.svg){#fig:SpherePT}
 
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points ocurrs at a prescribed location.
 
@@ -155,7 +167,8 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 
 ![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](../resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
 
-![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](../resources/images/svg/ParallelTransportMethod.png){#fig:parTransProc}
+
+![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](../resources/images/svg/ParallelTransportMethod.svg){#fig:parTransProc}
 
 ### Procedure
 
@@ -194,6 +207,13 @@ The placement of the first geodesic curve and the selection of the initial vecto
 
 Two main concepts are covered in this section, both proposed by [@Pottmann2010-ku]: the first, what is called the *evolution method*, and a second method based on *piecewise-geodesic* vector fields.
 
+<div id="fig:evolExample1">
+![](../resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
+![](../resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
+
+Surface covered by a 1-geodesic pattern using the evolution method without introducint greakpoints. [@Fig:evolSurf] shows an overview of the result; while [@fig:evolSurf2] highlights the intersection point of several geodesic curves. This problem will be adressed by introducing the concept of 'piece-wise' geodesic curves; which are curves that are not geodesics, but are composed of segments of several connected geodesic curves.
+</div>
+
 ### The *evolution method*
 
 As depicted in: Starting from a source geodesic somewhere in the surface:
@@ -230,8 +250,8 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 
 <div id="fig:geoDistMultiple">
  
-![Distances between geodesics](resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=30%}
-![Distances between geodesics](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
+![Distances between geodesics](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=30%}
+![Distances between geodesics](../resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
 
 Geodesic distances on sphere
 </div>
@@ -268,9 +288,9 @@ Surface covered by a 1-geodesic pattern using the evolution method. [@Fig:evolSu
 
 ## Piecewise-geodesic vectorfields
 
-![Geodesic Vector Fields](resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo width=50%}
+![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo width=50%}
 
-![Geodesic Vector Field sharpening](resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp width=50%}
+![Geodesic Vector Field sharpening](../resources/refImages/Geodesic-Vector-Field-Sharpening.png){#fig:vectorFieldSharp width=50%}
 
 # Panels from curve patterns
 
@@ -312,7 +332,9 @@ Therefore, the procedure was modified in the following way:
 >     2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
 >     3. The ruling segments $A_i(x)B_i(x)$ lies close to the *original surface* $\Phi$
 
-![Tangent developable method examples\label{tangentDevExamples}](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:tangentDevMethod}
+This adjustments to the algorithm allow for the modeling of panels that meet the requirements of developability and approximately constant width, although it must be noted computation times increase, as double the  ammount of geodesic curves need to be generated, and subsequently, the desired width function needs to be half the desired width of the panels. [@Fig:tangentDevMethod] shows the result of computing such panels and the subsequent gaps between the generated panels; these gaps need to be kept within a certain width in order to produce a succesfull watertight panelization of the original surface. Furthermore, material restrictions such as bending or torsion where not taken into account during the construction of the panels.
+
+![Panels computed using the using the tangent developable method.](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:tangentDevMethod}
 
 ## The Bi-Normal Method
 
@@ -330,7 +352,7 @@ The second method for defining panels, once an appropriate system of geodesics h
 The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
 For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
 
-![Binormal Method for panels & T.N.B. frame](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:binormalMethod}
+![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](../resources/images/svg/PTPanels&DistanceToMesh.png){#fig:binormalMethod}
 
 ## Method Comparison
 
