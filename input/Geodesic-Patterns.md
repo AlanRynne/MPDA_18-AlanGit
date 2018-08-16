@@ -7,7 +7,7 @@ date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: input/MPDABibliography.bib
+bibliography: ../input/MPDABibliography.bib
 ---
 
 \listoffigures
@@ -37,10 +37,12 @@ This section explains the different algorithmic aproaches that can be taken in o
 
 There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
 
-1. Rhino + Grasshopper
-2. Revit + Dynamo
-3. Houdini
-4. 3DMax
+1. [Rhino+Grasshopper](http://www.rhino3d.com)
+2. [Revit + Dynamo](http://www.dynamobim.com)
+3. [IOGram](http://www.iogram.ca) (Currently in beta, it's the 'new kid on the block' of parametric design)
+4. [Houdini](https://www.sidefx.com/)
+5. [3DMax](https://www.autodesk.eu/products/3ds-max/overview)
+
 
 There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields (which are widely used in this chapter) and other libraries oriented to general scientific and mathematical computing, which are usefull when numerical optimization is needed during the process. Some of those libraries are:
 
@@ -60,7 +62,7 @@ For triangle meshes, shortest polylines cross edges at ***equal angles***.
 
 Finding the truly shortest geodesic paths requires the computation of distance fields [see @Do_Carmo2016-kx;@Kimmel1998-ut]
 
-![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
+![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](../resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
 
 ## Algorithmic ways of generating geodesics
 
@@ -76,6 +78,8 @@ Both problems have different ways of being solved either numerically, graphicall
 
 > It is important to note that, during this chapter, all surfaces are discretized as triangular meshes (V,E,F) of sufficient precision.  
 > **What would that precision be?? %?? distance to reference surf??**
+
+![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic cuves of a torus, although $g_1$ is more than double the length of $g_0$.](../resources/images/svg/ShortestGeodesics.svg){#fig:shortGeo}
 
 # Developable surfaces
 
@@ -139,6 +143,8 @@ Problem 2
 
 ## Design by parallel transport
 
+![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](../resources/images/svg/SpherePT.svg){#fig:Code}
+
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points ocurrs at a prescribed location.
 
 > In differential geometry, the concept of *parallel transport* (see [@fig:parTrans]) of a vector ***V*** along a curve ***S*** contained in a surface means moving that vector along ***S*** such that:
@@ -147,9 +153,9 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 > 2. It changes as little as possible in direction
 > 3. It is a known fact that the length of the vector remains unchanged
 
-![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
+![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](../resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
 
-![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:parTransProc}
+![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](../resources/images/svg/ParallelTransportMethod.png){#fig:parTransProc}
 
 ### Procedure
 
@@ -196,7 +202,7 @@ As depicted in: Starting from a source geodesic somewhere in the surface:
 
 * 'Next' geodesics must fullfil the condition of being at approximately constant distance from its predecesor.
 
-* If the deviation from its predecesor is too great, breakpoints are introduced and continued as a *'piecewise geodesic'.*
+* If the deviation from its predecesor is too great, breakpoints are introduced and continued as a *'piecewise geodesic'*.
 
 * 'Next geodesics' are computed using Jacobi Fields
 
