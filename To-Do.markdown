@@ -4,48 +4,63 @@ author: Alan Rynne
 date: 2018
 ---
 
-# To-Do List
+# MPDA'18 Thesis - Geodesic Patterns
 
+## To-Do List
 
-- [ ] Decide about images
-- [ ] Parallel Transport...etc...
-- [ ] Finish reading references
-- [ ] Summarize all keypoints
-- [ ] Implement Parallel Transport
+- [x] Decide about image appearance
+- [x] Finish reading references
+- [x] Summarize all keypoints
+- [x] Implement Parallel Transport
+- [x] Implement evolution method
+- [x] Implement piece-wise geodesic methods
+- [x] Implement level sets
+- [ ] Implement geodesic vector fields
+- [ ] Implement geodesic webs 
 
-***Talk to Gerard about***
+## List of images to create
 
-  - [ ] **MONEY**
-  - [ ] Autoría de los capítulos
-  - [ ] Studio 2 Paper
-  - [ ] ??
-  - [ ] Template design
-  - [ ] Math notation standarization
-  - [ ] Level of detail in algorithms
-  - [ ] Geodesic generation
-  - [ ] Construction
+- [x] Parallel transport on a sphere
+- [x] Parallel transport method explanation
+- [x] Panels from parallel transport
+- [x] Panels from evolution method
+- [ ] Panels from evolution method + piecewise-geodesics
+- [x] Creation of dev-panels from a given curve
+- [x] Concept of shortest geodesics
+- [ ] Geodesics as level sets
+- [ ] Measurement of panelization quality (gaps, constant width, geodesic property)
 
-***GEODESIC GENERATION***
- 
-  - [ ] Geodesic = Shortest Path?
-  - [ ] Best option would be starting with point and vector.
-  - [ ] Shortest path could be easily implemented
-  - [ ] Shortest path + T.N.B frame is +50% of the algorithm.
-  - [ ] Could yield nice results for a ***phisical model***
+## Revision 17/08/18
 
-# List of images to create
+> **ASK ABOUT CV TO ST.RUCTURE**
 
-## Parallel transport
+- [ ] Geodesics as level-sets
+- [ ] Geodesic vector fields
+  - [ ] Used only for sufrace splitting
+  - [ ] Then -> the level set method is used
+  - [ ] How to implement this???
 
-## Evolution method
+### Revision Comments & Questions
 
-## Geodesic vector fields
+> Focus more on panels and less on geodesic curves
 
-# List of graphs to create
+In what way? generating a good geodesic pattern is the only way to achieve a good panelization
 
-- [ ] Cost/Quality comparison chart
-- [ ] ...
+> Change structure to something like:
 
-# References
+```markdown
+# Index
+1. Discussion about planks on freeform surfaces.
+    1. Geodesic vs Constant width.
+2. Geometric problems
+3. Algorithmic strategies
+    1. Build an optimal *mesh*?
+    2. Dynamic optimization
+4. Conclussion
+```
 
-I added this reference section here to check the 
+- [ ] **Section 2.** is a bit vague. What does he mean by *geometric problems* other than stating all the peculiarities of geodesic patterns and how to generate them.
+- [ ] ***Section 3.1***, there is no way to *build an optimal mesh* using this methods. Only the geodesic webs needs of a proper remeshing. The others will take ***ANY*** mesh 
+- [ ] ***Sectin 3.2***, as in the previous question. There is no dynamic optimization as such involved. There is though, a lot of optimizaiton that is needed, either numerical or using evolutionary methods. Minimization of error functions is one of the most important part of this technique.
+- [ ] Where do the curve generation algorithms go inside this new structure. Maybe in ***Section 2***?
+- [ ] 

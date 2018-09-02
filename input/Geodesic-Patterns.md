@@ -286,6 +286,8 @@ Any given surface can be completely covered in this maner by recursivly computin
 Surface covered by a 1-geodesic pattern using the evolution method. [@Fig:evolSurf] shows ***normal*** implementation; while [@fig:evolSurf2] implements the piece-wise geodesic concept. Both images use the same parameters
 </div>
 
+## Geodesic curves by Level Sets
+
 ## Piecewise-geodesic vectorfields
 
 ![Geodesic Vector Fields](../resources/refImages/Geodesic-Vector-Field-Algorithm.png){#fig:vectorFieldAlgo width=50%}
