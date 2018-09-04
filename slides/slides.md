@@ -10,7 +10,7 @@ date: "September 2018"
 css: ../slides/custom.css
 ---
 
-# Objective
+# Objective {data-background="https://www.dw.com/image/19172478_303.jpg"}
 
 ## Objective
 
@@ -24,13 +24,14 @@ Discretize a given freeform surface into panels with the following properties:
 
 4. Panels should ***bend by their weak axis*** to aproximate the surface.
 
-# Background
+# Background 
 
-## Boat-building
+## Boat-building {data-background="http://woodboatbuilder.com/maid-planking/sm13planks.jpg"}
 
-The use of *sraight developable planks* is widely used in **traditional boat building**
+The use of *sraight developable planks* is widely used in 
 
-![](http://woodboatbuilder.com/maid-planking/sm13planks.jpg){width=60%}
+**traditional boat building**
+
 
 ## Developable hulls
 
@@ -40,23 +41,19 @@ Connected developable patches for boat hull design.
 
 ![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg)
 
-## Frank Ghery
+## Frank Ghery {data-background="https://www.dw.com/image/19172478_303.jpg"}
 
 This techniques have also been used in the architecture world, mainly by **Frank Ghery**.
 
-![](https://www.dw.com/image/19172478_303.jpg){width=50%}
-
 His façades are usually a collection of connected developable surfaces.
 
-## Burj Khalifa
+## Burj Khalifa {data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg"}
 
 Latest architectural work following this techiques was:
 
-<small>Burj Khalifa by Frank Ghery</small>
+**Burj Khalifa by *Frank Ghery*** 
 
-![](https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg){width=50%}
-
-## Burj Khalifa
+## Burj Khalifa {data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg"}
 
 It was designed as a collection of:
 
@@ -65,9 +62,7 @@ It was designed as a collection of:
 * **Surfaces of constant cuvrature**  
   * *Which can be covered by repeating the same profile*  
 
-## Burj Khalifa
-
-![](https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg)
+## Burj Khalifa {data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" data-background-size=100%}
 
 # Construction technique
 
@@ -75,25 +70,20 @@ It was designed as a collection of:
 
 A geodesic curve is the generalization of a *straight line* into *curved spaces*.
 
-## Geodesic curves
+## Geodesic curves {data-background="../resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif" data-background-size=50%}
 
 It could be easiy understood as:
 
 *The path that a bug follows on a surface if it only moves **forward***
 
-![](https://upload.wikimedia.org/wikipedia/commons/6/6a/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){width=30%}
-
-## Straightest geodesics
+## Straightest geodesics {data-background="../resources/images/svg/ShortestGeodesics.svg" data-background-size=50%}
 
 In this research, we concentrate on the concept of ***straightest geodesics***.
 
-![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/ShortestGeodesics.png){width=30%}
-
-## Developable surfaces
+## Developable surfaces {data-background="../resources/images/svg/DevelopableFromCurve.svg" data-background-size=90%}
 
 Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distorsion***
 
-![A developable surface can be generated using by sweeping a line along a given curve.](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/DevelopableFromCurve.png){width=50%}
 
 ## Developable surfaces
 

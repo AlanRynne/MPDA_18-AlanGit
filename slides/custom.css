@@ -8,6 +8,7 @@ section.level1 > h1 {
 section.level2 > h2 {
   font-size: 140%;
   color: darkcyan;
+  display: none;
 }
 
 .reveal section {
@@ -17,7 +18,7 @@ section.level2 > h2 {
 .reveal section img {
   border: 0 !important;
   border-radius: 8px !important;
-  padding: 5px !important;
+  padding: 0px !important;
 }
 
 strong
@@ -35,4 +36,10 @@ em
 .author
 {
   color: darkblue;
+}
+
+.slide-background-content
+{
+  opacity: 0.2 !important;
+  
 }
