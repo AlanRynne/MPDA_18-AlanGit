@@ -7,7 +7,7 @@ date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: ../input/MPDABibliography.bib
+#bibliography: ../input/MPDABibliography.bib
 nocite: '@*'
 ---
 
@@ -25,16 +25,13 @@ This section explains the different algorithmic aproaches that can be taken in o
 
 # Background
 
-> There is very little backgrounnd on this topic without entering direclty into Orlando's topic `Ruled Surfaces`.
-> Some background that must be included:
-
 1. Burj Khalifa interior panelling [@meredith2012burj]
 2. Ghery's architecture in general uses same width metal sheets to cover entire buildings, although I am not shure if that is not Orlando's subject either...
 3. Denis Shelden thesis on constructability of gherys architecture [@shelden2002digital]
 4. MAYBE?? Include non-optimized builidng examples to demonstrate the method's usefulness.
 5. Looking for other built examples or previous/further research on the subject.
 
-# Computer programs using this technique
+## Computer programs using this technique
 
 There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
 
@@ -53,7 +50,7 @@ There also exist some powerful geometry processing libraries that can help with 
 4. [NumPy](http://www.numpy.org) (Python Computing Library)
 5. [SciPy](http://www.scipi.org) (Python Scientific Computing Library )
 
-# Geodesic curves
+## Geodesic curves
 
 In differential geometry, a *geodesic curve* is the generalization of a straight line into curved spaces (see [@fig:geodesicBug]).
 
@@ -65,7 +62,7 @@ Finding the truly shortest geodesic paths requires the computation of distance f
 
 ![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](../resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
 
-## Algorithmic ways of generating geodesics
+### Algorithmic ways of generating geodesics
 
 The computation of geodesics on smooth surfaces is aclassical topic, and can be reduced to two different solutions, depending on the initial conditions of the problem, you can basically find two tipes of problems [@bailin2011curvepatterns]:
 
@@ -82,7 +79,7 @@ Both problems have different ways of being solved either numerically, graphicall
 
 ![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic cuves of a torus, although $g_1$ is more than double the length of $g_0$.](../resources/images/svg/ShortestGeodesics.svg){#fig:shortGeo}
 
-# Developable surfaces
+## Developable surfaces
 
 > This is very well explained in p.170 of Denis Shelden thesis (Gerard's suggestion). Explanation is inspired by that section.
 

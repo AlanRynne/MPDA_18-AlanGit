@@ -26,8 +26,8 @@ fontsize: 10pt
 toc: true
 toc-depth: 2
 # List of figures & tables
-#lof: true id:10
-#lot: true id:11
+lof: true
+#lot: true
 # Make links in citations & references
 link-citations: true
 link-references: true
@@ -36,5 +36,5 @@ colorlinks: true
 linkcolor: NavyBlue
 toccolor: NavyBlue
 citecolor: Yellow
-urlcolor: Green
+urlcolor: NavyBlue
 ---

@@ -28,12 +28,77 @@ nocite: '@*'
 * Rationalizing a shape into *developable* patches is one of the main features of architect Frank Ghery's practice.
 * Also closely related to architectural membrane patterning, which is usually done by some variation of the parallel transport method explained in @Sec:parallel-transport.
 
-# Background {#sec:background}
+# Background
 
-- [ ] Traditional Boat building
-- [ ] Ghery's work.
-- [ ] Architectural membrane patterning
-- [ ] Toyo-Ito's work
+1. Burj Khalifa interior panelling [@meredith2012burj]
+2. Ghery's architecture in general uses same width metal sheets to cover entire buildings, although I am not shure if that is not Orlando's subject either...
+3. Denis Shelden thesis on constructability of gherys architecture [@shelden2002digital]
+4. MAYBE?? Include non-optimized builidng examples to demonstrate the method's usefulness.
+5. Looking for other built examples or previous/further research on the subject.
+
+## Computer programs using this technique
+
+There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
+
+1. [Rhino+Grasshopper](http://www.rhino3d.com)
+2. [Revit + Dynamo](http://www.dynamobim.com)
+3. [IOGram](http://www.iogram.ca) (Currently in beta, it's the 'new kid on the block' of parametric design)
+4. [Houdini](https://www.sidefx.com/)
+5. [3DMax](https://www.autodesk.eu/products/3ds-max/overview)
+
+There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields (which are widely used in this chapter) and other libraries oriented to general scientific and mathematical computing, which are usefull when numerical optimization is needed during the process. Some of those libraries are:
+
+1. [LibiGL](http://libigl.github.io/libigl/)(C++ with Python bindings)
+2. [CGal](https://www.cgal.org/) (C++)
+3. [OpenMesh](https://www.openmesh.org/) (C++ with Python bindings)
+4. [NumPy](http://www.numpy.org) (Python Computing Library)
+5. [SciPy](http://www.scipi.org) (Python Scientific Computing Library )
+
+## Geodesic curves
+
+In differential geometry, a *geodesic curve* is the generalization of a straight line into curved spaces (see [@fig:geodesicBug]).
+
+Also, in the presence of  an *affine connection*, a geodesic is defined to be a curve whose tangent vectors remain parallel if they are transported along it. We will explore the notion of vector *parallel transport* in the following sections.
+
+For triangle meshes, shortest polylines cross edges at ***equal angles***.
+
+Finding the truly shortest geodesic paths requires the computation of distance fields [see @Do_Carmo2016-kx;@Kimmel1998-ut]
+
+![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
+
+### Algorithmic ways of generating geodesics
+
+The computation of geodesics on smooth surfaces is aclassical topic, and can be reduced to two different solutions, depending on the initial conditions of the problem, you can basically find two tipes of problems [@bailin2011curvepatterns]:
+
+Initial value problem
+: given a point $p \in S$ and a vector $v \in T_pS$, find a geodesic which is incident with $p$, such that the tangent vector fo $g$ at $p$ is $v$.
+
+Boundary value problem
+: given two points $p_1, p_2 \in S$ find a geodesic $g$ connecting $p_1$ and $p_2$.
+
+Both problems have different ways of being solved either numerically, graphically or by the means of simulations. The initial value problem can be solved using the concept of *straightest geodesics* [@Polthier1998-dn], whereas the boundary value problem has a very close relation with the computation of *shortest paths* between two points on a surface.
+
+> It is important to note that, during this chapter, all surfaces are discretized as triangular meshes (V,E,F) of sufficient precision.  
+> **What would that precision be?? %?? distance to reference surf??**
+
+![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic cuves of a torus, although $g_1$ is more than double the length of $g_0$.](resources/images/svg/ShortestGeodesics.pdf){#fig:shortGeo}
+
+## Developable surfaces
+
+> This is very well explained in p.170 of Denis Shelden thesis (Gerard's suggestion). Explanation is inspired by that section.
+
+It is also important to introduce the concept of the *developable surface*, a special kind of surface that have substantial and variable normal curvature while guaranteeing zero gaussian curvature, and as such, this surfaces can be *unrolled* into a flat plane with no deformation of the surface. This surfaces have been an extremely important design element in the practice of known architect Frank Ghery and explained in [@shelden2002digital].
+
+There are several ways of generating a developable surface using a curve in space.
+
+1. Select the starting point of the curve
+2. Obtain the perpendicular frame of the curve at the specified parameter.
+3. Deconstruct the frame into it's $X,Y$ & $Z$ vectors.
+4. Select one of the vectors at all the sample points
+5. Draw a line using the selected vector at the start point of the curve.
+6. XXXXXX
+
+![Developable surface generated using curve $g_1$ of [@fig:shortGeo]. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](resources/images/svg/DevelopableFromCurve.pdf){#fig:devFromCurve}
 
 # Construction technique {#sec:construction-techniques}
 
@@ -78,7 +143,7 @@ Problem 2
 2. The panel's deveopment is ***nearly straight***.
 3. Those panels cover the surface with ***no gaps***
 
-## Quality Assesment {#sec:quality assesment}
+## Quality Assesment {#sec:quality-assesment}
 
 XXXXXX
 
@@ -142,7 +207,7 @@ The second method for defining panels, once an appropriate system of geodesics h
 The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
 For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
 
-![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](../resources/images/svg/PTPanels&DistanceToMesh.png){#fig:binormalMethod}
+![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:binormalMethod}
 
 ### Method Comparison
 
@@ -154,7 +219,7 @@ In this section, we will introduce the different existent methods for generating
 
 ## Parallel Transport Method {#sec:parallel-transport}
 
-![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](../resources/images/svg/SpherePT.svg){#fig:SpherePT}
+![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](resources/images/svg/SpherePTCairo.pdf){#fig:SpherePT}
 
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points ocurrs at a prescribed location.
 
@@ -164,10 +229,10 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 > 2. It changes as little as possible in direction
 > 3. It is a known fact that the length of the vector remains unchanged
 
-![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](../resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
+![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
 
 
-![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](../resources/images/svg/ParallelTransportMethod.svg){#fig:parTransProc}
+![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](resources/images/svg/ParallelTransportMethod.pdf){#fig:parTransProc}
 
 ### Procedure
 
@@ -208,8 +273,8 @@ The placement of the first geodesic curve and the selection of the initial vecto
 Two main concepts are covered in this section, both proposed by [@Pottmann2010-ku]: the first, what is called the *evolution method*, and a second method based on *piecewise-geodesic* vector fields.
 
 <div id="fig:evolExample1">
-![](../resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
-![](../resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
+![](resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
+![](resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
 
 Surface covered by a 1-geodesic pattern using the evolution method without introducint greakpoints. [@Fig:evolSurf] shows an overview of the result; while [@fig:evolSurf2] highlights the intersection point of several geodesic curves. This problem will be adressed by introducing the concept of 'piece-wise' geodesic curves; which are curves that are not geodesics, but are composed of segments of several connected geodesic curves.
 </div>
@@ -249,8 +314,10 @@ Gluing them together will result in a surface of approximate Gaussian curvature.
 [^question]: **Question:** What is $\alpha$ in this formula? Missing image
 
 <div id="fig:geoDistMultiple">
-![Distances between geodesics](../resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=30%}
-![Distances between geodesics](../resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
+
+![](resources/refImages/Distances-between-geodesics.png){#fig:distanceGeo width=30%}
+![](resources/refImages/Geodesic-+-Neighbouring-Geodesic.png){#fig:sphereGeoDist width=30%}
+
 Geodesic distances on sphere
 </div>
 
@@ -286,7 +353,7 @@ Surface covered by a 1-geodesic pattern using the evolution method. [@Fig:evolSu
 
 ## Level-Set Method {#sec:level-sets}
 
-We can also compute geodesic curve patterns on a surface by computing a scalar function on each vertex of a mesh that minimizes a given error $F_{min}$. 
+We can also compute geodesic curve patterns on a surface by computing a scalar function on each vertex of a mesh that minimizes a combination of error measurements $F_{min} = F_k + \lambda F_{_nabla} + F_w$.
 
 ## Geodesic Webs {#sec:geodesic-webs}
 
@@ -294,15 +361,13 @@ We can also expand the Leve-Set method explained in the previous section from on
 
 # Shape Optimization  {#sec:optimization}
 
-Depending on the surface 
-
 ## Geodesic Vector-fields {#sec:geodesic-vector-fields}
 
 The level-set method described in [@Sec:level-sets] is not suitable for arbitrary surfaces, and therefore it must be adapted to achieve the desired result. In this section, we introduce the concept of *Geodesic Vector-fields* to divide the surface into patches that could be easily covered by equal width panels using the level-set method.
 
 ## Dynamic shape optimization (Kennan Crane...)
 
-Another option is to modify the original surface to make it *developable*. This algorithm was first presented by @Stein2018DSF and it allows to convert any given triangle mesh into a developable approximation by minimizing a specified energy applied to each edge of the mesh.
+Another option is to modify the original surface to make it *developable*. This algorithm was first presented by [@Stein2018DSF] and it allows to convert any given triangle mesh into a developable approximation by minimizing a specified energy applied to each edge of the mesh and subsequently subdividing in order to achieve a smooth developable aproximation to the reference surface.
 
 # Mathematical background {#math-background}
 
