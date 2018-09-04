@@ -9,8 +9,6 @@ author-meta: "MPDA'18 Master Thesis"
 date: "September 2018"
 ---
 
-pandoc -s --self-contained -t revealjs slides/slides.md -o slides/index.html -V revealjs-url=reveal.js-master -V theme=white --slide-level 2
-
 # Objective
 
 ## Objective
