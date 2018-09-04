@@ -147,13 +147,17 @@ There are three main methods for the obtaining succesfful geodesic patterns:
 
 ## Results
 
-![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/PTPanels&DistanceToMesh.png)
+![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/PTPanels&DistanceToMesh.png){width=200%}
 
 # The evolution method
 
 ## Implementation details
 
+![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/CuttyEvolutionMethod.png)
+
 ## Results
+
+![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/CuttyEvolutionMethod2.png)
 
 # The piecewise evolution method
 

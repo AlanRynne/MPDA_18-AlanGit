@@ -4,26 +4,35 @@
     margin-top: 5%;
 
   }
-  
-  .reveal .slides>section {
-    min-height: 100%;
-    margin-left: 5%;
-    margin-right:5%;
-    text-align: center;
-  }
-  
-  .reveal .slides>section>section {
-    min-height: 100%;
-    
-  }
 
+.reveal .slides>section {
+  min-height: 100%;
+  margin-left: 5%;
+  margin-right:5%;
+  text-align: center;
+}
 
-  section.level2 > h2 {
-    font-size: 100%;
+.reveal .slides>section>section {
+  min-height: 100%;
+  
 }
 
 section.level1 > h1 {
-    font-size: 200%;
+  font-size: 200%;
+  color: cornflowerblue;
+}
+
+section.level2 > h2 {
+  font-size: 100%;
+  color: cornflowerblue;
+}
+
+em {
+}
+
+strong
+{
+  color:cornflowerblue;
 }
 
 #left {
