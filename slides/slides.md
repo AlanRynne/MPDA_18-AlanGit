@@ -7,6 +7,7 @@ title: "Geodesic Patterns"
 author: "Alan Rynne"
 author-meta: "MPDA'18 Master Thesis"
 date: "September 2018"
+css: slides/custom.css
 ---
 
 # Objective
@@ -80,13 +81,13 @@ It could be easiy understood as:
 
 *The path that a bug follows on a surface if it only moves **forward***
 
-![](https://upload.wikimedia.org/wikipedia/commons/6/6a/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){width=50%}
+![](https://upload.wikimedia.org/wikipedia/commons/6/6a/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){width=30%}
 
 ## Straightest geodesics
 
 In this research, we concentrate on the concept of ***straightest geodesics***.
 
-![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/ShortestGeodesics.png){width=50%}
+![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/ShortestGeodesics.png){width=30%}
 
 ## Developable surfaces
 
