@@ -143,7 +143,7 @@ There are three main methods for the obtaining succesfful geodesic patterns:
 
 ## Implementation details
 
-![Parallel transport method over positive curvature surface](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/ParallelTransportMethod.png)
+![Parallel transport method over positive curvature surface](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/resources/images/svg/ParallelTransportMethod.png){width=50%}
 
 ## Results
 
