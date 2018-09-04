@@ -7,6 +7,7 @@ title: "Geodesic Patterns"
 author: "Alan Rynne"
 author-meta: "MPDA'18 Master Thesis"
 date: "September 2018"
+css: slides/custom.css
 ---
 
 # Objective
