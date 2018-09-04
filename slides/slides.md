@@ -80,7 +80,7 @@ It could be easiy understood as:
 
 In this research, we concentrate on the concept of ***straightest geodesics***.
 
-## Developable surfaces {data-background="../resources/images/svg/DevelopableFromCurve.svg" data-background-size=90% data-state="dimbg"}
+## Developable surfaces {data-background="../resources/images/svg/DevelopableFromCurve.svg" data-background-size=90%}
 
 Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distorsion***
 
