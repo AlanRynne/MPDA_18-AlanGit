@@ -39,7 +39,7 @@ Connected developable patches for boat hull design.
 
 * Common practice in naval engineering industry.
 
-![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdq-OVEnY_mdJngyyxW_BqUxhUxxHC_aEVaTUrw_Vqb4ScBgA55Q)
+![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg)
 
 ## Frank Ghery
 
