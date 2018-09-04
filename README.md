@@ -20,3 +20,10 @@ To output in article format:
 Other commands for publishing a single file format are available (check the lower part of the makefile)
 
 All output files will be saved in the `output/` folder.
+
+
+Run this command for slides (I will make a Makefile command shortly)
+
+```command
+pandoc -s -t revealjs slides/slides.md -o slides/index.html -V revealjs-url=../slides/reveal.js-master -V theme=white --slide-level 2
+```
