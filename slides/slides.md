@@ -29,14 +29,23 @@ Discretize a given freeform surface into panels with the following properties:
 
 4. Panels should ***bend by their weak axis*** to aproximate the surface.
 
+::: notes
+
+This is my note.
+
+- It can contain Markdown
+- like this list
+
+:::
+
 ## Objective
 
-:::::::::::::: {.columns}
-::: {.column width="40%"}
+:::::::::::::: {columns}
+::: {column width="40%"}
 contents...
 :::
-::: {.column width="60%"}
-![alt](/Users/alan/Downloads/Architecture Photos/meric-dagli-388890-unsplash.jpg)
+::: {column width="60%"}
+ Some text
 :::
 ::::::::::::::
 
@@ -51,6 +60,8 @@ The use of *sraight developable planks* is widely used in
 ## Some Algorithm
 
 \begin{algorithm}[H]
+\caption{pseudocode for the calculation of }
+\label{alg:seq}
 \begin{algorithmic}[1]
 \FOR{$i=1$ to $N$}
 \FOR{$j=1$ to $JJJJ$}
@@ -59,8 +70,6 @@ $ interpolate(AAA[i*JJJ+j], ZZZ)$
 \ENDFOR
 \ENDFOR
 \end{algorithmic}
-\caption{pseudocode for the calculation of }
-\label{alg:seq}
 \end{algorithm}
 
 ## Developable hulls

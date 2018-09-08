@@ -7,7 +7,7 @@ date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: ../input/MPDABibliography.bib
+bibliography: input/MPDABibliography.bib
 nocite: '@*'
 ---
 
@@ -64,7 +64,7 @@ For triangle meshes, shortest polylines cross edges at ***equal angles***.
 
 Finding the truly shortest geodesic paths requires the computation of distance fields [see @Do_Carmo2016-kx;@Kimmel1998-ut]
 
-![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug}
+![If an insect is placed on a surface and continually walks "forward", by definition it will trace out a geodesic (image taken from [Wikipedia](https://en.wikipedia.org/wiki/Geodesic)).](resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif){#fig:geodesicBug width="30%"}
 
 ### Algorithmic ways of generating geodesics
 
@@ -81,7 +81,7 @@ Both problems have different ways of being solved either numerically, graphicall
 > It is important to note that, during this chapter, all surfaces are discretized as triangular meshes (V,E,F) of sufficient precision.  
 > **What would that precision be?? %?? distance to reference surf??**
 
-![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic cuves of a torus, although $g_1$ is more than double the length of $g_0$.](resources/images/svg/ShortestGeodesics.pdf){#fig:shortGeo}
+![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic cuves of a torus, although $g_1$ is more than double the length of $g_0$.](resources/images/svg/ShortestGeodesics.pdf){#fig:shortGeo pos=t}
 
 ## Developable surfaces
 
@@ -207,7 +207,7 @@ The second method for defining panels, once an appropriate system of geodesics h
 The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
 For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
 
-![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:binormalMethod}
+![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:binormalMethod fig.pos="t"}
 
 ### Method Comparison
 

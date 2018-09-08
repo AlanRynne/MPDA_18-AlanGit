@@ -25,8 +25,9 @@ All output files will be saved in the `output/` folder.
 Run this command for slides (I will make a Makefile command shortly)
 
 ```command
-pandoc -s -f markdown+implicit_figures+superscript+subscript+table_captions -F mermaid-filter -F pandoc-crossref -F pandoc-citeproc -t revealjs slides/slides.md -o slides/index.html -V revealjs-url=../slides/reveal.js-master -V theme=white --slide-level 2 --katex
+pandoc -s -f markdown+implicit_figures+superscript+subscript+table_captions+fenced_code_blocks -F mermaid-filter -F pandoc-crossref -F pandoc-citeproc -t revealjs slides/slides.md -o slides/index.html -V revealjs-url=../slides/reveal.js-master -V theme=white --slide-level 2 --katex
 ```
+
 Beamer
 ```command
 pandoc -s -f markdown+implicit_figures+superscript+subscript+table_captions -F mermaid-filter -F pandoc-crossref -F pandoc-citeproc -t beamer slides/slides.md -o slides/index.pdf --slide-level 2 --katex

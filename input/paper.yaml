@@ -11,6 +11,7 @@ header-includes:
   \usepackage{xcolor}
   \usepackage{algorithm}
   \usepackage{algorithmic}
+  \usepackage[export]{adjustbox}
 
 # Latex Template Options
 documentclass: paper
@@ -35,6 +36,6 @@ colorlinks: true
 # Color citations & references
 linkcolor: NavyBlue
 toccolor: NavyBlue
-citecolor: Yellow
+citecolor: NavyBlue
 urlcolor: NavyBlue
 ---
