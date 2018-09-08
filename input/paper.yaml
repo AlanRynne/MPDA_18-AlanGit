@@ -1,6 +1,7 @@
 ---
 # Latex Engine
 latex_engine: xelatex
+css:  slides/custom.css
 nocite: '@*'
 # Include Latex Packages
 header-includes:
