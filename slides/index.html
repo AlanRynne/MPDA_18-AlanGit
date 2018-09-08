@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="MPDA'18 Master Thesis">
+  <meta name="author" content="Alan Rynne">
   <title>Geodesic Patterns</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="../slides/reveal.js-master/css/reveal.css">
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="../slides/reveal.js-master/css/theme/white.css" id="theme">
-  <link rel="stylesheet" href="../slides/custom.css"/>
   <!-- Printing and PDF exports -->
   <script>
     var link = document.createElement( 'link' );
@@ -41,28 +40,34 @@
   <p class="date">September 2018</p>
 </section>
 
-<section><section id="dimbg" class="titleslide slide level1" data-background="https://www.dw.com/image/19172478_303.jpg"><h1>Objective</h1></section><section id="objective" class="slide level2">
+<section><section id="objective" class="titleslide slide level1"><h1>Objective</h1></section><section id="objective-1" class="slide level2">
 <h2>Objective</h2>
 <p>Discretize a given freeform surface into panels with the following properties:</p>
 <ol type="1">
 <li><p>Panels must be <strong><em>developable</em></strong> <span class="citation" data-cites="shelden2002digital">(Shelden 2002)</span></p></li>
-<li><p>Panels should be of approximate <strong><em>equal width</em></strong></p></li>
+<li>Panels should be of approximate <strong><em>equal width</em></strong> . . .</li>
 <li><p>Panels should be <strong><em>as straight as possible</em></strong></p></li>
 <li><p>Panels should <strong><em>bend by their weak axis</em></strong> to aproximate the surface.</p></li>
 </ol>
+</section><section id="objective-2" class="slide level2">
+<h2>Objective</h2>
+<p>:::::::::::::: {.columns} ::: {.column width=&quot;40%&quot;} contents... ::: ::: {.column width=&quot;60%&quot;} <img src="/Users/alan/Downloads/Architecture%20Photos/meric-dagli-388890-unsplash.jpg" alt="alt" /> ::: ::::::::::::::</p>
 </section></section>
 <section><section id="background" class="titleslide slide level1"><h1>Background</h1></section><section id="boat-building" class="slide level2" data-background="http://woodboatbuilder.com/maid-planking/sm13planks.jpg">
 <h2>Boat-building</h2>
 <p>The use of <em>sraight developable planks</em> is widely used in</p>
 <p><strong>traditional boat building</strong></p>
+</section><section id="some-algorithm" class="slide level2">
+<h2>Some Algorithm</h2>
+
 </section><section id="developable-hulls" class="slide level2">
 <h2>Developable hulls</h2>
 <p>Connected developable patches for boat hull design.</p>
-<ul>
+<ol type="1">
 <li>Common practice in naval engineering industry.</li>
-</ul>
+</ol>
 <figure>
-<img src="https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg" />
+<img src="https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg" alt="Developable hull model" /><figcaption>Developable hull model</figcaption>
 </figure>
 </section><section id="frank-ghery" class="slide level2" data-background="https://www.dw.com/image/19172478_303.jpg">
 <h2>Frank Ghery</h2>
@@ -197,8 +202,6 @@
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        // Transition style
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
         dependencies: [

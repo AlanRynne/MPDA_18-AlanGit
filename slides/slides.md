@@ -1,17 +1,21 @@
 ---
-theme: 'white'
-highlightTheme: "vs"
-transition: 'slide'
-titlepage: true
 title: "Geodesic Patterns"
 author: "Alan Rynne"
-author-meta: "MPDA'18 Master Thesis"
 date: "September 2018"
-css: ../slides/custom.css
+institute: "UPC - MPDA'18"
 bibliography: input/MPDABibliography.bib
+theme: metropolis
+colortheme: dove
+titlegraphic: "../resources/images/svg/MPDA-logo.png"
+logo: "../resources/images/svg/MPDA-logo.png"
+
+header-includes:
+  \usepackage{algorithmic, algorithm2e}
+  \usepackage{svg}
+  \usepackage{svgcolor}
 ---
 
-# Objective {data-background="https://www.dw.com/image/19172478_303.jpg" id="dimbg"}
+# Objective 
 
 ## Objective
 
@@ -19,11 +23,22 @@ Discretize a given freeform surface into panels with the following properties:
 
 1.  Panels must be ***developable*** [@shelden2002digital]
 
-2. Panels should be of approximate ***equal width***
-
+2. Panels should be of approximate ***equal width***  
+. . .
 3. Panels should be ***as straight as possible***
 
 4. Panels should ***bend by their weak axis*** to aproximate the surface.
+
+## Objective
+
+:::::::::::::: {.columns}
+::: {.column width="40%"}
+contents...
+:::
+::: {.column width="60%"}
+![alt](/Users/alan/Downloads/Architecture Photos/meric-dagli-388890-unsplash.jpg)
+:::
+::::::::::::::
 
 # Background 
 
@@ -33,14 +48,28 @@ The use of *sraight developable planks* is widely used in
 
 **traditional boat building**
 
+## Some Algorithm
+
+\begin{algorithm}[H]
+\begin{algorithmic}[1]
+\FOR{$i=1$ to $N$}
+\FOR{$j=1$ to $JJJJ$}
+\STATE $energy[i*JJJ+j] =$ \\
+$ interpolate(AAA[i*JJJ+j], ZZZ)$
+\ENDFOR
+\ENDFOR
+\end{algorithmic}
+\caption{pseudocode for the calculation of }
+\label{alg:seq}
+\end{algorithm}
 
 ## Developable hulls
 
 Connected developable patches for boat hull design.
 
-* Common practice in naval engineering industry.
+1. Common practice in naval engineering industry.
 
-![](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg)
+![Developable hull model](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg)
 
 ## Frank Ghery {data-background="https://www.dw.com/image/19172478_303.jpg"}
 
