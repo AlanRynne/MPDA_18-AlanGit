@@ -7,28 +7,30 @@ date: Sept 2017
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesics, paneling, surface disretization
-bibliography: input/MPDABibliography.bib
+bibliography: [input/MPDABibliography.bib]
 nocite: '@*'
 ---
 
 # Introduction {#sec:intro}
 
-* With the development of advanced 3D CAD tools in the last decades, architects are now able to incorporate complex freeform surfaces into their designs.  
-* This new capabilities have given birth to new architectural possibilities and challenges.
-* In an architectural scale, this smooth freeform surfaces cannot be built as designed. They must be *rationalized*
-* *Rationalization* is the simplification of a complex surface into smaller parts that fit some specified requirements.  
-* The *rationalization* of a freeform surfaces implies a difference, or loss of precision, between the reference and the rationalized surface.
-* This difference must be small in order for the rationalization to closely approximate the original.
-* Some requirements are related to aesthetics, such as the precision, the desired panel shape (quad, hex, triangular, strips...) or the aspect ratio,
-* while others are closely tied to the constructability of the rationalized surface, such as panel planarity, curvature allowed by material (when planar panels are not required)
+[08/Sep/18 - 22:10:10]: # (TALK ONLY ABOUT THIS PAPERS OBJECTIVES, INTRODUCE DIRECT REFERENCES. DON'T TALK ABOUT ANY BUILDINGS)
+
+With the development of advanced 3D CAD tools in the last decades, architects are now able to incorporate complex freeform surfaces into their designs.  This new capabilities have given birth to new architectural possibilities and, more importantly, new needs and challenges for the industry that can often be solved by the means of *Differential Geometry* [@doCarmo2016kx] and, more specifically, *Discrete Differential Geometry* [@Crane2013DGP], which studies the discrete counterparts of *Differential Geometry*. This new fusion between architecture and mathematics gave birth to the field known as *Architectural Geometry* [@pottmann2008geometry; @pottmann2010architectural], which has been further developed during the past years. 
+
+Given the scale an architectural scale, this smooth freeform surfaces cannot be built as designed in 3D CAD applications and, therefore, must be divided in smaller, simpler parts that could be easily manufacturable. This process is called *Rationalization*, and is not a trivial task; since the *Rationalization* of a surface implies a loss of precission in the resulting shape, it must be done in such a way that minimizes this loss. The selected shape of the generated panels also plays a key role when approaching this problems, since it is clear the final appearance of the design will vary greatly depending wether the panels are triangular, quad, hexagonal or long strips. Constructability of the selected design (panel planarity, curvature, error margins) is of great concern in rationalization methods for architectural purposes, as opposed to related Computer Graphics methods.
+
+In this publication we center on the generation of *Geodesic Panels on Freeform Surfaces*, meaning, seamlessly covering any given surface with a pattern of *thin, long, straight panels*, which must be *developable* and rectangular (or quasi-rectangular) in shape and must approximate the surface by being bent only on their weak axis. We will introduce the basic geometric properties behind this concept and the algorithmic implementation of several of the methods. We will also explore new methods for optimizing any given shape towards *developability*.
+
+# Background
+
+[08/Sep/18 - 22:11:11]: # (TALK ABOUT BUILDINGS, OPTIMIZED AND NON OPTIMIZED SOLUTIONS, MEMBRANES, WINTESS...)
+
 * Examples of surface Rationalization are abundant in today's current architecture (Zaha Hadid, Ghery, Foster, Toyo-Ito...)
-* In this *chapter* we will concentrate on the rationalization of free-form surfaces in straight *developable* panels that are rectangular or mostly rectangular in shape, and which can be bent on their weak axis to seamlessly cover the desired surface.
 * Covering surfaces with long rectangular, or quasi-rectangular panels of equal width, is a topic widely explored in traditional boat building, and has also been recently applied in several architectural projects, such as Toyo Ito's Minna No Mori, or the interior cladding at Frank Ghery's.
 * We will also explore current methods to convert a freeform surface into *developable* patches (the concept of developability is further explained  in the following chapters).
 * Rationalizing a shape into *developable* patches is one of the main features of architect Frank Ghery's practice.
 * Also closely related to architectural membrane patterning, which is usually done by some variation of the parallel transport method explained in @Sec:parallel-transport.
 
-# Background
 
 1. Burj Khalifa interior panelling [@meredith2012burj]
 2. Ghery's architecture in general uses same width metal sheets to cover entire buildings, although I am not shure if that is not Orlando's subject either...
@@ -36,23 +38,7 @@ nocite: '@*'
 4. MAYBE?? Include non-optimized builidng examples to demonstrate the method's usefulness.
 5. Looking for other built examples or previous/further research on the subject.
 
-## Computer programs using this technique
-
-There are no programs that develop this technique "out of the box", but it it based on simple algorithms and can be easily reproduced in any of the latest 3D modeling programs that allow any form of scripting (visual or otherwise) to generate and manipulate 3D geometries. Some examples of this might be:
-
-1. [Rhino+Grasshopper](http://www.rhino3d.com)
-2. [Revit + Dynamo](http://www.dynamobim.com)
-3. [IOGram](http://www.iogram.ca) (Currently in beta, it's the 'new kid on the block' of parametric design)
-4. [Houdini](https://www.sidefx.com/)
-5. [3DMax](https://www.autodesk.eu/products/3ds-max/overview)
-
-There also exist some powerful geometry processing libraries that can help with the task of computing geodesic curves, distances & fields (which are widely used in this chapter) and other libraries oriented to general scientific and mathematical computing, which are usefull when numerical optimization is needed during the process. Some of those libraries are:
-
-1. [LibiGL](http://libigl.github.io/libigl/)(C++ with Python bindings)
-2. [CGal](https://www.cgal.org/) (C++)
-3. [OpenMesh](https://www.openmesh.org/) (C++ with Python bindings)
-4. [NumPy](http://www.numpy.org) (Python Computing Library)
-5. [SciPy](http://www.scipi.org) (Python Scientific Computing Library )
+# Geometric properties
 
 ## Geodesic curves
 
@@ -100,9 +86,8 @@ There are several ways of generating a developable surface using a curve in spac
 
 ![Developable surface generated using curve $g_1$ of [@fig:shortGeo]. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](resources/images/svg/DevelopableFromCurve.pdf){#fig:devFromCurve}
 
-# Construction technique {#sec:construction-techniques}
 
-## Geometric Properties {#sec:geometric-properties}
+## Properties to aim for{#sec:properties to aim for}
 
 We will first introduce the properties we aim for when generating geodesic panels:
 
@@ -144,72 +129,6 @@ Problem 2
 3. Those panels cover the surface with ***no gaps***
 
 ## Quality Assesment {#sec:quality-assesment}
-
-XXXXXX
-
-## Panel modeling {#sec:panel-modeling}
-
-In this section, we will discuss several ways to generate panels from curves lying on a given surface:
-
-### Tangent-developable method {#sec:tangent-developable-panels}
-
-The notion of ***Conjugate tangents*** on smooth surfaces must be defined:
-
-> * Strictly related to the ***Dupin Indicatrix***
-> * In negatively curved areas, the Dupin Indicatrix is an hyperbola whose asymptotic directions (A1, A2)
-> * Any parallelogram tangentialy circumscribed to the indicatrix defines two conjugate tangents **T** and **U**.
-> * The asymptotic directions of the dupin indicatrix are the diagonals of any such parallelogram.
-
-![Tangent developable method for panels\label{tangentDevMethod}](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png)
-
-Initial algorithm is as follows:
-
->For all geodesics $s_i$ in a given pattern:
->
->  1. Compute the *tangent developable surfaces* $\rightarrow\Psi_i$
->  2. Trim $\Psi_i$ along the intersection curves with their respective neighbours.
->  3. Unfold the trimed $\Psi_i$, obtaining the panels in flat state.
-
-***Unfortunately***, this method needs to be refined in order to work in practice because:
-
-> 1. The rulings of tangent developables may behave in weird ways
-> 2. The intersection of the neighbouring $\Psi_i$'s is often *ill-defined*.
-
-Therefore, the procedure was modified in the following way:
-
-> 1. Compute the *tangent developable surfaces* $\Psi_i$ for all surfaces $s_i \rightarrow i=\text{even numbers}$
-> 2. Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
-> 3. Fill the holes in the rulings by interpolation (???)
-> 4. On each ruling:
->    1. Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
-> 5. Optimize globaly the positions of points $A_i(x)$ and $B_i(x)$ such that
->     1. Trim curves are *smooth*
->     2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
->     3. The ruling segments $A_i(x)B_i(x)$ lies close to the *original surface* $\Phi$
-
-This adjustments to the algorithm allow for the modeling of panels that meet the requirements of developability and approximately constant width, although it must be noted computation times increase, as double the  ammount of geodesic curves need to be generated, and subsequently, the desired width function needs to be half the desired width of the panels. [@Fig:tangentDevMethod] shows the result of computing such panels and the subsequent gaps between the generated panels; these gaps need to be kept within a certain width in order to produce a succesfull watertight panelization of the original surface. Furthermore, material restrictions such as bending or torsion where not taken into account during the construction of the panels.
-
-![Panels computed using the using the tangent developable method.](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:tangentDevMethod}
-
-### The Bi-Normal Method {#sec:bi-normal-panels}
-
-The second method for defining panels, once an appropriate system of geodesics has been found on $\Phi$, works directly with the geodesic curves.
-
-> Assume that a point $P(t)$ traverses a geodesic $s$ with unit speed, where $t$ is the time parameter.
-> For each time $t$ there is:
->
-> * a velocity vector $T(t)$
-> * the normal vector $N(t)$
-> * a third vector $B(t)$, *the binormal vector*
->
-> This makes $T.N.B$ a ***moving orthogonal right-handed frame***
-
-The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
-For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
-
-![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:binormalMethod fig.pos="t"}
-
-### Method Comparison
 
 XXXXXX
 
@@ -359,6 +278,81 @@ We can also compute geodesic curve patterns on a surface by computing a scalar f
 
 We can also expand the Leve-Set method explained in the previous section from one familiy of curves to several families of interconnected quasi-geodesic curves by simply computing several sets of scalar functions on each vertex of the surface.
 
+
+
+
+
+
+
+
+
+
+## Panel modeling {#sec:panel-modeling}
+
+In this section, we will discuss several ways to generate panels from curves lying on a given surface:
+
+### Tangent-developable method {#sec:tangent-developable-panels}
+
+The notion of ***Conjugate tangents*** on smooth surfaces must be defined:
+
+> * Strictly related to the ***Dupin Indicatrix***
+> * In negatively curved areas, the Dupin Indicatrix is an hyperbola whose asymptotic directions (A1, A2)
+> * Any parallelogram tangentialy circumscribed to the indicatrix defines two conjugate tangents **T** and **U**.
+> * The asymptotic directions of the dupin indicatrix are the diagonals of any such parallelogram.
+
+![Tangent developable method for panels\label{tangentDevMethod}](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png)
+
+Initial algorithm is as follows:
+
+>For all geodesics $s_i$ in a given pattern:
+>
+>  1. Compute the *tangent developable surfaces* $\rightarrow\Psi_i$
+>  2. Trim $\Psi_i$ along the intersection curves with their respective neighbours.
+>  3. Unfold the trimed $\Psi_i$, obtaining the panels in flat state.
+
+***Unfortunately***, this method needs to be refined in order to work in practice because:
+
+> 1. The rulings of tangent developables may behave in weird ways
+> 2. The intersection of the neighbouring $\Psi_i$'s is often *ill-defined*.
+
+Therefore, the procedure was modified in the following way:
+
+> 1. Compute the *tangent developable surfaces* $\Psi_i$ for all surfaces $s_i \rightarrow i=\text{even numbers}$
+> 2. Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
+> 3. Fill the holes in the rulings by interpolation (???)
+> 4. On each ruling:
+>    1. Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
+> 5. Optimize globaly the positions of points $A_i(x)$ and $B_i(x)$ such that
+>     1. Trim curves are *smooth*
+>     2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
+>     3. The ruling segments $A_i(x)B_i(x)$ lies close to the *original surface* $\Phi$
+
+This adjustments to the algorithm allow for the modeling of panels that meet the requirements of developability and approximately constant width, although it must be noted computation times increase, as double the  ammount of geodesic curves need to be generated, and subsequently, the desired width function needs to be half the desired width of the panels. [@Fig:tangentDevMethod] shows the result of computing such panels and the subsequent gaps between the generated panels; these gaps need to be kept within a certain width in order to produce a succesfull watertight panelization of the original surface. Furthermore, material restrictions such as bending or torsion where not taken into account during the construction of the panels.
+
+![Panels computed using the using the tangent developable method.](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:tangentDevMethod}
+
+### The Bi-Normal Method {#sec:bi-normal-panels}
+
+The second method for defining panels, once an appropriate system of geodesics has been found on $\Phi$, works directly with the geodesic curves.
+
+> Assume that a point $P(t)$ traverses a geodesic $s$ with unit speed, where $t$ is the time parameter.
+> For each time $t$ there is:
+>
+> * a velocity vector $T(t)$
+> * the normal vector $N(t)$
+> * a third vector $B(t)$, *the binormal vector*
+>
+> This makes $T.N.B$ a ***moving orthogonal right-handed frame***
+
+The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
+For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
+
+![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels coloured by distance to reference mesh.](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:binormalMethod fig.pos="t"}
+
+### Method Comparison
+
+XXXXXX
+
 # Shape Optimization  {#sec:optimization}
 
 ## Geodesic Vector-fields {#sec:geodesic-vector-fields}
@@ -368,7 +362,5 @@ The level-set method described in [@Sec:level-sets] is not suitable for arbitrar
 ## Dynamic shape optimization (Kennan Crane...)
 
 Another option is to modify the original surface to make it *developable*. This algorithm was first presented by [@Stein2018DSF] and it allows to convert any given triangle mesh into a developable approximation by minimizing a specified energy applied to each edge of the mesh and subsequently subdividing in order to achieve a smooth developable aproximation to the reference surface.
-
-# Mathematical background {#math-background}
 
 # References
