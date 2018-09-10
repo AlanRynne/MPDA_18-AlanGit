@@ -3,6 +3,7 @@
 latex_engine: xelatex
 css:  slides/custom.css
 nocite: '@*'
+
 # Include Latex Packages
 header-includes:
   \usepackage[multiple]{footmisc}
@@ -15,8 +16,9 @@ header-includes:
   \usepackage[export]{adjustbox}
 
 # Latex Template Options
-documentclass: paper
+documentclass: article
 classoption: twoside
+
 # Paper geometry options
 papersize: A4
 margin-left: 1in
@@ -24,16 +26,20 @@ margin-right: 1in
 margin-top: 1in
 margin-bottom: 1in
 fontsize: 10pt
+
 # Table of Contents
 toc: true
 toc-depth: 2
+
 # List of figures & tables
 lof: true
 #lot: true
+
 # Make links in citations & references
 link-citations: true
 link-references: true
 colorlinks: true
+
 # Color citations & references
 linkcolor: NavyBlue
 toccolor: NavyBlue
