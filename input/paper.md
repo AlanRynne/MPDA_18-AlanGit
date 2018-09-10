@@ -4,7 +4,7 @@ title: "Geodesic Patterns for free-form Architecture"
 subtitle: "MPDA'18 Master Thesis —— UPC-ETSAV"
 author: Alan Rynne Vidal
 institution: "UPC"
-date: \today
+date: September 2018
 abstract:
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 keywords: architectural geometry, geodesic patterns, geodesic curves, freeform paneling, surface rationalization, developable surfaces
@@ -28,7 +28,7 @@ In this publication we center on the generation of *Geodesic Panels on Freeform 
 
 Examples of the application of *Architectural Geometry*  are abundant in today's architecture. Architect Frank Ghery is known for his work ground-braking work on the design of architectural shapes based purely on *developable* patches [@Stein2018DSF], which can be easily covered by a variety of panel patterns.
 
-Recent projects by Zaha Hadid, Foster, Toyo-Ito... XXXXXX.
+Recent projects by Zaha Hadid, Foster, Toyo-Ito... XXXXXXX.
 
 Covering surfaces with long rectangular, or quasi-rectangular panels of equal width, is a topic widely explored in traditional boat building, and has also been recently applied in several architectural projects, such as Toyo Ito's Minna No Mori (Japan), or the interior cladding at Frank Ghery's Burj Khalifa (Dubai) [@meredith2012burj].
 
