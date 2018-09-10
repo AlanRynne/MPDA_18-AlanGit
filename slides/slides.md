@@ -6,12 +6,12 @@ institute: "UPC - MPDA'18"
 bibliography: input/MPDABibliography.bib
 
 latex-engine: xelatex
-block: transparent
 theme: metropolis
-fonttheme: serif
 colortheme: dove
+fonttheme: "serif"
+logo: "../resources/images/svg/MPDA-logo3.png"
+
 css: ../slides/slides.css
-titlegraphic: "../resources/images/svg/MPDA-logo.png"
 
 header-includes:
   \usepackage{algorithmic, algorithm2e}
@@ -33,10 +33,16 @@ Discretize a given freeform surface into panels with the following properties:
 
 4. Panels should ***bend by their weak axis*** to aproximate the surface.
 
-Notes:
-This are reveal notes
-
 ## Objective
+
+:::::::::{.columns}
+:::{.column width=50%}
+Some text
+:::
+:::{.column width=50%}
+![Some figure](http://woodboatbuilder.com/maid-planking/sm13planks.jpg){#fig:someFigure}
+:::
+:::::::::
 
 # Background 
 
@@ -67,7 +73,7 @@ Connected developable patches for boat hull design.
 
 1. Common practice in naval engineering industry.
 
-![Developable hull model](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg)
+![Developable hull model](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg){width=70%}
 
 ## Frank Ghery {data-background="https://www.dw.com/image/19172478_303.jpg"}
 
