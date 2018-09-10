@@ -4,12 +4,13 @@ author: "Alan Rynne"
 date: "September 2018"
 institute: "UPC - MPDA'18"
 bibliography: input/MPDABibliography.bib
+
 latex-engine: xelatex
 block: transparent
 theme: metropolis
 fonttheme: serif
 colortheme: dove
-
+css: ../slides/slides.css
 titlegraphic: "../resources/images/svg/MPDA-logo.png"
 
 header-includes:
@@ -27,19 +28,13 @@ Discretize a given freeform surface into panels with the following properties:
 1.  Panels must be ***developable*** [@shelden2002digital]
 
 2. Panels should be of approximate ***equal width***  
-. . .
+
 3. Panels should be ***as straight as possible***
 
 4. Panels should ***bend by their weak axis*** to aproximate the surface.
 
-::: notes
-
-This is my note.
-
-- It can contain Markdown
-- like this list
-
-:::
+Notes:
+This are reveal notes
 
 ## Objective
 
