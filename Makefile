@@ -72,12 +72,13 @@ PANDOC_OPTIONS=\
 	-F pandoc-citeproc
 PANDOC_HTML_OPTIONS=\
 	--to html5\
-	--template=templates/template.html\
-	--css=templates/template.css\
+	--css=templates/pandoc.css\
 	--katex\
-	--self-contained
+	-s\
+	--self-contained\
 	--toc\
-	--toc-depth=2
+	--toc-depth=2\
+	-M date="Last updated: `date +"%x"`"
 PANDOC_PDF_OPTIONS=\
 	$(PDF_YAML)
 PANDOC_DOCX_OPTIONS=\
@@ -88,7 +89,7 @@ PANDOC_ICML_OPTIONS=\
 	--standalone\
 	--katex
 PANDOC_REVEALJS_OPTIONS=\
-	-f markdown+smart+implicit_figures+superscript+subscript+table_captions\
+	-f markdown+smart+implicit_figures+superscript+subscript+table_captions+fenced_divs\
 	-t revealjs\
 	-V revealjs-url=../slides/reveal.js/\
 	-V theme=white\
@@ -99,7 +100,7 @@ PANDOC_REVEALJS_OPTIONS=\
 	-F pandoc-citeproc\
 	--katex
 PANDOC_BEAMER_OPTIONS=\
-	-f markdown+smart+implicit_figures+superscript+subscript+table_captions\
+	-f markdown+smart+implicit_figures+superscript+subscript+table_captions+fenced_divs\
 	-t beamer\
 	-s\
 	--slide-level=2\
