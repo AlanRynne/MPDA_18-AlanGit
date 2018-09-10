@@ -20,8 +20,6 @@ SLIDES_DOCS = $(wildcard $(SLIDES_PATH)*.md)
 FILE_NAME = $(notdir $(SOURCE_DOCS))
 SLIDES_NAME = $(notdir $(SLIDES_DOCS))
 
-
-
 # Remove command
 RM=/bin/rm -rf
 PANDOC=/usr/local/bin/pandoc
@@ -45,11 +43,14 @@ EXPORTED_ICML=\
  $(addprefix $(OUTPUT_PATH),$(FILE_NAME:.md=.icml))
 
 EXPORTED_SLIDES=\
- $(addprefix $(SLIDES_PATH),$(SLIDES_NAME:.md=.html))
+ $(addprefix $(OUTPUT_PATH),$(SLIDES_NAME:.md=.html))
+
+EXPORTED_BEAMER_SLIDES=\
+ $(addprefix $(OUTPUT_PATH),$(SLIDES_NAME:.md=.pdf))
 
 EXPORTED_DOCS=\
  $(EXPORTED_HTML5) \
- $(EXPORTED_PDF)\
+ $(EXPORTED_PDF) \
  $(EXPORTED_WORD) \
  $(EXPORTED_EPUB) \
  $(EXPORTED_ICML)
@@ -62,62 +63,78 @@ $(OUTPUT_PATH)$(BUNDLE_NAME).docx\
 $(OUTPUT_PATH)$(BUNDLE_NAME).epub\
 $(OUTPUT_PATH)$(BUNDLE_NAME).icml
 
-#PANDOC document publishing options
-# DOCUMENTCLASS can be {article, paper, book, memoir, report}
-# CLASSOPTION=twocolumn for 2-column document.
-# Number sections with -N
-# Table of contents with --toc
-# TOC depth with --toc-depth=X
-# Cross-references requires to have pandoc-crossref installed and the use of -F pandoc-crossref BEFORE running the citations filter
-# Citations & Bibliography with -F pandoc-citeproc (.bib file must be specified in the document's YAML frontmatter
-
 # PANDOC 'PER DOCUMENT' FORMAT OPTIONS
 PANDOC_OPTIONS=\
-	--from markdown+implicit_figures+superscript+subscript+table_captions\
+	--from markdown+implicit_figures+superscript+subscript+table_captions+fenced_divs\
 	-N\
 	-F mermaid-filter\
 	-F pandoc-crossref\
-	-F pandoc-citeproc\
-	--toc\
-	--toc-depth=2
+	-F pandoc-citeproc
 PANDOC_HTML_OPTIONS=\
 	--to html5\
 	--template=templates/template.html\
 	--css=templates/template.css\
 	--katex\
 	--self-contained
-PANDOC_PDF_OPTIONS=
+	--toc\
+	--toc-depth=2
+PANDOC_PDF_OPTIONS=\
+	$(PDF_YAML)
 PANDOC_DOCX_OPTIONS=\
 	--reference-doc=templates/reference.docx
 PANDOC_EPUB_OPTIONS=\
 	--to epub
 PANDOC_ICML_OPTIONS=\
-	--filter=pandocsvg.py\
 	--standalone\
 	--katex
 PANDOC_REVEALJS_OPTIONS=\
-	--from markdown+smart\
+	-f markdown+smart+implicit_figures+superscript+subscript+table_captions\
 	-t revealjs\
+	-V revealjs-url=../slides/reveal.js/\
+	-V theme=white\
+	--slide-level 2\
 	-s\
-	-V revealjs-url='http://lab.hakim.se/reveal-js'
+	-F mermaid-filter\
+	-F pandoc-crossref\
+	-F pandoc-citeproc\
+	--katex
+PANDOC_BEAMER_OPTIONS=\
+	-f markdown+smart+implicit_figures+superscript+subscript+table_captions\
+	-t beamer\
+	-s\
+	--slide-level=2\
+	--katex\
+ 	-F mermaid-filter\
+	-F pandoc-crossref\
+	-F pandoc-citeproc
 
 #Export options per format
 $(OUTPUT_PATH)%.html : $(INPUT_PATH)%.md
-	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_HTML_OPTIONS) -o $(OUTPUT_PATH)index.html $<
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_HTML_OPTIONS) -o $@ $<
+
 $(OUTPUT_PATH)%.pdf : $(INPUT_PATH)%.md
-	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $(PDF_YAML) $<
+	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $<
+
 $(OUTPUT_PATH)%.docx : $(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_DOCX_OPTIONS) -o $@ $<
+
 $(OUTPUT_PATH)%.rtf : $(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_RTF_OPTIONS) -o $@ $<
+
 $(OUTPUT_PATH)%.odt : $(INPUT_PATH)%.md 
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_ODT_OPTIONS) -o $@ $<
+
 $(OUTPUT_PATH)%.epub : $(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_EPUB_OPTIONS) -o $@ $<
+
 $(OUTPUT_PATH)%.icml :$(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_ICML_OPTIONS) -o $@ $<
-$(SLIDES_PATH)%.html : $(SLIDES_PATH)%.md
+
+$(OUTPUT_PATH)%.html : $(SLIDES_PATH)%.md
 	$(PANDOC) $(PANDOC_REVEALJS_OPTIONS) -o $@ $<
+
+$(OUTPUT_PATH)%.pdf : $(SLIDES_PATH)%.md
+	$(PANDOC) $(PANDOC_BEAMER_OPTIONS) -o $@ $<
 
 
 #Export options for exporting all files as one single file
@@ -140,21 +157,26 @@ $(OUTPUT_PATH)$(BUNDLE_NAME).icml : $(SOURCE_DOCS)
 
 
 # Targets and dependencies
-.PHONY: all clean clean-files clean-bundles final-docs bundle
+.PHONY: final-docs clean clean-files clean-bundles clean-slides
 
-all: final-docs
+.DEFAULT_GOAL:= final-docs
+
+
+final-docs :\
+ pdf\
+ html5\
+ reveal-slides\
+ beamer-slides
 
 pdf: $(EXPORTED_PDF) $(SOURCE_DOCS)
 html5: $(EXPORTED_HTML5) $(SOURCE_DOCS)
 word: $(EXPORTED_WORD) $(SOURCE_DOCS)
 ebook: $(EXPORTED_EPUB) $(SOURCE_DOCS)
 indesign: $(EXPORTED_ICML) $(SOURCE_DOCS)
+reveal-slides: $(EXPORTED_SLIDES) $(SLIDES_DOCS)
+beamer-slides: $(EXPORTED_BEAMER_SLIDES) $(SLIDES_DOCS)
 
-final-docs : pdf html5 word ebook indesign
-
-slides: $(EXPORTED_SLIDES) $(SLIDES_DOCS)
-
-bundle: pdf-bundle html5-bundle word-bundle epub-bundle indesign-bundle
+bundle: pdf-bundle html5-bundle
 pdf-bundle: $(OUTPUT_PATH)$(BUNDLE_NAME).pdf $(SOURCE_DOCS)
 html5-bundle: $(OUTPUT_PATH)$(BUNDLE_NAME).html $(SOURCE_DOCS)
 word-bundle: $(OUTPUT_PATH)$(BUNDLE_NAME).docx $(SOURCE_DOCS)
@@ -168,7 +190,8 @@ clean-files:
 clean-bundles:
 	-$(RM) $(EXPORTED_BUNDLES)
 clean-slides:
-	-$(RM) $(EXPORTED_SLIDES)
+	-$(RM) $(EXPORTED_SLIDES) $(EXPORTED_BEAMER_SLIDES)
+
 #USEFUL RULES
 #Rule to print any variable. To use write 'make print-VARIABLE' in the terminal
 print-%  : ; @echo $* = $($*)
