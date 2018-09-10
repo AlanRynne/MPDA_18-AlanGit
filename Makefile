@@ -92,7 +92,7 @@ PANDOC_REVEALJS_OPTIONS=\
 	-f markdown+smart+implicit_figures+superscript+subscript+table_captions+fenced_divs\
 	-t revealjs\
 	-V revealjs-url=../slides/reveal.js/\
-	-V theme=white\
+	-V theme=serif\
 	--slide-level 2\
 	-s\
 	-F mermaid-filter\
