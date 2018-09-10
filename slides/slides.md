@@ -5,6 +5,7 @@ date: "September 2018"
 institute: "UPC - MPDA'18"
 bibliography: input/MPDABibliography.bib
 
+# Beamer
 latex-engine: xelatex
 theme: metropolis
 colortheme: dove
@@ -14,89 +15,83 @@ logo: "../resources/images/svg/MPDA-logo3.png"
 css: ../slides/slides.css
 
 header-includes:
-  \usepackage{algorithmic, algorithm2e}
+  \usepackage{algorithmic, algorithm}
   \usepackage{svg}
   \usepackage{svgcolor}
 ---
 
-# Objective 
+## Index {-}
 
-## Objective
+1. Objective
+2. Background
+3. Construction technique
+4. Algorithmic strategies
+5. Shape optimization
+6. Analysis
+7. Conclusion
+
+# Objective
+
+---
 
 Discretize a given freeform surface into panels with the following properties:
 
-1.  Panels must be ***developable*** [@shelden2002digital]
+1. Panels must be ***developable*** [@shelden2002digital]
 
 2. Panels should be of approximate ***equal width***  
 
 3. Panels should be ***as straight as possible***
 
-4. Panels should ***bend by their weak axis*** to aproximate the surface.
+4. Panels should ***bend by their weak axis*** to approximate the surface.
 
-## Objective
+# Background
 
-:::::::::{.columns}
-:::{.column width=50%}
-Some text
-:::
-:::{.column width=50%}
-![Some figure](http://woodboatbuilder.com/maid-planking/sm13planks.jpg){#fig:someFigure}
-:::
-:::::::::
+---
 
-# Background 
+The use of *straight developable planks* is widely used in:
 
-## Boat-building {data-background="http://woodboatbuilder.com/maid-planking/sm13planks.jpg"}
+![Traditional boat building](http://woodboatbuilder.com/maid-planking/sm13planks.jpg){width=60%}
 
-The use of *sraight developable planks* is widely used in 
+---
 
-**traditional boat building**
+Also common practice in naval engineering industry:
 
-## Some Algorithm
+![Connected developable patches for boat hull design](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg){width=70%}
 
-\begin{algorithm}[H]
-\caption{pseudocode for the calculation of }
-\label{alg:seq}
-\begin{algorithmic}[1]
-\FOR{$i=1$ to $N$}
-\FOR{$j=1$ to $JJJJ$}
-\STATE $energy[i*JJJ+j] =$ \\
-$ interpolate(AAA[i*JJJ+j], ZZZ)$
-\ENDFOR
-\ENDFOR
-\end{algorithmic}
-\end{algorithm}
-
-## Developable hulls
-
-Connected developable patches for boat hull design.
-
-1. Common practice in naval engineering industry.
-
-![Developable hull model](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg){width=70%}
-
-## Frank Ghery {data-background="https://www.dw.com/image/19172478_303.jpg"}
+## Frank Ghery
 
 This techniques have also been used in the architecture world, mainly by **Frank Ghery**.
 
 His façades are usually a collection of connected developable surfaces.
 
-## Burj Khalifa {data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg"}
+---
 
-Latest architectural work following this techiques was:
+Latest architectural work following this techniques was:
 
-**Burj Khalifa by *Frank Ghery*** 
+![Burj Khalifa by Frank Ghery](https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg){width=60%}
 
-## Burj Khalifa {data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg"}
+---
 
+:::::::::{.columns}
+:::{.column width=65%}
 It was designed as a collection of:
 
 * **Developable surfaces**  
   * *Which can be covered by equal width planks*  
-* **Surfaces of constant cuvrature**  
+* **Surfaces of constant curvature**  
   * *Which can be covered by repeating the same profile*  
 
-## Burj Khalifa {data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" data-background-size=100%}
+:::
+:::{.column width=35%}
+
+![](https://www.dw.com/image/19172478_303.jpg)
+
+:::
+:::::::::
+
+---
+
+![Burj Khalifa final panel solution](https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg){#fig:burjKhalifa width=100%}
 
 # Construction technique
 
@@ -104,93 +99,103 @@ It was designed as a collection of:
 
 A geodesic curve is the generalization of a *straight line* into *curved spaces*.
 
-$$\nabla + \alpha^2 = \sqrt8 * A$$
-
-## Geodesic curves {data-background="../resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif" data-background-size=50%}
-
-It could be easiy understood as:
-
-*The path that a bug follows on a surface if it only moves **forward***
-
-## Straightest geodesics {data-background="../resources/images/svg/ShortestGeodesics.svg" data-background-size=50%}
+## Straightest geodesics
 
 In this research, we concentrate on the concept of ***straightest geodesics***.
 
-## Developable surfaces {data-background="../resources/images/svg/DevelopableFromCurve.svg" data-background-size=90%}
-
-Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distorsion***
+![Straightest geodesic on a torus](resources/images/svg/ShortestGeodesics.svg){#fig:straightestGeodesic size=90%}
 
 ## Developable surfaces
 
-> **Developable surfaces**
- 
-* can be flattened  
-* can be generated by a single curve.  
+![Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distortion***](resources/images/svg/DevelopableFromCurve.svg){#fig:devFromCurve}
 
-***and***
+---
 
-> **Geodesic curves**  
+Developable surfaces
+: \
   
-* are straight lines in a curved space.
+  * surfaces that can be flattened.
+  * can be generated by a single curve.  
 
-## Therefore
+Geodesic curves
+: \
+  
+  * are straight lines in a curved space.
 
-***Therefore***
+---
 
-> We wish to generate panels using geodesic curves in order to achieve **straight developable panels**
+If
+: Panels are generated using geodesic curves on the surface
 
-## Developable surfaces
+Then
+: Resulting panels will be ***developable*** and mostly ***straight*** when flat.
 
-In other words:
+---
 
-> We wish to cover a given freeform surface with a pattern of **geodesic curves** with equal spacing.
+In other words
+: \
+  
+  We wish to cover a given freeform surface with a pattern of **geodesic curves** with equal spacing.
 
-This can only be achieved if the provided surface is already *developable*.
-
-> A compromise exists between the *curve spacing* and the *curve geodesic property*
+This can only be achieved if the provided surface is already *developable*.\
+\
+A compromise exists between the *curve spacing* and the *curves geodesic property*
 
 # Algorithmic strategies
 
 ## Obtaining Geodesic Patterns
 
-There are three main methods for the obtaining succesfful geodesic patterns:
+These are the main methods for the obtaining successful geodesic patterns:
 
-1. The parallel transport method
-
-2. The evolution method
-
-3. The piecewise geodesic vector-field method
-
+1. The ***parallel transport*** method
+2. The ***evolution*** method
+    1. The ***piecewise geodesic*** evolution method
+3. The ***level-set*** method
 
 # The parallel transport method
 
-## Vector parallel transport {data-background="../resources/images/svg/SpherePT.svg" data-background-size=50%}
+## Vector parallel transport
 
-Parallel transport of a vector on a sphere
+![Parallel transport of a vector over a path on a sphere](resources/images/svg/SpherePT.svg){#fig:ptSphere}
 
-## Implementation details  {data-background="../resources/images/svg/ParallelTransportMethod.svg" data-background-size=90%}
+## P.T. Example
 
-> Parallel transport method over positive curvature surface
+![Parallel transport method over a positive curvature surface](resources/images/svg/ParallelTransportMethod.svg){#fig:ptPositiveCurvature}
 
-## Results {data-background="../resources/images/svg/PTPanels&DistanceToMesh.pdf" data-background-size=90%}
+## P.T. Implementation
 
-**Results**
+> PLACE P.T. ALGORITHM HERE!!!
 
-# The evolution method
+## P.T. Results
 
-## Implementation details {data-background="../resources/images/svg/CuttyEvolutionMethod.png" data-background-size=100%}
+![TNB generated panels & distance to original mesh](resources/images/svg/PTPanels&DistanceToMesh.svg){#fig:ptPanels}
 
-## Results {data-background="../resources/images/svg/CuttyEvolutionMethod2.png" data-background-size=100%}
+# The Evolution Method
 
-# The piecewise evolution method
+## Evolution Implementation
 
-## Implementation details
+> PLACE ALGORITHM HERE!!
 
-## Results
+## Evolution Method Results
+
+:::::::::{.columns}
+:::{.column width=50%}
+![Evolution method example](resources/images/svg/CuttyEvolutionMethod.png){#fig:evolutionExample}
+:::
+:::{.column width=50%}
+![Evolution method problems](resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolutionProblems}
+:::
+:::::::::
+
+# The Piecewise Evolution Method
+
+## Piecewise Ev. Implementation
+
+## Piecewise Ev. Results
 
 # The level set method
 
-## Implementation details
+## Level-set Implementation
 
 ## Results
 
@@ -206,7 +211,7 @@ Developable surfaces from a geodesic pattern
 
 ## Bi-Normal method
 
-## Comparisson
+## Comparison
 
 # Optimization
 
@@ -216,11 +221,24 @@ Developable surfaces from a geodesic pattern
 
 # Analysis
 
+## Gaps in panelization
+
+> ???
+
+## Stress in panels
+
+> ???
+
 # Conclusion
 
-# Thanks
-# Conclusion
+> ???
 
 # Thanks
+
+\appendix
+
+## Resources
+
+> PUT LINKS TO GH COMPONENTS HERE + OTHER NICE SOFTWARE!
 
 ## References {.allowframebreaks}

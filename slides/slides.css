@@ -6,9 +6,8 @@ section.level1 > h1 {
 }
 
 section.level2 > h2 {
-  font-size: 140%;
+  font-size: 100%;
   color: darkcyan;
-  display: none;
 }
 
 .reveal section {
@@ -48,7 +47,9 @@ em
 {
   color: darkblue;
 }
-
+.header-section-number:after{
+  content: ". "
+}
 /* Background content */
 .slide-background-content
 {
@@ -69,12 +70,4 @@ body:after {
   top: 0em;
   left:0em;
   box-shadow: 1px 0px 5px #000; 
-}
-
-upcLogo {
-  content: "MPDA Master Thesis"
-}
-
-mpdaLogo {
-
 }

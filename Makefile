@@ -95,6 +95,7 @@ PANDOC_REVEALJS_OPTIONS=\
 	-V theme=serif\
 	--slide-level 2\
 	-s\
+	-N\
 	-F mermaid-filter\
 	-F pandoc-crossref\
 	-F pandoc-citeproc\
@@ -103,6 +104,7 @@ PANDOC_BEAMER_OPTIONS=\
 	-f markdown+smart+implicit_figures+superscript+subscript+table_captions+fenced_divs\
 	-t beamer\
 	-s\
+	-N\
 	--slide-level=2\
 	--katex\
  	-F mermaid-filter\
@@ -131,7 +133,7 @@ $(OUTPUT_PATH)%.epub : $(INPUT_PATH)%.md
 $(OUTPUT_PATH)%.icml :$(INPUT_PATH)%.md
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_ICML_OPTIONS) -o $@ $<
 
-$(OUTPUT_PATH)%.html : $(SLIDES_PATH)%.md
+$(OUTPUT_PATH)%.html : $(SLIDES_PATH)%.md $(SLIDES_PATH)slides.css
 	$(PANDOC) $(PANDOC_REVEALJS_OPTIONS) -o $@ $<
 
 $(OUTPUT_PATH)%.pdf : $(SLIDES_PATH)%.md
@@ -166,14 +168,14 @@ $(OUTPUT_PATH)$(BUNDLE_NAME).icml : $(SOURCE_DOCS)
 final-docs :\
  pdf\
  html5\
- reveal-slides\
- beamer-slides
+ slides
 
 pdf: $(EXPORTED_PDF) $(SOURCE_DOCS)
 html5: $(EXPORTED_HTML5) $(SOURCE_DOCS)
 word: $(EXPORTED_WORD) $(SOURCE_DOCS)
 ebook: $(EXPORTED_EPUB) $(SOURCE_DOCS)
 indesign: $(EXPORTED_ICML) $(SOURCE_DOCS)
+slides: reveal-slides beamer-slides
 reveal-slides: $(EXPORTED_SLIDES) $(SLIDES_DOCS)
 beamer-slides: $(EXPORTED_BEAMER_SLIDES) $(SLIDES_DOCS)
 
