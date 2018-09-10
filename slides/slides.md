@@ -4,10 +4,13 @@ author: "Alan Rynne"
 date: "September 2018"
 institute: "UPC - MPDA'18"
 bibliography: input/MPDABibliography.bib
+latex-engine: xelatex
+block: transparent
 theme: metropolis
+fonttheme: serif
 colortheme: dove
+
 titlegraphic: "../resources/images/svg/MPDA-logo.png"
-logo: "../resources/images/svg/MPDA-logo.png"
 
 header-includes:
   \usepackage{algorithmic, algorithm2e}
@@ -39,15 +42,6 @@ This is my note.
 :::
 
 ## Objective
-
-:::::::::::::: {columns}
-::: {column width="40%"}
-contents...
-:::
-::: {column width="60%"}
- Some text
-:::
-::::::::::::::
 
 # Background 
 
@@ -224,3 +218,8 @@ Developable surfaces from a geodesic pattern
 # Conclusion
 
 # Thanks
+# Conclusion
+
+# Thanks
+
+## References {.allowframebreaks}
