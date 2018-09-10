@@ -42,54 +42,54 @@
   <p class="date">September 2018</p>
 </section>
 
-<section><section id="objective" class="title-slide slide level1"><h1>Objective</h1></section><section id="objective-1" class="slide level2">
-<h2>Objective</h2>
+<section id="index" class="slide level2 unnumbered">
+<h2>Index</h2>
+<ol type="1">
+<li>Objective</li>
+<li>Background</li>
+<li>Construction technique</li>
+<li>Algorithmic strategies</li>
+<li>Shape optimization</li>
+<li>Analysis</li>
+<li>Conclusion</li>
+</ol>
+</section>
+<section><section id="objective" class="title-slide slide level1"><h1><span class="header-section-number">1</span> Objective</h1></section><section class="slide level2">
+
 <p>Discretize a given freeform surface into panels with the following properties:</p>
 <ol type="1">
 <li><p>Panels must be <strong><em>developable</em></strong> <span class="citation" data-cites="shelden2002digital">(Shelden 2002)</span></p></li>
 <li><p>Panels should be of approximate <strong><em>equal width</em></strong></p></li>
 <li><p>Panels should be <strong><em>as straight as possible</em></strong></p></li>
-<li><p>Panels should <strong><em>bend by their weak axis</em></strong> to aproximate the surface.</p></li>
+<li><p>Panels should <strong><em>bend by their weak axis</em></strong> to approximate the surface.</p></li>
 </ol>
-</section><section id="objective-2" class="slide level2">
-<h2>Objective</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Some text</p>
-</div><div class="column" style="width:50%;">
-<p>. . .</p>
-<figure>
-<img data-src="http://woodboatbuilder.com/maid-planking/sm13planks.jpg" alt="Figure 1: Some figure" id="fig:someFigure" /><figcaption>Figure 1: Some figure</figcaption>
-</figure>
-</div>
-</div>
 </section></section>
-<section><section id="background" class="title-slide slide level1"><h1>Background</h1></section><section id="boat-building" class="slide level2" data-background="http://woodboatbuilder.com/maid-planking/sm13planks.jpg">
-<h2>Boat-building</h2>
-<p>The use of <em>sraight developable planks</em> is widely used in</p>
-<p><strong>traditional boat building</strong></p>
-</section><section id="some-algorithm" class="slide level2">
-<h2>Some Algorithm</h2>
+<section><section id="background" class="title-slide slide level1"><h1><span class="header-section-number">2</span> Background</h1></section><section class="slide level2">
 
-</section><section id="developable-hulls" class="slide level2">
-<h2>Developable hulls</h2>
-<p>Connected developable patches for boat hull design.</p>
-<ol type="1">
-<li>Common practice in naval engineering industry.</li>
-</ol>
+<p>The use of <em>straight developable planks</em> is widely used in:</p>
 <figure>
-<img data-src="https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg" alt="Developable hull model" style="width:70.0%" /><figcaption>Developable hull model</figcaption>
+<img data-src="http://woodboatbuilder.com/maid-planking/sm13planks.jpg" alt="Traditional boat building" style="width:60.0%" /><figcaption>Traditional boat building</figcaption>
 </figure>
-</section><section id="frank-ghery" class="slide level2" data-background="https://www.dw.com/image/19172478_303.jpg">
-<h2>Frank Ghery</h2>
+</section><section class="slide level2">
+
+<p>Also common practice in naval engineering industry:</p>
+<figure>
+<img data-src="https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg" alt="Connected developable patches for boat hull design" style="width:70.0%" /><figcaption>Connected developable patches for boat hull design</figcaption>
+</figure>
+</section><section id="frank-ghery" class="slide level2">
+<h2><span class="header-section-number">2.3</span> Frank Ghery</h2>
 <p>This techniques have also been used in the architecture world, mainly by <strong>Frank Ghery</strong>.</p>
 <p>His façades are usually a collection of connected developable surfaces.</p>
-</section><section id="burj-khalifa" class="slide level2" data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg">
-<h2>Burj Khalifa</h2>
-<p>Latest architectural work following this techiques was:</p>
-<p><strong>Burj Khalifa by <em>Frank Ghery</em></strong></p>
-</section><section id="burj-khalifa-1" class="slide level2" data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg">
-<h2>Burj Khalifa</h2>
+</section><section class="slide level2">
+
+<p>Latest architectural work following this techniques was:</p>
+<figure>
+<img data-src="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg" alt="Burj Khalifa by Frank Ghery" style="width:60.0%" /><figcaption>Burj Khalifa by Frank Ghery</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:65%;">
 <p>It was designed as a collection of:</p>
 <ul>
 <li><strong>Developable surfaces</strong>
@@ -97,115 +97,171 @@
 <li><em>Which can be covered by equal width planks</em><br />
 </li>
 </ul></li>
-<li><strong>Surfaces of constant cuvrature</strong>
+<li><strong>Surfaces of constant curvature</strong>
 <ul>
 <li><em>Which can be covered by repeating the same profile</em></li>
 </ul></li>
 </ul>
-</section><section id="burj-khalifa-2" class="slide level2" data-background="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" data-background-size="100%">
-<h2>Burj Khalifa</h2>
+</div><div class="column" style="width:35%;">
+<p><img data-src="https://www.dw.com/image/19172478_303.jpg" /></p>
+</div>
+</div>
+</section><section class="slide level2">
+
+<figure>
+<img data-src="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" alt="Figure 1: Burj Khalifa final panel solution" id="fig:burjKhalifa" style="width:100.0%" /><figcaption>Figure 1: Burj Khalifa final panel solution</figcaption>
+</figure>
 </section></section>
-<section><section id="construction-technique" class="title-slide slide level1"><h1>Construction technique</h1></section><section id="geodesic-curves" class="slide level2">
-<h2>Geodesic curves</h2>
+<section><section id="construction-technique" class="title-slide slide level1"><h1><span class="header-section-number">3</span> Construction technique</h1></section><section id="geodesic-curves" class="slide level2">
+<h2><span class="header-section-number">3.1</span> Geodesic curves</h2>
 <p>A geodesic curve is the generalization of a <em>straight line</em> into <em>curved spaces</em>.</p>
-<p><span class="math display">\[\nabla + \alpha^2 = \sqrt8 * A\]</span></p>
-</section><section id="geodesic-curves-1" class="slide level2" data-background="../resources/images/gif/Insect_on_a_torus_tracing_out_a_non-trivial_geodesic.gif" data-background-size="50%">
-<h2>Geodesic curves</h2>
-<p>It could be easiy understood as:</p>
-<p><em>The path that a bug follows on a surface if it only moves <strong>forward</strong></em></p>
-</section><section id="straightest-geodesics" class="slide level2" data-background="../resources/images/svg/ShortestGeodesics.svg" data-background-size="50%">
-<h2>Straightest geodesics</h2>
+</section><section id="straightest-geodesics" class="slide level2">
+<h2><span class="header-section-number">3.2</span> Straightest geodesics</h2>
 <p>In this research, we concentrate on the concept of <strong><em>straightest geodesics</em></strong>.</p>
-</section><section id="developable-surfaces" class="slide level2" data-background="../resources/images/svg/DevelopableFromCurve.svg" data-background-size="90%">
-<h2>Developable surfaces</h2>
-<p>Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distorsion</em></strong></p>
-</section><section id="developable-surfaces-1" class="slide level2">
-<h2>Developable surfaces</h2>
-<blockquote>
-<p><strong>Developable surfaces</strong></p>
-</blockquote>
+<figure>
+<img data-src="resources/images/svg/ShortestGeodesics.svg" alt="Figure 2: Straightest geodesic on a torus" id="fig:straightestGeodesic" size="90%" /><figcaption>Figure 2: Straightest geodesic on a torus</figcaption>
+</figure>
+</section><section id="developable-surfaces" class="slide level2">
+<h2><span class="header-section-number">3.3</span> Developable surfaces</h2>
+<figure>
+<img data-src="resources/images/svg/DevelopableFromCurve.svg" alt="Figure 3: Surfaces with 0 gaussian curvature. Meaning, they can be flattened onto a plane without distortion" id="fig:devFromCurve" /><figcaption>Figure 3: Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distortion</em></strong></figcaption>
+</figure>
+</section><section class="slide level2">
+
+<dl>
+<dt>Developable surfaces</dt>
+<dd><br />
+
+</dd>
+</dl>
 <ul>
-<li>can be flattened<br />
-</li>
+<li>surfaces that can be flattened.</li>
 <li>can be generated by a single curve.</li>
 </ul>
-<p><strong><em>and</em></strong></p>
-<blockquote>
-<p><strong>Geodesic curves</strong></p>
-</blockquote>
+<dl>
+<dt>Geodesic curves</dt>
+<dd><br />
+
+</dd>
+</dl>
 <ul>
 <li>are straight lines in a curved space.</li>
 </ul>
-</section><section id="therefore" class="slide level2">
-<h2>Therefore</h2>
-<p><strong><em>Therefore</em></strong></p>
-<blockquote>
-<p>We wish to generate panels using geodesic curves in order to achieve <strong>straight developable panels</strong></p>
-</blockquote>
-</section><section id="developable-surfaces-2" class="slide level2">
-<h2>Developable surfaces</h2>
-<p>In other words:</p>
-<blockquote>
+</section><section class="slide level2">
+
+<dl>
+<dt>If</dt>
+<dd>Panels are generated using geodesic curves on the surface
+</dd>
+<dt>Then</dt>
+<dd>Resulting panels will be <strong><em>developable</em></strong> and mostly <strong><em>straight</em></strong> when flat.
+</dd>
+</dl>
+</section><section class="slide level2">
+
+<dl>
+<dt>In other words</dt>
+<dd><br />
+
+</dd>
+</dl>
 <p>We wish to cover a given freeform surface with a pattern of <strong>geodesic curves</strong> with equal spacing.</p>
-</blockquote>
-<p>This can only be achieved if the provided surface is already <em>developable</em>.</p>
-<blockquote>
-<p>A compromise exists between the <em>curve spacing</em> and the <em>curve geodesic property</em></p>
-</blockquote>
+<p>This can only be achieved if the provided surface is already <em>developable</em>.<br />
+<br />
+A compromise exists between the <em>curve spacing</em> and the <em>curves geodesic property</em></p>
 </section></section>
-<section><section id="algorithmic-strategies" class="title-slide slide level1"><h1>Algorithmic strategies</h1></section><section id="obtaining-geodesic-patterns" class="slide level2">
-<h2>Obtaining Geodesic Patterns</h2>
-<p>There are three main methods for the obtaining succesfful geodesic patterns:</p>
+<section><section id="algorithmic-strategies" class="title-slide slide level1"><h1><span class="header-section-number">4</span> Algorithmic strategies</h1></section><section id="obtaining-geodesic-patterns" class="slide level2">
+<h2><span class="header-section-number">4.1</span> Obtaining Geodesic Patterns</h2>
+<p>These are the main methods for the obtaining successful geodesic patterns:</p>
 <ol type="1">
-<li><p>The parallel transport method</p></li>
-<li><p>The evolution method</p></li>
-<li><p>The piecewise geodesic vector-field method</p></li>
+<li>The <strong><em>parallel transport</em></strong> method</li>
+<li>The <strong><em>evolution</em></strong> method
+<ol type="1">
+<li>The <strong><em>piecewise geodesic</em></strong> evolution method</li>
+</ol></li>
+<li>The <strong><em>level-set</em></strong> method</li>
 </ol>
 </section></section>
-<section><section id="the-parallel-transport-method" class="title-slide slide level1"><h1>The parallel transport method</h1></section><section id="vector-parallel-transport" class="slide level2" data-background="../resources/images/svg/SpherePT.svg" data-background-size="50%">
-<h2>Vector parallel transport</h2>
-<p>Parallel transport of a vector on a sphere</p>
-</section><section id="implementation-details" class="slide level2" data-background="../resources/images/svg/ParallelTransportMethod.svg" data-background-size="90%">
-<h2>Implementation details</h2>
+<section><section id="the-parallel-transport-method" class="title-slide slide level1"><h1><span class="header-section-number">5</span> The parallel transport method</h1></section><section id="vector-parallel-transport" class="slide level2">
+<h2><span class="header-section-number">5.1</span> Vector parallel transport</h2>
+<figure>
+<img data-src="resources/images/svg/SpherePT.svg" alt="Figure 4: Parallel transport of a vector over a path on a sphere" id="fig:ptSphere" /><figcaption>Figure 4: Parallel transport of a vector over a path on a sphere</figcaption>
+</figure>
+</section><section id="p.t.-example" class="slide level2">
+<h2><span class="header-section-number">5.2</span> P.T. Example</h2>
+<figure>
+<img data-src="resources/images/svg/ParallelTransportMethod.svg" alt="Figure 5: Parallel transport method over a positive curvature surface" id="fig:ptPositiveCurvature" /><figcaption>Figure 5: Parallel transport method over a positive curvature surface</figcaption>
+</figure>
+</section><section id="p.t.-implementation" class="slide level2">
+<h2><span class="header-section-number">5.3</span> P.T. Implementation</h2>
 <blockquote>
-<p>Parallel transport method over positive curvature surface</p>
+<p>PLACE P.T. ALGORITHM HERE!!!</p>
 </blockquote>
-</section><section id="results" class="slide level2" data-background="../resources/images/svg/PTPanels&amp;DistanceToMesh.pdf" data-background-size="90%">
-<h2>Results</h2>
-<p><strong>Results</strong></p>
+</section><section id="p.t.-results" class="slide level2">
+<h2><span class="header-section-number">5.4</span> P.T. Results</h2>
+<figure>
+<img data-src="resources/images/svg/PTPanels&amp;DistanceToMesh.svg" alt="Figure 6: TNB generated panels &amp; distance to original mesh" id="fig:ptPanels" /><figcaption>Figure 6: TNB generated panels &amp; distance to original mesh</figcaption>
+</figure>
 </section></section>
-<section><section id="the-evolution-method" class="title-slide slide level1"><h1>The evolution method</h1></section><section id="implementation-details-1" class="slide level2" data-background="../resources/images/svg/CuttyEvolutionMethod.png" data-background-size="100%">
-<h2>Implementation details</h2>
-</section><section id="results-1" class="slide level2" data-background="../resources/images/svg/CuttyEvolutionMethod2.png" data-background-size="100%">
-<h2>Results</h2>
+<section><section id="the-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">6</span> The Evolution Method</h1></section><section id="evolution-implementation" class="slide level2">
+<h2><span class="header-section-number">6.1</span> Evolution Implementation</h2>
+<blockquote>
+<p>PLACE ALGORITHM HERE!!</p>
+</blockquote>
+</section><section id="evolution-method-results" class="slide level2">
+<h2><span class="header-section-number">6.2</span> Evolution Method Results</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<figure>
+<img data-src="resources/images/svg/CuttyEvolutionMethod.png" alt="Figure 7: Evolution method example" id="fig:evolutionExample" /><figcaption>Figure 7: Evolution method example</figcaption>
+</figure>
+</div><div class="column" style="width:50%;">
+<figure>
+<img data-src="resources/images/svg/CuttyEvolutionMethod2.png" alt="Figure 8: Evolution method problems" id="fig:evolutionProblems" /><figcaption>Figure 8: Evolution method problems</figcaption>
+</figure>
+</div>
+</div>
 </section></section>
-<section><section id="the-piecewise-evolution-method" class="title-slide slide level1"><h1>The piecewise evolution method</h1></section><section id="implementation-details-2" class="slide level2">
-<h2>Implementation details</h2>
-</section><section id="results-2" class="slide level2">
-<h2>Results</h2>
+<section><section id="the-piecewise-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">7</span> The Piecewise Evolution Method</h1></section><section id="piecewise-ev.-implementation" class="slide level2">
+<h2><span class="header-section-number">7.1</span> Piecewise Ev. Implementation</h2>
+</section><section id="piecewise-ev.-results" class="slide level2">
+<h2><span class="header-section-number">7.2</span> Piecewise Ev. Results</h2>
 </section></section>
-<section><section id="the-level-set-method" class="title-slide slide level1"><h1>The level set method</h1></section><section id="implementation-details-3" class="slide level2">
-<h2>Implementation details</h2>
-</section><section id="results-3" class="slide level2">
-<h2>Results</h2>
+<section><section id="the-level-set-method" class="title-slide slide level1"><h1><span class="header-section-number">8</span> The level set method</h1></section><section id="level-set-implementation" class="slide level2">
+<h2><span class="header-section-number">8.1</span> Level-set Implementation</h2>
+</section><section id="results" class="slide level2">
+<h2><span class="header-section-number">8.2</span> Results</h2>
 </section></section>
-<section><section id="modeling-planks" class="title-slide slide level1"><h1>Modeling planks</h1></section><section id="tangent-developable-method" class="slide level2">
-<h2>Tangent developable method</h2>
+<section><section id="modeling-planks" class="title-slide slide level1"><h1><span class="header-section-number">9</span> Modeling planks</h1></section><section id="tangent-developable-method" class="slide level2">
+<h2><span class="header-section-number">9.1</span> Tangent developable method</h2>
 </section><section id="bi-normal-method" class="slide level2">
-<h2>Bi-Normal method</h2>
-</section><section id="comparisson" class="slide level2">
-<h2>Comparisson</h2>
+<h2><span class="header-section-number">9.2</span> Bi-Normal method</h2>
+</section><section id="comparison" class="slide level2">
+<h2><span class="header-section-number">9.3</span> Comparison</h2>
 </section></section>
-<section><section id="optimization" class="title-slide slide level1"><h1>Optimization</h1></section><section id="piecewise-geodesic-vector-fields" class="slide level2">
-<h2>Piecewise geodesic vector-fields</h2>
+<section><section id="optimization" class="title-slide slide level1"><h1><span class="header-section-number">10</span> Optimization</h1></section><section id="piecewise-geodesic-vector-fields" class="slide level2">
+<h2><span class="header-section-number">10.1</span> Piecewise geodesic vector-fields</h2>
 </section><section id="developability-of-triangle-meshes" class="slide level2">
-<h2>Developability of triangle meshes</h2>
+<h2><span class="header-section-number">10.2</span> Developability of triangle meshes</h2>
 </section></section>
-<section><section id="analysis" class="title-slide slide level1"><h1>Analysis</h1></section></section>
-<section><section id="conclusion" class="title-slide slide level1"><h1>Conclusion</h1></section></section>
-<section><section id="thanks" class="title-slide slide level1"><h1>Thanks</h1></section></section>
-<section><section id="conclusion-1" class="title-slide slide level1"><h1>Conclusion</h1></section></section>
-<section><section id="thanks-1" class="title-slide slide level1"><h1>Thanks</h1></section><section id="references" class="slide level2 unnumbered allowframebreaks">
+<section><section id="analysis" class="title-slide slide level1"><h1><span class="header-section-number">11</span> Analysis</h1></section><section id="gaps-in-panelization" class="slide level2">
+<h2><span class="header-section-number">11.1</span> Gaps in panelization</h2>
+<blockquote>
+<p>???</p>
+</blockquote>
+</section><section id="stress-in-panels" class="slide level2">
+<h2><span class="header-section-number">11.2</span> Stress in panels</h2>
+<blockquote>
+<p>???</p>
+</blockquote>
+</section></section>
+<section><section id="conclusion" class="title-slide slide level1"><h1><span class="header-section-number">12</span> Conclusion</h1></section></section>
+<section><section id="thanks" class="title-slide slide level1"><h1><span class="header-section-number">13</span> Thanks</h1></section><section id="resources" class="slide level2">
+<h2><span class="header-section-number">13.1</span> Resources</h2>
+<blockquote>
+<p>PUT LINKS TO GH COMPONENTS HERE + OTHER NICE SOFTWARE!</p>
+</blockquote>
+</section><section id="references" class="slide level2 unnumbered allowframebreaks">
 <h2>References</h2>
 <div id="refs" class="references">
 <div id="ref-shelden2002digital">
