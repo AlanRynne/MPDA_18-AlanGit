@@ -1,6 +1,6 @@
----
-title: MPDA'18 Master Thesis
----
+# Readme!
+
+## Files
 
 This repository contains all of my master thesis work on geodesic patterns.
 
