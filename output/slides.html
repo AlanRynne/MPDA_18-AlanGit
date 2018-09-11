@@ -38,6 +38,7 @@
 
 <section id="title-slide">
   <h1 class="title">Geodesic Patterns</h1>
+  <p class="subtitle">for Freeform Architecture</p>
   <p class="author">Alan Rynne</p>
   <p class="date">September 2018</p>
 </section>
@@ -115,16 +116,14 @@
 <section><section id="construction-technique" class="title-slide slide level1"><h1><span class="header-section-number">3</span> Construction technique</h1></section><section id="geodesic-curves" class="slide level2">
 <h2><span class="header-section-number">3.1</span> Geodesic curves</h2>
 <p>A geodesic curve is the generalization of a <em>straight line</em> into <em>curved spaces</em>.</p>
-</section><section id="straightest-geodesics" class="slide level2">
-<h2><span class="header-section-number">3.2</span> Straightest geodesics</h2>
 <p>In this research, we concentrate on the concept of <strong><em>straightest geodesics</em></strong>.</p>
 <figure>
-<img data-src="resources/images/svg/ShortestGeodesics.svg" alt="Figure 2: Straightest geodesic on a torus" id="fig:straightestGeodesic" size="90%" /><figcaption>Figure 2: Straightest geodesic on a torus</figcaption>
+<img data-src="resources/images/svg/ShortestGeodesics.png" alt="Figure 2: Straightest geodesic on a torus" id="fig:straightestGeodesic" size="90%" /><figcaption>Figure 2: Straightest geodesic on a torus</figcaption>
 </figure>
 </section><section id="developable-surfaces" class="slide level2">
-<h2><span class="header-section-number">3.3</span> Developable surfaces</h2>
+<h2><span class="header-section-number">3.2</span> Developable surfaces</h2>
 <figure>
-<img data-src="resources/images/svg/DevelopableFromCurve.svg" alt="Figure 3: Surfaces with 0 gaussian curvature. Meaning, they can be flattened onto a plane without distortion" id="fig:devFromCurve" /><figcaption>Figure 3: Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distortion</em></strong></figcaption>
+<img data-src="resources/images/svg/DevelopableFromCurve.png" alt="Figure 3: Surfaces with 0 gaussian curvature. Meaning, they can be flattened onto a plane without distortion" id="fig:devFromCurve" /><figcaption>Figure 3: Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distortion</em></strong></figcaption>
 </figure>
 </section><section class="slide level2">
 
@@ -185,52 +184,115 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <section><section id="the-parallel-transport-method" class="title-slide slide level1"><h1><span class="header-section-number">5</span> The parallel transport method</h1></section><section id="vector-parallel-transport" class="slide level2">
 <h2><span class="header-section-number">5.1</span> Vector parallel transport</h2>
 <figure>
-<img data-src="resources/images/svg/SpherePT.svg" alt="Figure 4: Parallel transport of a vector over a path on a sphere" id="fig:ptSphere" /><figcaption>Figure 4: Parallel transport of a vector over a path on a sphere</figcaption>
+<img data-src="resources/images/svg/SpherePT.png" alt="Figure 4: Parallel transport of a vector over a path on a sphere" id="fig:ptSphere" /><figcaption>Figure 4: Parallel transport of a vector over a path on a sphere</figcaption>
 </figure>
-</section><section id="p.t.-example" class="slide level2">
-<h2><span class="header-section-number">5.2</span> P.T. Example</h2>
+</section><section class="slide level2">
+
 <figure>
-<img data-src="resources/images/svg/ParallelTransportMethod.svg" alt="Figure 5: Parallel transport method over a positive curvature surface" id="fig:ptPositiveCurvature" /><figcaption>Figure 5: Parallel transport method over a positive curvature surface</figcaption>
+<img data-src="resources/images/svg/Diagram-ParallelTransport.png" alt="Figure 5: Parallel transport over two adjacent mesh faces" id="fig:ptDiagram" /><figcaption>Figure 5: Parallel transport over two adjacent mesh faces</figcaption>
 </figure>
 </section><section id="p.t.-implementation" class="slide level2">
 <h2><span class="header-section-number">5.3</span> P.T. Implementation</h2>
-<blockquote>
-<p>PLACE P.T. ALGORITHM HERE!!!</p>
-</blockquote>
-</section><section id="p.t.-results" class="slide level2">
-<h2><span class="header-section-number">5.4</span> P.T. Results</h2>
+
+</section><section class="slide level2">
+
+<p>There are <strong>three</strong> <em>extreme</em> cases depending on the <strong><em>local gaussian curvature</em></strong> where <span class="math inline">\(g\)</span> lies on <span class="math inline">\(\Phi\)</span>:</p>
+<dl>
+<dt>Positive curvature</dt>
+<dd>Panels will have <strong>Maximum width</strong> on <span class="math inline">\(g\)</span>
+</dd>
+<dt>Negative curvature</dt>
+<dd>Panels will have <strong>Minimum width</strong> on <span class="math inline">\(g\)</span>
+</dd>
+<dt>0 gaussian curvature:</dt>
+<dd>Panels will be of equal width
+</dd>
+</dl>
+</section><section id="p.t.-example" class="slide level2">
+<h2><span class="header-section-number">5.5</span> P.T. Example</h2>
 <figure>
-<img data-src="resources/images/svg/PTPanels&amp;DistanceToMesh.svg" alt="Figure 6: TNB generated panels &amp; distance to original mesh" id="fig:ptPanels" /><figcaption>Figure 6: TNB generated panels &amp; distance to original mesh</figcaption>
+<img data-src="resources/images/svg/ParallelTransportMethod.png" alt="Figure 6: Parallel transport method over a positive curvature surface" id="fig:ptPositiveCurvature" /><figcaption>Figure 6: Parallel transport method over a positive curvature surface</figcaption>
+</figure>
+</section><section id="p.t.-results" class="slide level2">
+<h2><span class="header-section-number">5.6</span> P.T. Results</h2>
+<figure>
+<img data-src="resources/images/svg/PTPanels&amp;DistanceToMesh.png" alt="Figure 7: TNB generated panels &amp; distance to original mesh" id="fig:ptPanels" /><figcaption>Figure 7: TNB generated panels &amp; distance to original mesh</figcaption>
 </figure>
 </section></section>
-<section><section id="the-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">6</span> The Evolution Method</h1></section><section id="evolution-implementation" class="slide level2">
-<h2><span class="header-section-number">6.1</span> Evolution Implementation</h2>
-<blockquote>
-<p>PLACE ALGORITHM HERE!!</p>
-</blockquote>
+<section><section id="the-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">6</span> The Evolution Method</h1></section><section class="slide level2">
+
+<figure>
+<img data-src="resources/images/svg/Diagram-BestFitGeodesic.png" alt="Figure 8: Calculating the best-fit geodesic" id="fig:bestFitGeodesic" /><figcaption>Figure 8: Calculating the best-fit geodesic</figcaption>
+</figure>
+</section><section id="evolution-implementation" class="slide level2">
+<h2><span class="header-section-number">6.2</span> Evolution Implementation</h2>
+
 </section><section id="evolution-method-results" class="slide level2">
-<h2><span class="header-section-number">6.2</span> Evolution Method Results</h2>
+<h2><span class="header-section-number">6.3</span> Evolution Method Results</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/CuttyEvolutionMethod.png" alt="Figure 7: Evolution method example" id="fig:evolutionExample" /><figcaption>Figure 7: Evolution method example</figcaption>
+<img data-src="resources/images/svg/CuttyEvolutionMethod.png" alt="Figure 9: Evolution method example" id="fig:evolutionExample" /><figcaption>Figure 9: Evolution method example</figcaption>
 </figure>
 </div><div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/CuttyEvolutionMethod2.png" alt="Figure 8: Evolution method problems" id="fig:evolutionProblems" /><figcaption>Figure 8: Evolution method problems</figcaption>
+<img data-src="resources/images/svg/CuttyEvolutionMethod2.png" alt="Figure 10: Evolution method problems" id="fig:evolutionProblems" /><figcaption>Figure 10: Evolution method problems</figcaption>
+</figure>
+</div>
+</div>
+</section><section class="slide level2">
+
+<p>Local changes in curvature produce:</p>
+<ul>
+<li>Sharp panel endings in positive curvature areas</li>
+<li>Panel width increase in negative curvature areas</li>
+</ul>
+</section></section>
+<section><section id="the-piecewise-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">7</span> The Piecewise Evolution Method</h1></section><section class="slide level2">
+
+<figure>
+<img data-src="resources/images/svg/Diagram-PieceWiseGeodesic.png" alt="Figure 11: Calculating the best piece-wise geodesic" id="fig:bestPiecewiseGeodesic" /><figcaption>Figure 11: Calculating the best piece-wise geodesic</figcaption>
+</figure>
+</section><section id="piecewise-ev.-implementation" class="slide level2">
+<h2><span class="header-section-number">7.2</span> Piecewise Ev. Implementation</h2>
+<blockquote>
+<p>INSERT ALGORITHM HERE</p>
+</blockquote>
+</section><section id="piecewise-ev.-results" class="slide level2">
+<h2><span class="header-section-number">7.3</span> Piecewise Ev. Results</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<figure>
+<img data-src="resources/images/svg/PiecewiseTestView2.png" alt="Figure 12: Piecewise Test" id="fig:piecewiseTestView2" /><figcaption>Figure 12: Piecewise Test</figcaption>
+</figure>
+</div><div class="column" style="width:50%;">
+<figure>
+<img data-src="resources/images/svg/PiecewiseTest.png" alt="Figure 13: Piecewise Test" id="fig:piecewiseTest" /><figcaption>Figure 13: Piecewise Test</figcaption>
 </figure>
 </div>
 </div>
 </section></section>
-<section><section id="the-piecewise-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">7</span> The Piecewise Evolution Method</h1></section><section id="piecewise-ev.-implementation" class="slide level2">
-<h2><span class="header-section-number">7.1</span> Piecewise Ev. Implementation</h2>
-</section><section id="piecewise-ev.-results" class="slide level2">
-<h2><span class="header-section-number">7.2</span> Piecewise Ev. Results</h2>
-</section></section>
-<section><section id="the-level-set-method" class="title-slide slide level1"><h1><span class="header-section-number">8</span> The level set method</h1></section><section id="level-set-implementation" class="slide level2">
-<h2><span class="header-section-number">8.1</span> Level-set Implementation</h2>
+<section><section id="the-level-set-method" class="title-slide slide level1"><h1><span class="header-section-number">8</span> The level set method</h1></section><section id="mesh-level-sets" class="slide level2">
+<h2><span class="header-section-number">8.1</span> Mesh Level-sets</h2>
+<figure>
+<img data-src="resources/images/svg/LevelSet-SingleTriangle.png" alt="Figure 14: Level set on a single mesh face" id="fig:levelSetFace" /><figcaption>Figure 14: Level set on a single mesh face</figcaption>
+</figure>
+</section><section id="level-set-implementation" class="slide level2">
+<h2><span class="header-section-number">8.2</span> Level-set Implementation</h2>
+<blockquote>
+<p>INSERT ALGORITHM HERE</p>
+</blockquote>
 </section><section id="results" class="slide level2">
-<h2><span class="header-section-number">8.2</span> Results</h2>
+<h2><span class="header-section-number">8.3</span> Results</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>MISSING TEXT</p>
+</div><div class="column" style="width:50%;">
+<blockquote>
+<p>MISSING IMAGE</p>
+</blockquote>
+</div>
+</div>
 </section></section>
 <section><section id="modeling-planks" class="title-slide slide level1"><h1><span class="header-section-number">9</span> Modeling planks</h1></section><section id="tangent-developable-method" class="slide level2">
 <h2><span class="header-section-number">9.1</span> Tangent developable method</h2>
@@ -243,6 +305,9 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <h2><span class="header-section-number">10.1</span> Piecewise geodesic vector-fields</h2>
 </section><section id="developability-of-triangle-meshes" class="slide level2">
 <h2><span class="header-section-number">10.2</span> Developability of triangle meshes</h2>
+<blockquote>
+<p>MISSING K.CRANE’S IMPLEMENTATION IMAGES!</p>
+</blockquote>
 </section></section>
 <section><section id="analysis" class="title-slide slide level1"><h1><span class="header-section-number">11</span> Analysis</h1></section><section id="gaps-in-panelization" class="slide level2">
 <h2><span class="header-section-number">11.1</span> Gaps in panelization</h2>
@@ -256,8 +321,9 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 </blockquote>
 </section></section>
 <section><section id="conclusion" class="title-slide slide level1"><h1><span class="header-section-number">12</span> Conclusion</h1></section></section>
-<section><section id="thanks" class="title-slide slide level1"><h1><span class="header-section-number">13</span> Thanks</h1></section><section id="resources" class="slide level2">
-<h2><span class="header-section-number">13.1</span> Resources</h2>
+<section><section id="thanks-acknowledgments" class="title-slide slide level1"><h1><span class="header-section-number">13</span> Thanks<a href="#/fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1></section></section>
+<section><section id="appendix" class="title-slide slide level1"><h1><span class="header-section-number">14</span> Appendix</h1></section><section id="resources" class="slide level2">
+<h2><span class="header-section-number">14.1</span> Resources</h2>
 <blockquote>
 <p>PUT LINKS TO GH COMPONENTS HERE + OTHER NICE SOFTWARE!</p>
 </blockquote>
@@ -269,6 +335,15 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 </div>
 </div>
 </section></section>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Special thanks to … FILL IN LATER!<br />
+<br />
+<br />
+<a href="#/fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
     </div>
   </div>
 
