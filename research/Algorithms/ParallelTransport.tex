@@ -1,0 +1,20 @@
+\begin{algorithm}[H]
+\label{parTransPatterns}
+\caption{Geodesic patterns by parallel transport}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\scriptsize
+\begin{algorithmic}[1]
+\REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F)
+\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
+\STATE Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2.
+\STATE Divide the curve into $N$ equally spaced points $p$ with distance $W$.
+\STATE Place an vector $\mathbf v$  onto $p_0$
+\STATE Parallel transport that vector along $g_x$ as described in [@fig:parTransProc].
+\FORALL {points $p_i$ where i = 0,...,M}
+  \STATE Generate geodesic curve $+g_i$ and $-g_i$ using vector $\mathbf{v}_i$ and $\mathbf{-v}_i$ respectively.
+  \STATE Join $+g_i$ and $-g_i$ together to obtain $g_i$
+  \STATE Add $g_i$ to output.
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
