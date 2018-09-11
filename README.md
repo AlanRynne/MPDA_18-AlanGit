@@ -1,6 +1,4 @@
----
-title: MPDA'18 Master Thesis - Alan Rynne
----
+# MPDA'18 Master Thesis - Alan Rynne
 
 ## Files
 
