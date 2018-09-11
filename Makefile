@@ -16,7 +16,7 @@ SLIDES_PATH= slides/
 PDF_YAML = input/paper.yaml
 SOURCE_DOCS = $(wildcard $(INPUT_PATH)*.md)
 SLIDES_DOCS = $(wildcard $(SLIDES_PATH)*.md)
-
+IMAGES = $(wildcard resources/images/svg/*.svg)
 FILE_NAME = $(notdir $(SOURCE_DOCS))
 SLIDES_NAME = $(notdir $(SLIDES_DOCS))
 
@@ -109,13 +109,14 @@ PANDOC_BEAMER_OPTIONS=\
 	--katex\
  	-F mermaid-filter\
 	-F pandoc-crossref\
-	-F pandoc-citeproc
+	-F pandoc-citeproc\
+	--dpi=300
 
 #Export options per format
-$(OUTPUT_PATH)%.html : $(INPUT_PATH)%.md
+$(OUTPUT_PATH)%.html : $(INPUT_PATH)%.md templates/pandoc.css
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_HTML_OPTIONS) -o $@ $<
 
-$(OUTPUT_PATH)%.pdf : $(INPUT_PATH)%.md
+$(OUTPUT_PATH)%.pdf : $(INPUT_PATH)%.md $(PDF_YAML)
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_PDF_OPTIONS) -o $@ $<
 
 $(OUTPUT_PATH)%.docx : $(INPUT_PATH)%.md
@@ -160,10 +161,9 @@ $(OUTPUT_PATH)$(BUNDLE_NAME).icml : $(SOURCE_DOCS)
 
 
 # Targets and dependencies
-.PHONY: final-docs clean clean-files clean-bundles clean-slides
+.PHONY: final-docs clean clean-files clean-bundles clean-slides 
 
 .DEFAULT_GOAL:= final-docs
-
 
 final-docs :\
  pdf\

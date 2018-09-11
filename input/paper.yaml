@@ -29,10 +29,10 @@ fontsize: 10pt
 
 # Table of Contents
 toc: true
-toc-depth: 2
+toc-depth: 1
 
 # List of figures & tables
-lof: true
+#lof: true
 #lot: true
 
 # Make links in citations & references

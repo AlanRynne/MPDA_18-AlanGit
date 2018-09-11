@@ -1,5 +1,6 @@
 ---
 title: "Geodesic Patterns"
+subtitle: "for Freeform Architecture"
 author: "Alan Rynne"
 date: "September 2018"
 institute: "UPC - MPDA'18"
@@ -9,15 +10,20 @@ bibliography: input/MPDABibliography.bib
 latex-engine: xelatex
 theme: metropolis
 colortheme: dove
-fonttheme: "serif"
+fonttheme: serif
+fontsize: 9pt
 logo: "../resources/images/svg/MPDA-logo3.png"
-
 css: ../slides/slides.css
 
 header-includes:
-  \usepackage{algorithmic, algorithm}
+  \usepackage{algorithmic}
   \usepackage{svg}
   \usepackage{svgcolor}
+  \usepackage{pgfpages}
+  \usepackage{caption}
+  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+
 ---
 
 ## Index {-}
@@ -76,7 +82,7 @@ Latest architectural work following this techniques was:
 :::{.column width=65%}
 It was designed as a collection of:
 
-* **Developable surfaces**  
+* **Developable surfaces**
   * *Which can be covered by equal width planks*  
 * **Surfaces of constant curvature**  
   * *Which can be covered by repeating the same profile*  
@@ -99,15 +105,13 @@ It was designed as a collection of:
 
 A geodesic curve is the generalization of a *straight line* into *curved spaces*.
 
-## Straightest geodesics
-
 In this research, we concentrate on the concept of ***straightest geodesics***.
 
-![Straightest geodesic on a torus](resources/images/svg/ShortestGeodesics.svg){#fig:straightestGeodesic size=90%}
+![Straightest geodesic on a torus](resources/images/svg/ShortestGeodesics.png){#fig:straightestGeodesic size=90%}
 
 ## Developable surfaces
 
-![Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distortion***](resources/images/svg/DevelopableFromCurve.svg){#fig:devFromCurve}
+![Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distortion***](resources/images/svg/DevelopableFromCurve.png){#fig:devFromCurve}
 
 ---
 
@@ -156,25 +160,65 @@ These are the main methods for the obtaining successful geodesic patterns:
 
 ## Vector parallel transport
 
-![Parallel transport of a vector over a path on a sphere](resources/images/svg/SpherePT.svg){#fig:ptSphere}
+![Parallel transport of a vector over a path on a sphere](resources/images/svg/SpherePT.png){#fig:ptSphere}
 
-## P.T. Example
+---
 
-![Parallel transport method over a positive curvature surface](resources/images/svg/ParallelTransportMethod.svg){#fig:ptPositiveCurvature}
+![Parallel transport over two adjacent mesh faces](resources/images/svg/Diagram-ParallelTransport.png){#fig:ptDiagram}
 
 ## P.T. Implementation
 
-> PLACE P.T. ALGORITHM HERE!!!
+\small
+\begin{algorithmic}[1]
+\REQUIRE {A surface $\Phi$, represented as a triangular mesh (V,E,F), a specified distance $W$, a threshold $\epsilon$ and a maximum number of iterations.}
+\ENSURE Set $g$ of geodesic curves of approximate equal distance, $g_i,\quad where \quad i=0,...,M$
+\STATE Place a geodesic curve $g_0$ along $S$ such that it traverses across the whole surface.
+\RETURN The geodesic pattern $G$ of all $g_i$'s.
+\end{algorithmic}
+
+---
+
+There are **three** *extreme* cases depending on the ***local gaussian curvature*** where $g$ lies on $\Phi$:
+
+Positive curvature
+: Panels will have **Maximum width** on $g$
+
+Negative curvature
+: Panels will have **Minimum width** on $g$
+
+0 gaussian curvature:
+: Panels will be  of equal width
+
+## P.T. Example
+
+![Parallel transport method over a positive curvature surface](resources/images/svg/ParallelTransportMethod.png){#fig:ptPositiveCurvature}
 
 ## P.T. Results
 
-![TNB generated panels & distance to original mesh](resources/images/svg/PTPanels&DistanceToMesh.svg){#fig:ptPanels}
+![TNB generated panels & distance to original mesh](resources/images/svg/PTPanels&DistanceToMesh.png){#fig:ptPanels}
 
 # The Evolution Method
 
+---
+
+![Calculating the best-fit geodesic](resources/images/svg/Diagram-BestFitGeodesic.png){#fig:bestFitGeodesic}
+
 ## Evolution Implementation
 
-> PLACE ALGORITHM HERE!!
+\small
+\begin{algorithmic}[1]
+\REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F)
+\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
+\STATE Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2.
+\STATE Divide the curve into $N$ equally spaced points $p$ with distance $W$.
+\STATE Place an vector $\mathbf v$  onto $p_0$
+\STATE Parallel transport that vector along $g_x$ as described in [@fig:parTransProc].
+\FORALL {points $p_i$ where i = 0,...,M}
+\STATE Generate geodesic curve $+g_i$ and $-g_i$ using vector $\mathbf{v}_i$ and $\mathbf{-v}_i$ respectively.
+\STATE Join $+g_i$ and $-g_i$ together to obtain $g_i$
+\STATE Add $g_i$ to output.
+\ENDFOR
+\end{algorithmic}
 
 ## Evolution Method Results
 
@@ -187,17 +231,54 @@ These are the main methods for the obtaining successful geodesic patterns:
 :::
 :::::::::
 
+---
+
+Local changes in curvature produce:
+
+* Sharp panel endings in positive curvature areas
+* Panel width increase in negative curvature areas
+
 # The Piecewise Evolution Method
+
+---
+
+![Calculating the best piece-wise geodesic](resources/images/svg/Diagram-PieceWiseGeodesic.png){#fig:bestPiecewiseGeodesic}
 
 ## Piecewise Ev. Implementation
 
+> INSERT ALGORITHM HERE
+
 ## Piecewise Ev. Results
+
+:::::::::{.columns}
+:::{.column width=50%}
+![Piecewise Test](resources/images/svg/PiecewiseTestView2.png){#fig:piecewiseTestView2}
+:::
+:::{.column width=50%}
+![Piecewise Test](resources/images/svg/PiecewiseTest.png){#fig:piecewiseTest}
+:::
+:::::::::
 
 # The level set method
 
+## Mesh Level-sets
+
+![Level set on a single mesh face](resources/images/svg/LevelSet-SingleTriangle.png){#fig:levelSetFace}
+
 ## Level-set Implementation
 
+> INSERT ALGORITHM HERE
+
 ## Results
+
+:::::::::{.columns}
+:::{.column width=50%}
+MISSING TEXT
+:::
+:::{.column width=50%}
+> MISSING IMAGE
+:::
+:::::::::
 
 # Modeling planks
 
@@ -219,6 +300,8 @@ Developable surfaces from a geodesic pattern
 
 ## Developability of triangle meshes
 
+> MISSING K.CRANE'S IMPLEMENTATION IMAGES!
+
 # Analysis
 
 ## Gaps in panelization
@@ -233,9 +316,13 @@ Developable surfaces from a geodesic pattern
 
 > ???
 
-# Thanks
+# Thanks [^acknowledgments]
 
-\appendix
+[^acknowledgments]: Special thanks to ... FILL IN LATER!  
+  \
+  \
+
+# Appendix
 
 ## Resources
 
