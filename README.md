@@ -1,11 +1,15 @@
+# Readme!
+
+## Files
+
 This repository contains all of my master thesis work on geodesic patterns.
 
 The following files are available:
 
-[Paper (PDF Version)](output/paper.pdf)
-[Paper (Web Version)](output/paper.html)
-[Slides (PDF Version)](output/slides.pdf)
-[Slides (Web Version)](output/slides.html)
+* [Paper (PDF Version)](output/paper.pdf)
+* [Paper (Web Version)](output/paper.html)
+* [Slides (PDF Version)](output/slides.pdf)
+* [Slides (Web Version)](output/slides.html)
 
 The code implementation for this research lives in another repo on my account.
 
