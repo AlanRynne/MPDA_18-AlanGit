@@ -13,8 +13,11 @@ colortheme: dove
 fonttheme: serif
 fontsize: 9pt
 logo: "../resources/images/svg/MPDA-logo3.png"
+
+# Reveal.js styles
 css: ../slides/slides.css
 
+# Other options
 header-includes:
   \usepackage{algorithmic}
   \usepackage{svg}
@@ -40,15 +43,24 @@ header-includes:
 
 ---
 
-Discretize a given freeform surface into panels with the following properties:
+Discretize a given freeform surface into planks with the following properties:
 
-1. Panels must be ***developable*** [@shelden2002digital]
+1. Must be ***developable*** [@shelden2002digital]
 
-2. Panels should be of approximate ***equal width***  
+2. Should tend to have approximate ***equal width***  
 
-3. Panels should be ***as straight as possible***
+3. Should be ***as straight as possible***
 
-4. Panels should ***bend by their weak axis*** to approximate the surface.
+4. Cannot bend by their strong axis but,
+   
+5. can have a twist and bend by their weak axis
+
+---
+
+Plank
+: A plank is timber that is flat, elongated, and rectangular with parallel faces that are higher and longer than wide. ([Wikipedia](https://en.wikipedia.org/wiki/Plank_(wood)))
+
+![A straight plank laying on a cylinder on different directions.](resources/images/svg/CylinderPlaks.pdf){#fig:cylinderPlanks}
 
 # Background
 
@@ -107,11 +119,11 @@ A geodesic curve is the generalization of a *straight line* into *curved spaces*
 
 In this research, we concentrate on the concept of ***straightest geodesics***.
 
-![Straightest geodesic on a torus](resources/images/svg/ShortestGeodesics.png){#fig:straightestGeodesic size=90%}
+![Straightest geodesic on a torus](resources/images/svg/ShortestGeodesics.pdf){#fig:straightestGeodesic size=90%}
 
 ## Developable surfaces
 
-![Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distortion***](resources/images/svg/DevelopableFromCurve.png){#fig:devFromCurve}
+![Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distortion***](resources/images/svg/DevelopableFromCurve.pdf){#fig:devFromCurve}
 
 ---
 
@@ -133,6 +145,8 @@ If
 
 Then
 : Resulting panels will be ***developable*** and mostly ***straight*** when flat.
+
+![A straight plank laying on a hyperbolic paraboloid](resources/images/svg/HyparPlanks.pdf){#fig:hyparPlank width=40%}
 
 ---
 
@@ -160,11 +174,11 @@ These are the main methods for the obtaining successful geodesic patterns:
 
 ## Vector parallel transport
 
-![Parallel transport of a vector over a path on a sphere](resources/images/svg/SpherePT.png){#fig:ptSphere}
+![Parallel transport of a vector over a path on a sphere](resources/images/svg/SpherePT.pdf){#fig:ptSphere}
 
 ---
 
-![Parallel transport over two adjacent mesh faces](resources/images/svg/Diagram-ParallelTransport.png){#fig:ptDiagram}
+![Parallel transport over two adjacent mesh faces](resources/images/svg/Diagram-ParallelTransport.pdf){#fig:ptDiagram}
 
 ## P.T. Implementation
 
@@ -191,17 +205,17 @@ Negative curvature
 
 ## P.T. Example
 
-![Parallel transport method over a positive curvature surface](resources/images/svg/ParallelTransportMethod.png){#fig:ptPositiveCurvature}
+![Parallel transport method over a positive curvature surface](resources/images/svg/ParallelTransportMethod.pdf){#fig:ptPositiveCurvature}
 
 ## P.T. Results
 
-![TNB generated panels & distance to original mesh](resources/images/svg/PTPanels&DistanceToMesh.png){#fig:ptPanels}
+![TNB generated panels & distance to original mesh](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:ptPanels}
 
 # The Evolution Method
 
 ---
 
-![Calculating the best-fit geodesic](resources/images/svg/Diagram-BestFitGeodesic.png){#fig:bestFitGeodesic}
+![Calculating the best-fit geodesic](resources/images/svg/Diagram-BestFitGeodesic.pdf){#fig:bestFitGeodesic}
 
 ## Evolution Implementation
 
@@ -242,7 +256,7 @@ Local changes in curvature produce:
 
 ---
 
-![Calculating the best piece-wise geodesic](resources/images/svg/Diagram-PieceWiseGeodesic.png){#fig:bestPiecewiseGeodesic}
+![Calculating the best piece-wise geodesic](resources/images/svg/Diagram-PieceWiseGeodesic.pdf){#fig:bestPiecewiseGeodesic}
 
 ## Piecewise Ev. Implementation
 
@@ -263,7 +277,7 @@ Local changes in curvature produce:
 
 ## Mesh Level-sets
 
-![Level set on a single mesh face](resources/images/svg/LevelSet-SingleTriangle.png){#fig:levelSetFace}
+![Level set on a single mesh face](resources/images/svg/LevelSet-SingleTriangle.pdf){#fig:levelSetFace}
 
 ## Level-set Implementation
 

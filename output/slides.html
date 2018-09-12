@@ -57,13 +57,24 @@
 </section>
 <section><section id="objective" class="title-slide slide level1"><h1><span class="header-section-number">1</span> Objective</h1></section><section class="slide level2">
 
-<p>Discretize a given freeform surface into panels with the following properties:</p>
+<p>Discretize a given freeform surface into planks with the following properties:</p>
 <ol type="1">
-<li><p>Panels must be <strong><em>developable</em></strong> <span class="citation" data-cites="shelden2002digital">(Shelden 2002)</span></p></li>
-<li><p>Panels should be of approximate <strong><em>equal width</em></strong></p></li>
-<li><p>Panels should be <strong><em>as straight as possible</em></strong></p></li>
-<li><p>Panels should <strong><em>bend by their weak axis</em></strong> to approximate the surface.</p></li>
+<li><p>Must be <strong><em>developable</em></strong> <span class="citation" data-cites="shelden2002digital">(Shelden 2002)</span></p></li>
+<li><p>Should tend to have approximate <strong><em>equal width</em></strong></p></li>
+<li><p>Should be <strong><em>as straight as possible</em></strong></p></li>
+<li><p>Cannot bend by their strong axis but,</p></li>
+<li><p>can have a twist and bend by their weak axis</p></li>
 </ol>
+</section><section class="slide level2">
+
+<dl>
+<dt>Plank</dt>
+<dd>A plank is timber that is flat, elongated, and rectangular with parallel faces that are higher and longer than wide. (<a href="https://en.wikipedia.org/wiki/Plank_(wood)">Wikipedia</a>)
+</dd>
+</dl>
+<figure>
+<embed data-src="resources/images/svg/CylinderPlaks.pdf" id="fig:cylinderPlanks" /><figcaption>Figure 1: A straight plank laying on a cylinder on different directions.</figcaption>
+</figure>
 </section></section>
 <section><section id="background" class="title-slide slide level1"><h1><span class="header-section-number">2</span> Background</h1></section><section class="slide level2">
 
@@ -110,7 +121,7 @@
 </section><section class="slide level2">
 
 <figure>
-<img data-src="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" alt="Figure 1: Burj Khalifa final panel solution" id="fig:burjKhalifa" style="width:100.0%" /><figcaption>Figure 1: Burj Khalifa final panel solution</figcaption>
+<img data-src="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" alt="Figure 2: Burj Khalifa final panel solution" id="fig:burjKhalifa" style="width:100.0%" /><figcaption>Figure 2: Burj Khalifa final panel solution</figcaption>
 </figure>
 </section></section>
 <section><section id="construction-technique" class="title-slide slide level1"><h1><span class="header-section-number">3</span> Construction technique</h1></section><section id="geodesic-curves" class="slide level2">
@@ -118,12 +129,12 @@
 <p>A geodesic curve is the generalization of a <em>straight line</em> into <em>curved spaces</em>.</p>
 <p>In this research, we concentrate on the concept of <strong><em>straightest geodesics</em></strong>.</p>
 <figure>
-<img data-src="resources/images/svg/ShortestGeodesics.png" alt="Figure 2: Straightest geodesic on a torus" id="fig:straightestGeodesic" size="90%" /><figcaption>Figure 2: Straightest geodesic on a torus</figcaption>
+<embed data-src="resources/images/svg/ShortestGeodesics.pdf" id="fig:straightestGeodesic" size="90%" /><figcaption>Figure 3: Straightest geodesic on a torus</figcaption>
 </figure>
 </section><section id="developable-surfaces" class="slide level2">
 <h2><span class="header-section-number">3.2</span> Developable surfaces</h2>
 <figure>
-<img data-src="resources/images/svg/DevelopableFromCurve.png" alt="Figure 3: Surfaces with 0 gaussian curvature. Meaning, they can be flattened onto a plane without distortion" id="fig:devFromCurve" /><figcaption>Figure 3: Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distortion</em></strong></figcaption>
+<embed data-src="resources/images/svg/DevelopableFromCurve.pdf" id="fig:devFromCurve" /><figcaption>Figure 4: Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distortion</em></strong></figcaption>
 </figure>
 </section><section class="slide level2">
 
@@ -156,6 +167,9 @@
 <dd>Resulting panels will be <strong><em>developable</em></strong> and mostly <strong><em>straight</em></strong> when flat.
 </dd>
 </dl>
+<figure>
+<embed data-src="resources/images/svg/HyparPlanks.pdf" id="fig:hyparPlank" style="width:40.0%" /><figcaption>Figure 5: A straight plank laying on a hyperbolic paraboloid</figcaption>
+</figure>
 </section><section class="slide level2">
 
 <dl>
@@ -184,12 +198,12 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <section><section id="the-parallel-transport-method" class="title-slide slide level1"><h1><span class="header-section-number">5</span> The parallel transport method</h1></section><section id="vector-parallel-transport" class="slide level2">
 <h2><span class="header-section-number">5.1</span> Vector parallel transport</h2>
 <figure>
-<img data-src="resources/images/svg/SpherePT.png" alt="Figure 4: Parallel transport of a vector over a path on a sphere" id="fig:ptSphere" /><figcaption>Figure 4: Parallel transport of a vector over a path on a sphere</figcaption>
+<embed data-src="resources/images/svg/SpherePT.pdf" id="fig:ptSphere" /><figcaption>Figure 6: Parallel transport of a vector over a path on a sphere</figcaption>
 </figure>
 </section><section class="slide level2">
 
 <figure>
-<img data-src="resources/images/svg/Diagram-ParallelTransport.png" alt="Figure 5: Parallel transport over two adjacent mesh faces" id="fig:ptDiagram" /><figcaption>Figure 5: Parallel transport over two adjacent mesh faces</figcaption>
+<embed data-src="resources/images/svg/Diagram-ParallelTransport.pdf" id="fig:ptDiagram" /><figcaption>Figure 7: Parallel transport over two adjacent mesh faces</figcaption>
 </figure>
 </section><section id="p.t.-implementation" class="slide level2">
 <h2><span class="header-section-number">5.3</span> P.T. Implementation</h2>
@@ -211,18 +225,18 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 </section><section id="p.t.-example" class="slide level2">
 <h2><span class="header-section-number">5.5</span> P.T. Example</h2>
 <figure>
-<img data-src="resources/images/svg/ParallelTransportMethod.png" alt="Figure 6: Parallel transport method over a positive curvature surface" id="fig:ptPositiveCurvature" /><figcaption>Figure 6: Parallel transport method over a positive curvature surface</figcaption>
+<embed data-src="resources/images/svg/ParallelTransportMethod.pdf" id="fig:ptPositiveCurvature" /><figcaption>Figure 8: Parallel transport method over a positive curvature surface</figcaption>
 </figure>
 </section><section id="p.t.-results" class="slide level2">
 <h2><span class="header-section-number">5.6</span> P.T. Results</h2>
 <figure>
-<img data-src="resources/images/svg/PTPanels&amp;DistanceToMesh.png" alt="Figure 7: TNB generated panels &amp; distance to original mesh" id="fig:ptPanels" /><figcaption>Figure 7: TNB generated panels &amp; distance to original mesh</figcaption>
+<embed data-src="resources/images/svg/PTPanels&amp;DistanceToMesh.pdf" id="fig:ptPanels" /><figcaption>Figure 9: TNB generated panels &amp; distance to original mesh</figcaption>
 </figure>
 </section></section>
 <section><section id="the-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">6</span> The Evolution Method</h1></section><section class="slide level2">
 
 <figure>
-<img data-src="resources/images/svg/Diagram-BestFitGeodesic.png" alt="Figure 8: Calculating the best-fit geodesic" id="fig:bestFitGeodesic" /><figcaption>Figure 8: Calculating the best-fit geodesic</figcaption>
+<embed data-src="resources/images/svg/Diagram-BestFitGeodesic.pdf" id="fig:bestFitGeodesic" /><figcaption>Figure 10: Calculating the best-fit geodesic</figcaption>
 </figure>
 </section><section id="evolution-implementation" class="slide level2">
 <h2><span class="header-section-number">6.2</span> Evolution Implementation</h2>
@@ -232,11 +246,11 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <div class="columns">
 <div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/CuttyEvolutionMethod.png" alt="Figure 9: Evolution method example" id="fig:evolutionExample" /><figcaption>Figure 9: Evolution method example</figcaption>
+<img data-src="resources/images/svg/CuttyEvolutionMethod.png" alt="Figure 11: Evolution method example" id="fig:evolutionExample" /><figcaption>Figure 11: Evolution method example</figcaption>
 </figure>
 </div><div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/CuttyEvolutionMethod2.png" alt="Figure 10: Evolution method problems" id="fig:evolutionProblems" /><figcaption>Figure 10: Evolution method problems</figcaption>
+<img data-src="resources/images/svg/CuttyEvolutionMethod2.png" alt="Figure 12: Evolution method problems" id="fig:evolutionProblems" /><figcaption>Figure 12: Evolution method problems</figcaption>
 </figure>
 </div>
 </div>
@@ -251,7 +265,7 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <section><section id="the-piecewise-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">7</span> The Piecewise Evolution Method</h1></section><section class="slide level2">
 
 <figure>
-<img data-src="resources/images/svg/Diagram-PieceWiseGeodesic.png" alt="Figure 11: Calculating the best piece-wise geodesic" id="fig:bestPiecewiseGeodesic" /><figcaption>Figure 11: Calculating the best piece-wise geodesic</figcaption>
+<embed data-src="resources/images/svg/Diagram-PieceWiseGeodesic.pdf" id="fig:bestPiecewiseGeodesic" /><figcaption>Figure 13: Calculating the best piece-wise geodesic</figcaption>
 </figure>
 </section><section id="piecewise-ev.-implementation" class="slide level2">
 <h2><span class="header-section-number">7.2</span> Piecewise Ev. Implementation</h2>
@@ -263,11 +277,11 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <div class="columns">
 <div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/PiecewiseTestView2.png" alt="Figure 12: Piecewise Test" id="fig:piecewiseTestView2" /><figcaption>Figure 12: Piecewise Test</figcaption>
+<img data-src="resources/images/svg/PiecewiseTestView2.png" alt="Figure 14: Piecewise Test" id="fig:piecewiseTestView2" /><figcaption>Figure 14: Piecewise Test</figcaption>
 </figure>
 </div><div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/PiecewiseTest.png" alt="Figure 13: Piecewise Test" id="fig:piecewiseTest" /><figcaption>Figure 13: Piecewise Test</figcaption>
+<img data-src="resources/images/svg/PiecewiseTest.png" alt="Figure 15: Piecewise Test" id="fig:piecewiseTest" /><figcaption>Figure 15: Piecewise Test</figcaption>
 </figure>
 </div>
 </div>
@@ -275,7 +289,7 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <section><section id="the-level-set-method" class="title-slide slide level1"><h1><span class="header-section-number">8</span> The level set method</h1></section><section id="mesh-level-sets" class="slide level2">
 <h2><span class="header-section-number">8.1</span> Mesh Level-sets</h2>
 <figure>
-<img data-src="resources/images/svg/LevelSet-SingleTriangle.png" alt="Figure 14: Level set on a single mesh face" id="fig:levelSetFace" /><figcaption>Figure 14: Level set on a single mesh face</figcaption>
+<embed data-src="resources/images/svg/LevelSet-SingleTriangle.pdf" id="fig:levelSetFace" /><figcaption>Figure 16: Level set on a single mesh face</figcaption>
 </figure>
 </section><section id="level-set-implementation" class="slide level2">
 <h2><span class="header-section-number">8.2</span> Level-set Implementation</h2>
