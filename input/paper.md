@@ -10,12 +10,8 @@ abstract:
 keywords: architectural geometry, geodesic patterns, geodesic curves, freeform paneling, surface rationalization, developable surfaces
 bibliography: [input/MPDABibliography.bib]
 
-include-after:
-  \appendix
-  \listofalgorithms
-  \listoffigures
+nocite: "@*"
 ---
-
 
 # Introduction {#sec:intro}
 
@@ -25,7 +21,7 @@ With the development of advanced 3D CAD tools in the last decades, architects ar
 
 Given the scale an architectural scale, this smooth freeform surfaces cannot be built as designed in 3D CAD applications and, therefore, must be divided in smaller, simpler parts that could be easily manufacturable. This process is called *Rationalization*, and is not a trivial task; since the *Rationalization* of a surface implies a loss of precission in the resulting shape, it must be done in such a way that minimizes this loss. The selected shape of the generated panels also plays a key role when approaching this problems, since it is clear the final appearance of the design will vary greatly depending wether the panels are triangular, quad, hexagonal or long strips. Constructibility of the selected design (panel planarity, curvature, error margins) is of great concern in rationalization methods for architectural purposes, as opposed to related Computer Graphics methods.
 
-In this publication we center on the generation of *Geodesic Panels on Freeform Surfaces*, meaning, seamlessly covering any given surface with a pattern of *thin, long, straight panels*, which must be *developable* and rectangular (or quasi-rectangular) in shape and must approximate the surface by being bent only on their weak axis. We will introduce the basic geometric properties behind this concept and the algorithmic implementation of several of the methods. We will also explore new methods for optimizing any given shape towards *developability*.
+In this publication we center on the generation of *Geodesic Panels on Freeform Surfaces*, meaning, seamlessly covering any given surface with a pattern ***planks***; *thin, long, straight panels*, which must be *developable* and rectangular (or quasi-rectangular) in shape and must approximate the surface by being bent only on their weak axis. We will introduce the basic geometric properties behind this concept and the algorithmic implementation of several of the methods. We will also explore new methods for optimizing any given shape towards *developability*.
 
 # Background
 
@@ -33,7 +29,7 @@ In this publication we center on the generation of *Geodesic Panels on Freeform 
 
 Examples of the application of *Architectural Geometry*  are abundant in today's architecture. Architect Frank Ghery is known for his work ground-braking work on the design of architectural shapes based purely on *developable* patches [@Stein2018DSF], which can be easily covered by a variety of panel patterns.
 
-Recent projects by Zaha Hadid, Foster, Toyo-Ito... XXXXXXX.
+Recent projects by Zaha Hadid, Foster, Toyo-Ito, NOX... XXXXXXX.
 
 Covering surfaces with long rectangular, or quasi-rectangular panels of equal width, is a topic widely explored in traditional boat building, and has also been recently applied in several architectural projects, such as Toyo Ito's Minna No Mori (Japan), or the interior cladding at Frank Ghery's Burj Khalifa (Dubai) [@meredith2012burj].
 
@@ -67,13 +63,14 @@ Boundary value problem
 
 Both problems have different ways of being solved either numerically, graphically or by the means of simulations. The initial value problem can be solved using the concept of *straightest geodesics* [@Polthier1998-dn], whereas the boundary value problem has a very close relation with the computation of *shortest paths* between two points on a surface.
 
-![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic curves of a torus, although $g_1$ is more than double the length of $g_0$.](resources/images/svg/ShortestGeodesics.pdf){#fig:shortGeo}
+![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic curves of a torus, although $g_1$ is more than double the length of $g_0$. $g_0$ was computed solving the *initial value problem, while $g_1$ was computed using the *boundary value problem*.](resources/images/vector/ShortestGeodesics.svg){#fig:shortGeo}
 
 ## Developable surfaces
 
 It is also important to introduce the concept of the *developable surface*, a special kind of surface that have substantial and variable normal curvature while guaranteeing zero gaussian curvature, and as such, this surfaces can be *unrolled* into a flat plane with no deformation of the surface. This surfaces have been an extremely important design element in the practice of known architect Frank Ghery and explained in [@shelden2002digital].
 
-There are several ways of generating a developable surface using a curve in space.
+There are several ways of generating a developable surface using a curve in space. The most simple way is the following.
+
 
 1. Select the starting point of the curve
 2. Obtain the perpendicular frame of the curve at the specified parameter.
@@ -82,7 +79,7 @@ There are several ways of generating a developable surface using a curve in spac
 5. Draw a line using the selected vector at the start point of the curve.
 6. XXXXXX
 
-![Developable surface generated using curve a geodesic curve. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](resources/images/svg/DevelopableFromCurve.pdf){#fig:devFromCurve}
+![Developable surface generated using curve a geodesic curve. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](resources/images/vector/DevelopableFromCurve.svg){#fig:devFromCurve}
 
 ## Properties to aim for {#sec:properties-to-aim-for}
 
@@ -133,7 +130,7 @@ In this section, we will introduce the different existent methods for generating
 
 ## Parallel Transport Method {#sec:parallel-transport}
 
-![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](resources/images/svg/SpherePT.pdf){#fig:SpherePT}
+![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](resources/images/vector/SpherePT.svg){#fig:SpherePT}
 
 
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points occurs at a prescribed location.
@@ -146,13 +143,13 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 
 ![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
 
-![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](resources/images/svg/ParallelTransportMethod.pdf){#fig:parTransProc}
+![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](resources/images/vector/ParallelTransportMethod.svg){#fig:parTransProc}
 
 ### Procedure
 
 [29/Jul/18 - 17:00:25]: # (Algorithms will not show in any output but PDF!!!)
 
-\begin{algorithm}
+\begin{algorithm}[h]
 \label{parTransPatterns}
 \caption{Geodesic patterns by parallel transport}
 \algsetup{indent=2em}
@@ -187,8 +184,8 @@ The placement of the first geodesic curve and the selection of the initial vecto
 Two main concepts are covered in this section, both proposed by [@Pottmann2010-ku]: the first, what is called the *evolution method*, and a second method based on *piecewise-geodesic* vector fields.
 
 <div id="fig:evolExample1">
-![](resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
-![](resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
+![](resources/images/png/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
+![](resources/images/png/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
 
 Surface covered by a 1-geodesic pattern using the evolution method without introducing breakpoints. $(a)$ shows an overview of the result; while $(b)$ highlights the intersection point of several geodesic curves. This problem will be addressed by introducing the concept of 'piece-wise' geodesic curves; which are curves that are not geodesics, but are composed of segments of several connected geodesic curves.
 </div>
@@ -237,7 +234,7 @@ Geodesic distances on sphere
 
 ### Obtaining the 'next' geodesic
 
-![Calculating the 'next' geodesic](resources/images/svg/Diagram-BestFitGeodesic.png){#fig:bestFitGeodesic}
+![Calculating the 'next' geodesic](resources/images/vector/Diagram-BestFitGeodesic.svg){#fig:bestFitGeodesic}
 
 Input:
 : A freeform surface $S$, a desired width $W$ and a starting geodesic curve $g_0$
@@ -262,8 +259,8 @@ Any given surface can be completely covered in this manner by recursively comput
 
 <div id="fig:evolutionExample">
 
-![](resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
-![](resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
+![](resources/images/png/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
+![](resources/images/png/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
 
 Surface covered by a 1-geodesic pattern using the evolution method. $(a)$ shows ***normal*** implementation; while $(b)$ shows the *sharp* panel endings that ocur on positive curvature.
 </div>
@@ -272,12 +269,12 @@ Surface covered by a 1-geodesic pattern using the evolution method. $(a)$ shows 
 
 We can modify the implementation of the evolution method to be able to control the distance between geodesics even in areas with a high rate of change in curvature. In order to prevent this unwanted width variations, instead of looking for the best overall geodesic, we will look for the best geodesic that fits the largest interval of $h_i$'s possible [@fig:bestPiecewiseGeodesic], given a specified threshold $\epsilon$. Once this interval is obtained, the current geodesic is split and a new geodesic will be generated. This process will be repeated until the curve crosses all $h_i$'s (some exceptions apply).
 
-![Calculating the best piece-wise geodesic](resources/images/svg/Diagram-PieceWiseGeodesic.png){#fig:bestPiecewiseGeodesic}
+![Calculating the best piece-wise geodesic](resources/images/vector/Diagram-PieceWiseGeodesic.svg){#fig:bestPiecewiseGeodesic}
 
 <div id="fig:piecewiseEvolExample">
 
-![](resources/images/svg/PiecewiseTestView2.png){#fig:piecewiseTestView2 width=45%}
-![](resources/images/svg/PiecewiseTest.png){#fig:piecewiseTest width=45%}
+![](resources/images/png/PiecewiseTestView2.png){#fig:piecewiseTestView2 width=45%}
+![](resources/images/png/PiecewiseTest.png){#fig:piecewiseTest width=45%}
 
 $(a)$ Perspective view; $(b)$ Top View. In red, the initial geodesic curve; in blue, the generated piecewise geodesic pattern; the red dots are breakpoints in the piecewise geodesic curves.
 </div>
@@ -286,7 +283,7 @@ $(a)$ Perspective view; $(b)$ Top View. In red, the initial geodesic curve; in b
 
 We can also compute geodesic curve patterns on a surface by computing a scalar function on each vertex of a mesh that minimizes a combination of error measurements $F_{min} = F_k + \lambda F_{_nabla} + F_w$.
 
-![Calculating a level set on a single face](resources/images/svg/LevelSet-SingleTriangle.png){#fig:levelSetFace}
+![Calculating a level set on a single face](resources/images/vector/LevelSet-SingleTriangle.svg){#fig:levelSetFace}
 
 ## Geodesic Webs {#sec:geodesic-webs}
 
@@ -325,7 +322,7 @@ Therefore, the procedure was modified in the following way:
 > 1. Compute the *tangent developable surfaces* $\Psi_i$ for all surfaces $s_i \rightarrow i=\text{even numbers}$
 > 2. Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
 > 3. Fill the holes in the rulings by interpolation (???)
-> 4. On each ruling:
+> 4. On each ruling:æ
 >    1. Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
 > 5. Optimize globally the positions of points $A_i(x)$ and $B_i(x)$ such that
 >     1. Trim curves are *smooth*
@@ -352,7 +349,7 @@ The second method for defining panels, once an appropriate system of geodesics h
 The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
 For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
 
-![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels colored by distance to reference mesh.](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:binormalMethod fig.pos="t"}
+![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels colored by distance to reference mesh.](resources/images/vector/PTPanels&DistanceToMesh.svg){#fig:binormalMethod fig.pos="t"}
 
 ## Shape Optimization  {#sec:optimization}
 
@@ -370,32 +367,51 @@ Another option is to modify the original surface to make it *developable*. This 
 
 # Quality Assessment {#sec:quality-assessment}
 
-[09/Sep/18 - 10:22:18]: # (TALK ABOUT PANEL GAPS, STRESSES, CURVATURE... ETC...)
-
 ## Panel gaps
+
+![Gaps in panels](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:panelGaps}
 
 ## Stress and strain in panels
 
-The following section investigates the behavior of a rectangular strip of elastic material when it is bent to the shape of a ruled surface $\Psi$ un such way that:
+The following section investigates the behavior of a rectangular strip of elastic material when it is bent to the shape of a ruled surface $\Psi$ un such way that the central line $m$ of the strip follows the *'middle geodesic'* $g$ in $\Psi$. This applies to both methods defining panels.[@fig:panelGaps]
 
-> The central line $m$ of the strip follows the *'middle geodesic'* $s$ in $\Psi$
+* Lines parallel to $m$ at distance $d/2$ are not only bent but also stretched.
+* If you introduce the radius of Gaussia curvature $\rho = 1 / \sqrt{|K|}$...
+* ...the relative increment in length of the strip is:
 
-This applies to both methods defining panels.[@fig:panelStress]
+$$\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots $$ {#eq:strain}
 
-![Stress in panels](https://dummyimage.com/600x150/f9f9f9/f1f1f1.png){#fig:panelStress}
+### Tensile stress
 
-### Formulas
+Tensile stress is estimated by expressing stress as $\sigma = E\varepsilon$,  which yields
 
-> $$ \rho=1/{\sqrt{K}}, $$  {#eq:eqLabel}
+$$ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}}$$ {#eq:maxWidth}
 
+where $\rho_{max}$ is the maximum admissible sress and is Young's modulus. Since this calculation is an approximation, a safety factor must be used when choosing $\rho_{max}$.
 
-> $$\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots$$ {#eq:eqLabel3}
+$C$ is a material constant, from which we can obtain an upper width bound for the panels by $d_{max} = 2\rho_{min}C$, which will be the maximum admissible width for that design configuration.
 
+|  Material |  Young Modulus | Max. stress | $C$ |
+|---|---|---|---|
+| Wood | 200000  |   |   |
+| Steel | 13000  |   |   |
+| Others? | ? | | |
+: Example calculation of constant $C$ for some of the most suitable materials.
 
-> $$ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}},$$ {#eq:eqLabel2}
+## Bending and shear stress
 
-where $\sigma_{max}$ is the maximum admissible stress and $E$ is Young's modulus.
+Bending ($\sigma$) and shear stresses ($\tau$) for panels with a thin rectangular cross-section depend on the panel thickness $h$, but not on the panel width $d$ ***if*** $h/d \ll 1$, and maximum values occurr on the outer surface of the panel [@Wallner2010tiling].
 
-The value of $C$ is a material constant which yields an *upper bound* $\sigma_{max} = 2\rho_{min}C$ for the maximum strip width.
+These values depend on the curvature $\kappa$ of the central geodesic and the rate of torsion $\theta$  of the panel. We have:
+
+$$\sigma = E \kappa h/2 \quad and\quad \tau = hG\theta$${#eq:bendingAndShear}
+
+It is important to note that $\tau$, measured by arc per meter, does not exceed $\sqrt{|K|} = 1/\rho$, where the maximum value ocurs in case the central geodesic's tangent happens to be an asymptotic direction of the panel surface [@DoCarmo2016kx].
+
+It is standard procedure to combine all streses (tension, shear, bending) and use this information for checking panel admissibility.
+
+Also, as one might conclude straight away, panels generated using the tangent developable method will experience less shear than the ones created by the 'binormal' method.
+
+> MISSING SOME RESULTS!!!
 
 # References

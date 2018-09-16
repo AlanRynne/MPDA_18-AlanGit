@@ -43,27 +43,46 @@
   <p class="date">September 2018</p>
 </section>
 
-<section id="index" class="slide level2 unnumbered">
-<h2>Index</h2>
+<section id="index" class="slide level2">
+<h2><span class="header-section-number">0.1</span> Index</h2>
 <ol type="1">
-<li>Objective</li>
-<li>Background</li>
-<li>Construction technique</li>
-<li>Algorithmic strategies</li>
-<li>Shape optimization</li>
-<li>Analysis</li>
-<li>Conclusion</li>
+<li><a href="#/objective">Objective</a></li>
+<li><a href="#/background">Background</a></li>
+<li><a href="#/construction-technique">Construction technique</a></li>
+<li><a href="#/algorithmic-strategies">Algorithmic strategies</a></li>
+<li><a href="#/the-parallel-transport-method">The parallel transport method</a></li>
+<li><a href="#/the-evolution-method">The Evolution Method</a></li>
+<li><a href="#/the-piecewise-evolution-method">The Piecewise Evolution Method</a></li>
+<li><a href="#/the-level-set-method">The level set method</a></li>
+<li><a href="#/modeling-planks">Modeling planks</a></li>
+<li><a href="#/optimization">Optimization</a></li>
+<li><a href="#/analysis">Analysis</a></li>
+<li><a href="#/conclusion">Conclusion</a></li>
+<li><a href="#/thanks-acknowledgments">Thanks<a href="#/fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></a></li>
+<li><a href="#/appendix">Appendix</a></li>
 </ol>
 </section>
 <section><section id="objective" class="title-slide slide level1"><h1><span class="header-section-number">1</span> Objective</h1></section><section class="slide level2">
 
-<p>Discretize a given freeform surface into panels with the following properties:</p>
+<p>pandoc –filter=pandoc-svg.py -f markdown -s -N –slide-level=2 –katex -F mermaid-filter -F pandoc-crossref -F pandoc-citeproc –dpi=300 -o output/slides.pptx slides/slides.md –template /Users/alan/GitHub/MPDA_18-MasterThesis/templates/reference.pptx</p>
+<p>Discretize a given freeform surface into planks with the following properties:</p>
 <ol type="1">
-<li><p>Panels must be <strong><em>developable</em></strong> <span class="citation" data-cites="shelden2002digital">(Shelden 2002)</span></p></li>
-<li><p>Panels should be of approximate <strong><em>equal width</em></strong></p></li>
-<li><p>Panels should be <strong><em>as straight as possible</em></strong></p></li>
-<li><p>Panels should <strong><em>bend by their weak axis</em></strong> to approximate the surface.</p></li>
+<li><p>Must be <strong><em>developable</em></strong> <span class="citation" data-cites="shelden2002digital">(Shelden 2002)</span></p></li>
+<li><p>Should tend to have approximate <strong><em>equal width</em></strong></p></li>
+<li><p>Should be <strong><em>as straight as possible</em></strong></p></li>
+<li><p>Cannot bend by their strong axis but,</p></li>
+<li><p>can have a twist and bend by their weak axis</p></li>
 </ol>
+</section><section class="slide level2">
+
+<dl>
+<dt>Plank</dt>
+<dd>A plank is timber that is flat, elongated, and rectangular with parallel faces that are higher and longer than wide. (<a href="https://en.wikipedia.org/wiki/Plank_(wood)">Wikipedia</a>)
+</dd>
+</dl>
+<figure>
+<img data-src="resources/images/vector/CylinderPlaks.svg" alt="Figure 1: A straight plank laying on a cylinder on different directions." id="fig:cylinderPlanks" /><figcaption>Figure 1: A straight plank laying on a cylinder on different directions.</figcaption>
+</figure>
 </section></section>
 <section><section id="background" class="title-slide slide level1"><h1><span class="header-section-number">2</span> Background</h1></section><section class="slide level2">
 
@@ -77,8 +96,14 @@
 <figure>
 <img data-src="https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg" alt="Connected developable patches for boat hull design" style="width:70.0%" /><figcaption>Connected developable patches for boat hull design</figcaption>
 </figure>
+</section><section class="slide level2">
+
+<p>NOX was one of the first to experiment with paper strips.</p>
+<blockquote>
+<p>MISSING NOX IMAGE/REFERENCE!</p>
+</blockquote>
 </section><section id="frank-ghery" class="slide level2">
-<h2><span class="header-section-number">2.3</span> Frank Ghery</h2>
+<h2><span class="header-section-number">2.4</span> Frank Ghery</h2>
 <p>This techniques have also been used in the architecture world, mainly by <strong>Frank Ghery</strong>.</p>
 <p>His façades are usually a collection of connected developable surfaces.</p>
 </section><section class="slide level2">
@@ -110,23 +135,30 @@
 </section><section class="slide level2">
 
 <figure>
-<img data-src="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" alt="Figure 1: Burj Khalifa final panel solution" id="fig:burjKhalifa" style="width:100.0%" /><figcaption>Figure 1: Burj Khalifa final panel solution</figcaption>
+<img data-src="https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg" alt="Figure 2: Burj Khalifa final panel solution" id="fig:burjKhalifa" style="width:100.0%" /><figcaption>Figure 2: Burj Khalifa final panel solution</figcaption>
 </figure>
 </section></section>
 <section><section id="construction-technique" class="title-slide slide level1"><h1><span class="header-section-number">3</span> Construction technique</h1></section><section id="geodesic-curves" class="slide level2">
 <h2><span class="header-section-number">3.1</span> Geodesic curves</h2>
 <p>A geodesic curve is the generalization of a <em>straight line</em> into <em>curved spaces</em>.</p>
 <p>In this research, we concentrate on the concept of <strong><em>straightest geodesics</em></strong>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="some-markdown-content"><span class="header-section-number">3.1</span> Some markdown content</h3>
+</div><div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/ShortestGeodesics.png" alt="Figure 2: Straightest geodesic on a torus" id="fig:straightestGeodesic" size="90%" /><figcaption>Figure 2: Straightest geodesic on a torus</figcaption>
+<img data-src="resources/images/vector/ShortestGeodesics.svg" alt="Figure 3: Shortest geodesic on a torus" id="fig:shortestGeod" /><figcaption>Figure 3: Shortest geodesic on a torus</figcaption>
 </figure>
+</div>
+</div>
 </section><section id="developable-surfaces" class="slide level2">
 <h2><span class="header-section-number">3.2</span> Developable surfaces</h2>
 <figure>
-<img data-src="resources/images/svg/DevelopableFromCurve.png" alt="Figure 3: Surfaces with 0 gaussian curvature. Meaning, they can be flattened onto a plane without distortion" id="fig:devFromCurve" /><figcaption>Figure 3: Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distortion</em></strong></figcaption>
+<img data-src="resources/images/vector/DevelopableFromCurve.svg" alt="Figure 4: Surfaces with 0 gaussian curvature. Meaning, they can be flattened onto a plane without distortion" id="fig:devFromCurve" /><figcaption>Figure 4: Surfaces with <strong><em>0 gaussian curvature</em></strong>. Meaning, they can be flattened onto a plane <strong><em>without distortion</em></strong></figcaption>
 </figure>
 </section><section class="slide level2">
 
+<blockquote>
 <dl>
 <dt>Developable surfaces</dt>
 <dd><br />
@@ -137,6 +169,8 @@
 <li>surfaces that can be flattened.</li>
 <li>can be generated by a single curve.</li>
 </ul>
+</blockquote>
+<blockquote>
 <dl>
 <dt>Geodesic curves</dt>
 <dd><br />
@@ -146,6 +180,7 @@
 <ul>
 <li>are straight lines in a curved space.</li>
 </ul>
+</blockquote>
 </section><section class="slide level2">
 
 <dl>
@@ -156,6 +191,9 @@
 <dd>Resulting panels will be <strong><em>developable</em></strong> and mostly <strong><em>straight</em></strong> when flat.
 </dd>
 </dl>
+<figure>
+<img data-src="resources/images/vector/HyparPlanks.svg" alt="Figure 5: A straight plank laying on a hyperbolic paraboloid" id="fig:hyparPlank" style="width:40.0%" /><figcaption>Figure 5: A straight plank laying on a hyperbolic paraboloid</figcaption>
+</figure>
 </section><section class="slide level2">
 
 <dl>
@@ -167,7 +205,7 @@
 <p>We wish to cover a given freeform surface with a pattern of <strong>geodesic curves</strong> with equal spacing.</p>
 <p>This can only be achieved if the provided surface is already <em>developable</em>.<br />
 <br />
-A compromise exists between the <em>curve spacing</em> and the <em>curves geodesic property</em></p>
+A compromise exists between the <em>curve spacing</em> and the <em>curve’s geodesic curvature</em></p>
 </section></section>
 <section><section id="algorithmic-strategies" class="title-slide slide level1"><h1><span class="header-section-number">4</span> Algorithmic strategies</h1></section><section id="obtaining-geodesic-patterns" class="slide level2">
 <h2><span class="header-section-number">4.1</span> Obtaining Geodesic Patterns</h2>
@@ -184,12 +222,12 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <section><section id="the-parallel-transport-method" class="title-slide slide level1"><h1><span class="header-section-number">5</span> The parallel transport method</h1></section><section id="vector-parallel-transport" class="slide level2">
 <h2><span class="header-section-number">5.1</span> Vector parallel transport</h2>
 <figure>
-<img data-src="resources/images/svg/SpherePT.png" alt="Figure 4: Parallel transport of a vector over a path on a sphere" id="fig:ptSphere" /><figcaption>Figure 4: Parallel transport of a vector over a path on a sphere</figcaption>
+<img data-src="resources/images/vector/SpherePT.svg" alt="Figure 6: Parallel transport of a vector over a path on a sphere" id="fig:ptSphere" style="width:50.0%" /><figcaption>Figure 6: Parallel transport of a vector over a path on a sphere</figcaption>
 </figure>
 </section><section class="slide level2">
 
 <figure>
-<img data-src="resources/images/svg/Diagram-ParallelTransport.png" alt="Figure 5: Parallel transport over two adjacent mesh faces" id="fig:ptDiagram" /><figcaption>Figure 5: Parallel transport over two adjacent mesh faces</figcaption>
+<img data-src="resources/images/vector/Diagram-ParallelTransport.svg" alt="Figure 7: Parallel transport over two adjacent mesh faces" id="fig:ptDiagram" /><figcaption>Figure 7: Parallel transport over two adjacent mesh faces</figcaption>
 </figure>
 </section><section id="p.t.-implementation" class="slide level2">
 <h2><span class="header-section-number">5.3</span> P.T. Implementation</h2>
@@ -211,18 +249,18 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 </section><section id="p.t.-example" class="slide level2">
 <h2><span class="header-section-number">5.5</span> P.T. Example</h2>
 <figure>
-<img data-src="resources/images/svg/ParallelTransportMethod.png" alt="Figure 6: Parallel transport method over a positive curvature surface" id="fig:ptPositiveCurvature" /><figcaption>Figure 6: Parallel transport method over a positive curvature surface</figcaption>
+<img data-src="resources/images/vector/ParallelTransportMethod.svg" alt="Figure 8: Parallel transport method over a positive curvature surface" id="fig:ptPositiveCurvature" /><figcaption>Figure 8: Parallel transport method over a positive curvature surface</figcaption>
 </figure>
 </section><section id="p.t.-results" class="slide level2">
 <h2><span class="header-section-number">5.6</span> P.T. Results</h2>
 <figure>
-<img data-src="resources/images/svg/PTPanels&amp;DistanceToMesh.png" alt="Figure 7: TNB generated panels &amp; distance to original mesh" id="fig:ptPanels" /><figcaption>Figure 7: TNB generated panels &amp; distance to original mesh</figcaption>
+<img data-src="resources/images/vector/PTPanels&amp;DistanceToMesh.svg" alt="Figure 9: TNB generated panels &amp; distance to original mesh" id="fig:ptPanels" /><figcaption>Figure 9: TNB generated panels &amp; distance to original mesh</figcaption>
 </figure>
 </section></section>
 <section><section id="the-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">6</span> The Evolution Method</h1></section><section class="slide level2">
 
 <figure>
-<img data-src="resources/images/svg/Diagram-BestFitGeodesic.png" alt="Figure 8: Calculating the best-fit geodesic" id="fig:bestFitGeodesic" /><figcaption>Figure 8: Calculating the best-fit geodesic</figcaption>
+<img data-src="resources/images/vector/Diagram-BestFitGeodesic.svg" alt="Figure 10: Calculating the best-fit geodesic" id="fig:bestFitGeodesic" /><figcaption>Figure 10: Calculating the best-fit geodesic</figcaption>
 </figure>
 </section><section id="evolution-implementation" class="slide level2">
 <h2><span class="header-section-number">6.2</span> Evolution Implementation</h2>
@@ -232,11 +270,11 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <div class="columns">
 <div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/CuttyEvolutionMethod.png" alt="Figure 9: Evolution method example" id="fig:evolutionExample" /><figcaption>Figure 9: Evolution method example</figcaption>
+<img data-src="resources/images/png/CuttyEvolutionMethod.png" alt="Figure 11: Evolution method example" id="fig:evolutionExample" /><figcaption>Figure 11: Evolution method example</figcaption>
 </figure>
 </div><div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/CuttyEvolutionMethod2.png" alt="Figure 10: Evolution method problems" id="fig:evolutionProblems" /><figcaption>Figure 10: Evolution method problems</figcaption>
+<img data-src="resources/images/png/CuttyEvolutionMethod2.png" alt="Figure 12: Evolution method problems" id="fig:evolutionProblems" /><figcaption>Figure 12: Evolution method problems</figcaption>
 </figure>
 </div>
 </div>
@@ -251,7 +289,7 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <section><section id="the-piecewise-evolution-method" class="title-slide slide level1"><h1><span class="header-section-number">7</span> The Piecewise Evolution Method</h1></section><section class="slide level2">
 
 <figure>
-<img data-src="resources/images/svg/Diagram-PieceWiseGeodesic.png" alt="Figure 11: Calculating the best piece-wise geodesic" id="fig:bestPiecewiseGeodesic" /><figcaption>Figure 11: Calculating the best piece-wise geodesic</figcaption>
+<img data-src="resources/images/vector/Diagram-PieceWiseGeodesic.svg" alt="Figure 13: Calculating the best piece-wise geodesic" id="fig:bestPiecewiseGeodesic" /><figcaption>Figure 13: Calculating the best piece-wise geodesic</figcaption>
 </figure>
 </section><section id="piecewise-ev.-implementation" class="slide level2">
 <h2><span class="header-section-number">7.2</span> Piecewise Ev. Implementation</h2>
@@ -263,11 +301,11 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <div class="columns">
 <div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/PiecewiseTestView2.png" alt="Figure 12: Piecewise Test" id="fig:piecewiseTestView2" /><figcaption>Figure 12: Piecewise Test</figcaption>
+<img data-src="resources/images/png/PiecewiseTestView2.png" alt="Figure 14: Piecewise Test" id="fig:piecewiseTestView2" /><figcaption>Figure 14: Piecewise Test</figcaption>
 </figure>
 </div><div class="column" style="width:50%;">
 <figure>
-<img data-src="resources/images/svg/PiecewiseTest.png" alt="Figure 13: Piecewise Test" id="fig:piecewiseTest" /><figcaption>Figure 13: Piecewise Test</figcaption>
+<img data-src="resources/images/png/PiecewiseTest.png" alt="Figure 15: Piecewise Test" id="fig:piecewiseTest" /><figcaption>Figure 15: Piecewise Test</figcaption>
 </figure>
 </div>
 </div>
@@ -275,7 +313,7 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <section><section id="the-level-set-method" class="title-slide slide level1"><h1><span class="header-section-number">8</span> The level set method</h1></section><section id="mesh-level-sets" class="slide level2">
 <h2><span class="header-section-number">8.1</span> Mesh Level-sets</h2>
 <figure>
-<img data-src="resources/images/svg/LevelSet-SingleTriangle.png" alt="Figure 14: Level set on a single mesh face" id="fig:levelSetFace" /><figcaption>Figure 14: Level set on a single mesh face</figcaption>
+<img data-src="resources/images/vector/LevelSet-SingleTriangle.svg" alt="Figure 16: Level set on a single mesh face" id="fig:levelSetFace" /><figcaption>Figure 16: Level set on a single mesh face</figcaption>
 </figure>
 </section><section id="level-set-implementation" class="slide level2">
 <h2><span class="header-section-number">8.2</span> Level-set Implementation</h2>
@@ -294,15 +332,66 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 </div>
 </div>
 </section></section>
-<section><section id="modeling-planks" class="title-slide slide level1"><h1><span class="header-section-number">9</span> Modeling planks</h1></section><section id="tangent-developable-method" class="slide level2">
-<h2><span class="header-section-number">9.1</span> Tangent developable method</h2>
-</section><section id="bi-normal-method" class="slide level2">
-<h2><span class="header-section-number">9.2</span> Bi-Normal method</h2>
-</section><section id="comparison" class="slide level2">
-<h2><span class="header-section-number">9.3</span> Comparison</h2>
+<section><section id="modeling-planks" class="title-slide slide level1"><h1><span class="header-section-number">9</span> Modeling planks</h1></section><h3 id="tangent-developable-method"><span class="header-section-number">9.0.1</span> Tangent-developable method</h3><section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Given any point in <span class="math inline">\(g\)</span>:</p>
+<ol type="1">
+<li>Assuming <span class="math inline">\(T(x)\)</span> is tangent <span class="math inline">\(g\)</span>.<br />
+</li>
+<li>Compute <span class="math inline">\(U(x)\)</span> as <span class="math inline">\(T(x)\times N_\Phi(x)\)</span></li>
+</ol>
+<blockquote>
+<p>The union of all <span class="math inline">\(U(x)\)</span> is a developable ruled surface <span class="math inline">\(\Psi\)</span>.</p>
+</blockquote>
+</div><div class="column" style="width:50%;">
+<figure>
+<img data-src="resources/images/vector/Panels-TangentDevelopable.svg" alt="Figure 17: Tangent developable method for panels" id="fig:tangDevPanels" /><figcaption>Figure 17: Tangent developable method for panels</figcaption>
+</figure>
+</div>
+</div>
+</section><section class="slide level2">
+
+<p>Initial algorithm is as follows:</p>
+<blockquote>
+<p>For all geodesics <span class="math inline">\(s_i\)</span> in a given pattern:</p>
+</blockquote>
+<ol type="1">
+<li>Compute the <em>tangent developable surfaces</em> <span class="math inline">\(\rightarrow\Psi_i\)</span></li>
+<li>Trim <span class="math inline">\(\Psi_i\)</span> along the intersection curves with their respective neighbours.</li>
+<li>Unfold the trimmed <span class="math inline">\(\Psi_i\)</span>, obtaining the panels in flat state.</li>
+</ol>
+<p><strong><em>Unfortunately</em></strong>, this method needs to be refined in order to work in practice because:</p>
+<ol type="1">
+<li>The rulings of tangent developable may behave in weird ways</li>
+<li>The intersection of the neighboring <span class="math inline">\(\Psi_i\)</span>’s is often <em>ill-defined</em>.</li>
+</ol>
+</section><section class="slide level2">
+
+<p>Therefore, the procedure was modified in the following way:</p>
+<ol type="1">
+<li>Compute the <em>tangent developable surfaces</em> <span class="math inline">\(\Psi_i\)</span> for all surfaces <span class="math inline">\(s_i \rightarrow i=\text{even numbers}\)</span></li>
+<li>Delete all rulings where the angle enclose with the tangent <span class="math inline">\(\alpha\)</span> is smaller than a certain threshold (i.e. 20º).</li>
+<li>Fill the holes in the rulings by interpolation (???)</li>
+<li>On each ruling:</li>
+<li>Determine points <span class="math inline">\(A_i(x)\)</span> and <span class="math inline">\(B_i(x)\)</span> which are the closest to geodesics <span class="math inline">\(s_{i-1}\)</span> and <span class="math inline">\(s_{i+1}\)</span>. This serves for trimming the surface <span class="math inline">\(\Psi_i\)</span>.</li>
+<li>Optimize globally the positions of points <span class="math inline">\(A_i(x)\)</span> and <span class="math inline">\(B_i(x)\)</span> such that</li>
+<li>Trim curves are <em>smooth</em></li>
+<li><span class="math inline">\(A_i(x)\)</span> and <span class="math inline">\(B_i(x)\)</span> are close to geodesics <span class="math inline">\(s_{i-1}\)</span> and <span class="math inline">\(s_{i+1}\)</span></li>
+<li>The ruling segments <span class="math inline">\(A_i(x)B_i(x)\)</span> lies close to the <em>original surface</em> <span class="math inline">\(\Phi\)</span></li>
+</ol>
+</section><section class="slide level2">
+
+<figure>
+<img data-src="resources/images/vector/Panels-TangentDevelopableModified.svg" alt="Figure 18: Panels computed using the using the modified tangent developable method." id="fig:tangentDevMethod" /><figcaption>Figure 18: Panels computed using the using the modified tangent developable method.</figcaption>
+</figure>
 </section></section>
 <section><section id="optimization" class="title-slide slide level1"><h1><span class="header-section-number">10</span> Optimization</h1></section><section id="piecewise-geodesic-vector-fields" class="slide level2">
 <h2><span class="header-section-number">10.1</span> Piecewise geodesic vector-fields</h2>
+<blockquote>
+<p>Missing PG Vector Field Images!</p>
+</blockquote>
 </section><section id="developability-of-triangle-meshes" class="slide level2">
 <h2><span class="header-section-number">10.2</span> Developability of triangle meshes</h2>
 <blockquote>
@@ -317,11 +406,118 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 </section><section id="stress-in-panels" class="slide level2">
 <h2><span class="header-section-number">11.2</span> Stress in panels</h2>
 <blockquote>
-<p>???</p>
+<p><strong>Assuming the material:</strong></p>
 </blockquote>
+<ul>
+<li>is bent to the shape of a ruled surface <span class="math inline">\(\Psi\)</span></li>
+<li>the central line <span class="math inline">\(m\)</span> of the plank follows the <em>‘middle geodesic’</em> in <span class="math inline">\(\Psi\)</span>.<br />
+<br />
+</li>
+</ul>
+<blockquote>
+<p><strong>Then:</strong></p>
+</blockquote>
+<ul>
+<li>Lines parallel to <span class="math inline">\(m\)</span> at distance <span class="math inline">\(d/2\)</span> are not only bent but also stretched.</li>
+</ul>
+</section><section class="slide level2">
+
+<p>If we introduce the radius of Gaussian curvature <span class="math inline">\(\rho = 1 / \sqrt{|K|}\)</span></p>
+<p>the relative increment in length <span class="math inline">\(\varepsilon\)</span> (strain) of the strip is:</p>
+<p><span id="eq:strain"><span class="math display">\[\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots \qquad(1)\]</span></span></p>
+<p>where <span class="math inline">\(d\)</span> is the planks width.</p>
+</section><section class="slide level2">
+
+<h3 id="tensile-stress"><span class="header-section-number">11.4.1</span> Tensile stress</h3>
+<p>Tensile stress can be expressed as <span class="math inline">\(\sigma = E\varepsilon\)</span><a href="#/fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, which yields:</p>
+<p><span class="math display">\[ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}}\]</span></p>
+<p><span class="math display">\[\sigma_{max} = \text{maximum admissible stress}\]</span> <span class="math display">\[E = \text {Young&#39;s modulus}\]</span></p>
+</section><section class="slide level2">
+
+<p><span class="math display">\[ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}}\]</span></p>
+<p>Since <span class="math inline">\(C\)</span> is a material constant. We obtain the maximum admissible width with:</p>
+<p><span class="math display">\[d_{max} = 2\rho_{min}C\]</span></p>
+</section><section class="slide level2">
+
+<blockquote>
+<p>Maybe missing an image here?</p>
+</blockquote>
+<table>
+<caption>Example calculation of constant <span class="math inline">\(C\)</span> for some of the most suitable materials.</caption>
+<thead>
+<tr class="header">
+<th>Material</th>
+<th>Young Modulus</th>
+<th>Max. stress</th>
+<th><span class="math inline">\(C\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wood</td>
+<td>200000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Steel</td>
+<td>13000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Others?</td>
+<td>?</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section><section id="bending-and-shear-stress" class="slide level2">
+<h2><span class="header-section-number">11.7</span> Bending and shear stress</h2>
+<blockquote>
+<p><strong>Only for panels with thin rectangular cross-sections (<span class="math inline">\(h/d \ll 1\)</span>)</strong></p>
+</blockquote>
+<p>Bending (<span class="math inline">\(\sigma\)</span>) and shear stresses (<span class="math inline">\(\tau\)</span>) depend on:</p>
+<p>Panel thickness <span class="math inline">\(h\)</span> but <strong><em>not</em></strong> on the panel width <span class="math inline">\(d\)</span>.</p>
+</section><section class="slide level2">
+
+<p>Maximum values occur on the outer surface of the panel <span class="citation" data-cites="Wallner2010tiling">(Wallner et al. 2010)</span> and depend on:</p>
+<ul>
+<li>the curvature <span class="math inline">\(\kappa\)</span> of the central geodesic</li>
+<li>the rate of torsion <span class="math inline">\(\theta\)</span> of the panel.</li>
+</ul>
+<blockquote>
+<p><span id="eq:bendingAndShear"><span class="math display">\[\sigma = E \kappa h/2 \quad and\quad \tau = hG\theta\qquad(2)\]</span></span></p>
+</blockquote>
+<p>Where <span class="math inline">\(G\)</span> is the shear modulus.</p>
+</section><section class="slide level2">
+
+<p><span class="math inline">\(\tau\)</span>, measured by arc per meter, does not exceed <span class="math inline">\(\sqrt{|K|} = 1/\rho\)</span>,</p>
+<p>maximum value ocurs if:</p>
+<ul>
+<li>the central geodesic’s tangent is an asymptotic direction of the panel surface <span class="citation" data-cites="DoCarmo2016kx">(Carmo 2016)</span>.</li>
+</ul>
+</section><section class="slide level2">
+
+<p>It is standard procedure to combine all streses (tension, shear, bending) and use this information for checking panel admissibility.</p>
+<p>INSERT RESULTS!!!</p>
 </section></section>
-<section><section id="conclusion" class="title-slide slide level1"><h1><span class="header-section-number">12</span> Conclusion</h1></section></section>
-<section><section id="thanks-acknowledgments" class="title-slide slide level1"><h1><span class="header-section-number">13</span> Thanks<a href="#/fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1></section></section>
+<section><section id="conclusion" class="title-slide slide level1"><h1><span class="header-section-number">12</span> Conclusion</h1></section><section class="slide level2">
+
+<ul>
+<li>Parallel transport method is ONLY usefull when surfaces are developable or <em>nearly</em> developable.</li>
+<li>Evolution Method improves upon it’s predecessor but still lacks the ability to maintain equal thickness over complex surfaces.</li>
+<li><em>Piecewise</em> evolution method gives the best results overall.</li>
+<li><em>Level-set method</em> can be used to calculate geodesic webs.
+<ul>
+<li>To cover freeform surfaces it need to be coupled with the geodesic-vector field technique.</li>
+</ul></li>
+<li><em>Geodesic vector fields</em> is an introductory step to cut the mesh into pieces that will be easily covered by a 1-pattern of geodesic curves.</li>
+<li><em>Developalizing</em> the surface is an extreme measure, since during the process, the overall smoothness of the surface will be lost. It can still be done in a controlled manner to reduce areas of high curvature.</li>
+</ul>
+</section></section>
+<section><section id="thanks-acknowledgments" class="title-slide slide level1"><h1><span class="header-section-number">13</span> Thanks<a href="#/fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></h1></section></section>
 <section><section id="appendix" class="title-slide slide level1"><h1><span class="header-section-number">14</span> Appendix</h1></section><section id="resources" class="slide level2">
 <h2><span class="header-section-number">14.1</span> Resources</h2>
 <blockquote>
@@ -330,8 +526,14 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 </section><section id="references" class="slide level2 unnumbered allowframebreaks">
 <h2>References</h2>
 <div id="refs" class="references">
+<div id="ref-DoCarmo2016kx">
+<p>Carmo, Manfredo P do. 2016. <em>Differential Geometry of Curves and Surfaces: Revised and Updated Second Edition</em>. Courier Dover Publications.</p>
+</div>
 <div id="ref-shelden2002digital">
 <p>Shelden, Dennis Robert. 2002. “Digital Surface Representation and the Constructibility of Gehry’s Architecture.” PhD thesis, Massachusetts Institute of Technology. <a href="http://hdl.handle.net/1721.1/16899" class="uri">http://hdl.handle.net/1721.1/16899</a>.</p>
+</div>
+<div id="ref-Wallner2010tiling">
+<p>Wallner, Johannes, Alexander Schiftner, Martin Kilian, Simon Flöry, Mathias Höbinger, Bailin Deng, Qixing Huang, and Helmut Pottmann. 2010. “Tiling Freeform Shapes with Straight Panels: Algorithmic Methods.” In <em>Advances in Architectural Geometry 2010</em>, edited by Cristiano Ceccato, Lars Hesselgren, Mark Pauly, Helmut Pottmann, and Johannes Wallner. Vienna: Springer Vienna. <a href="https://doi.org/10.1007/978-3-7091-0309-8_5" class="uri">https://doi.org/10.1007/978-3-7091-0309-8_5</a>.</p>
 </div>
 </div>
 </section></section>
@@ -342,6 +544,11 @@ A compromise exists between the <em>curve spacing</em> and the <em>curves geodes
 <br />
 <br />
 <a href="#/fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Since this calculation is an approximation, a safety factor must be used when choosing <span class="math inline">\(\sigma_{max}\)</span>.<a href="#/fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Special thanks to … FILL IN LATER!<br />
+<br />
+<br />
+<a href="#/fnref3" class="footnote-back">↩</a></p></li>
 </ol>
 </section>
     </div>
