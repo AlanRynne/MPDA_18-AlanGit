@@ -50,6 +50,8 @@ header-includes:
 
 ---
 
+pandoc --filter=pandoc-svg.py -f markdown -s -N --slide-level=2 --katex -F mermaid-filter -F pandoc-crossref -F pandoc-citeproc --dpi=300 -o output/slides.pptx slides/slides.md --template /Users/alan/GitHub/MPDA_18-MasterThesis/templates/reference.pptx
+
 Discretize a given freeform surface into planks with the following properties:
 
 1. Must be ***developable*** [@shelden2002digital]

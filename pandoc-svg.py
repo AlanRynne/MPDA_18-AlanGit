@@ -36,7 +36,7 @@ def svg_to_any(key, value, fmt, meta):
             except OSError:
                 mtime = -1
             if mtime < os.path.getmtime(src):
-                cmd_line = ['inkscape', option[0], os.path.abspath(eps_name), os.path.abspath(src)]
+                cmd_line = ['inkscape', option[0], os.path.abspath(eps_name), os.path.abspath(src), '-y 1.0']
                 sys.stderr.write("Running %s\n" % " ".join(cmd_line))
                 subprocess.call(cmd_line, stdout=sys.stderr.fileno())
             return Image(attrs, alt, [os.path.abspath(eps_name.replace("%20", " ")), title])

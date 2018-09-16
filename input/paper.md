@@ -63,7 +63,7 @@ Boundary value problem
 
 Both problems have different ways of being solved either numerically, graphically or by the means of simulations. The initial value problem can be solved using the concept of *straightest geodesics* [@Polthier1998-dn], whereas the boundary value problem has a very close relation with the computation of *shortest paths* between two points on a surface.
 
-![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic curves of a torus, although $g_1$ is more than double the length of $g_0$. $g_0$ was computed solving the *initial value problem, while $g_1$ was computed using the *boundary value problem*.](resources/images/svg/ShortestGeodesics.pdf){#fig:shortGeo}
+![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic curves of a torus, although $g_1$ is more than double the length of $g_0$. $g_0$ was computed solving the *initial value problem, while $g_1$ was computed using the *boundary value problem*.](resources/images/vector/ShortestGeodesics.svg){#fig:shortGeo}
 
 ## Developable surfaces
 
@@ -79,7 +79,7 @@ There are several ways of generating a developable surface using a curve in spac
 5. Draw a line using the selected vector at the start point of the curve.
 6. XXXXXX
 
-![Developable surface generated using curve a geodesic curve. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](resources/images/svg/DevelopableFromCurve.pdf){#fig:devFromCurve}
+![Developable surface generated using curve a geodesic curve. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](resources/images/vector/DevelopableFromCurve.svg){#fig:devFromCurve}
 
 ## Properties to aim for {#sec:properties-to-aim-for}
 
@@ -130,7 +130,7 @@ In this section, we will introduce the different existent methods for generating
 
 ## Parallel Transport Method {#sec:parallel-transport}
 
-![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](resources/images/svg/SpherePT.pdf){#fig:SpherePT}
+![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](resources/images/vector/SpherePT.svg){#fig:SpherePT}
 
 
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points occurs at a prescribed location.
@@ -143,7 +143,7 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 
 ![Example of parallel transport method. Generatrix geodesic $g$ (red) and geodesics $g^\perp$ generated from a parallel transported vector (blue) computed given a point and a vector $\mathbf v$ tangent to the surface, in both positive and negative directions.](resources/images/png/Parallel Transport Implementation.png){#fig:parTrans width=50%}
 
-![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](resources/images/svg/ParallelTransportMethod.pdf){#fig:parTransProc}
+![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](resources/images/vector/ParallelTransportMethod.svg){#fig:parTransProc}
 
 ### Procedure
 
@@ -184,8 +184,8 @@ The placement of the first geodesic curve and the selection of the initial vecto
 Two main concepts are covered in this section, both proposed by [@Pottmann2010-ku]: the first, what is called the *evolution method*, and a second method based on *piecewise-geodesic* vector fields.
 
 <div id="fig:evolExample1">
-![](resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
-![](resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
+![](resources/images/png/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
+![](resources/images/png/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
 
 Surface covered by a 1-geodesic pattern using the evolution method without introducing breakpoints. $(a)$ shows an overview of the result; while $(b)$ highlights the intersection point of several geodesic curves. This problem will be addressed by introducing the concept of 'piece-wise' geodesic curves; which are curves that are not geodesics, but are composed of segments of several connected geodesic curves.
 </div>
@@ -234,7 +234,7 @@ Geodesic distances on sphere
 
 ### Obtaining the 'next' geodesic
 
-![Calculating the 'next' geodesic](resources/images/svg/Diagram-BestFitGeodesic.png){#fig:bestFitGeodesic}
+![Calculating the 'next' geodesic](resources/images/vector/Diagram-BestFitGeodesic.svg){#fig:bestFitGeodesic}
 
 Input:
 : A freeform surface $S$, a desired width $W$ and a starting geodesic curve $g_0$
@@ -259,8 +259,8 @@ Any given surface can be completely covered in this manner by recursively comput
 
 <div id="fig:evolutionExample">
 
-![](resources/images/svg/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
-![](resources/images/svg/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
+![](resources/images/png/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
+![](resources/images/png/CuttyEvolutionMethod2.png){#fig:evolSurf2 width=45%}
 
 Surface covered by a 1-geodesic pattern using the evolution method. $(a)$ shows ***normal*** implementation; while $(b)$ shows the *sharp* panel endings that ocur on positive curvature.
 </div>
@@ -269,12 +269,12 @@ Surface covered by a 1-geodesic pattern using the evolution method. $(a)$ shows 
 
 We can modify the implementation of the evolution method to be able to control the distance between geodesics even in areas with a high rate of change in curvature. In order to prevent this unwanted width variations, instead of looking for the best overall geodesic, we will look for the best geodesic that fits the largest interval of $h_i$'s possible [@fig:bestPiecewiseGeodesic], given a specified threshold $\epsilon$. Once this interval is obtained, the current geodesic is split and a new geodesic will be generated. This process will be repeated until the curve crosses all $h_i$'s (some exceptions apply).
 
-![Calculating the best piece-wise geodesic](resources/images/svg/Diagram-PieceWiseGeodesic.png){#fig:bestPiecewiseGeodesic}
+![Calculating the best piece-wise geodesic](resources/images/vector/Diagram-PieceWiseGeodesic.svg){#fig:bestPiecewiseGeodesic}
 
 <div id="fig:piecewiseEvolExample">
 
-![](resources/images/svg/PiecewiseTestView2.png){#fig:piecewiseTestView2 width=45%}
-![](resources/images/svg/PiecewiseTest.png){#fig:piecewiseTest width=45%}
+![](resources/images/png/PiecewiseTestView2.png){#fig:piecewiseTestView2 width=45%}
+![](resources/images/png/PiecewiseTest.png){#fig:piecewiseTest width=45%}
 
 $(a)$ Perspective view; $(b)$ Top View. In red, the initial geodesic curve; in blue, the generated piecewise geodesic pattern; the red dots are breakpoints in the piecewise geodesic curves.
 </div>
@@ -283,7 +283,7 @@ $(a)$ Perspective view; $(b)$ Top View. In red, the initial geodesic curve; in b
 
 We can also compute geodesic curve patterns on a surface by computing a scalar function on each vertex of a mesh that minimizes a combination of error measurements $F_{min} = F_k + \lambda F_{_nabla} + F_w$.
 
-![Calculating a level set on a single face](resources/images/svg/LevelSet-SingleTriangle.png){#fig:levelSetFace}
+![Calculating a level set on a single face](resources/images/vector/LevelSet-SingleTriangle.svg){#fig:levelSetFace}
 
 ## Geodesic Webs {#sec:geodesic-webs}
 
@@ -349,7 +349,7 @@ The second method for defining panels, once an appropriate system of geodesics h
 The surface $\Phi$ is represented as a triangle mesh and $s$ is given as a polyline.
 For each geodesic, the associated surface is constructed according to [@Fig:binormalMethod]. Points $L(t)$ and $R(t)$ represent the border of the panel, whose distance from $P(t)$ is half the panel width.
 
-![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels colored by distance to reference mesh.](resources/images/svg/PTPanels&DistanceToMesh.pdf){#fig:binormalMethod fig.pos="t"}
+![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels colored by distance to reference mesh.](resources/images/vector/PTPanels&DistanceToMesh.svg){#fig:binormalMethod fig.pos="t"}
 
 ## Shape Optimization  {#sec:optimization}
 
