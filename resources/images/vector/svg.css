@@ -1,0 +1,41 @@
+@namespace svg url(http://www.w3.org/2000/svg);
+
+@keyframes appearStart {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+#Panels-TangentDev
+{
+    animation-name: appearStart !important;
+    animation-timing-function: ease-in;
+    animation-duration: 2s !important;
+}
+
+#Surf1
+{
+    animation: appearStart !important;
+    animation-duration: 3s !important;
+    animation-delay: 0s! important;
+}
+
+#Surf1:hover .Surface-visible 
+{
+    fill: #3f82c4;
+    opacity: 0.1;
+    transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+#Surf1:hover #U1 .cls-4
+{
+    stroke: #000000;
+    transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+#Surf1 #U1 .cls-4:hover {
+    stroke: orange !important;
+    stroke-width: 2px !important;
+    transition: 0.1s;
+}
