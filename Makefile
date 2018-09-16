@@ -77,10 +77,11 @@ PANDOC_HTML_OPTIONS=\
 	-s\
 	--self-contained\
 	--toc\
-	--toc-depth=2\
+	--toc-depth=3\
 	-M date="Last updated: `date +"%x"`"
 PANDOC_PDF_OPTIONS=\
-	$(PDF_YAML)
+	$(PDF_YAML)\
+	--include-after=input/appendix.tex
 PANDOC_DOCX_OPTIONS=\
 	--reference-doc=templates/reference.docx
 PANDOC_EPUB_OPTIONS=\
@@ -101,6 +102,7 @@ PANDOC_REVEALJS_OPTIONS=\
 	-F pandoc-citeproc\
 	--katex
 PANDOC_BEAMER_OPTIONS=\
+	--filter=pandoc-svg.py\
 	-f markdown+smart+implicit_figures+superscript+subscript+table_captions+fenced_divs\
 	-t beamer\
 	-s\
@@ -111,6 +113,7 @@ PANDOC_BEAMER_OPTIONS=\
 	-F pandoc-crossref\
 	-F pandoc-citeproc\
 	--dpi=300
+
 
 #Export options per format
 $(OUTPUT_PATH)%.html : $(INPUT_PATH)%.md templates/pandoc.css
