@@ -4,7 +4,7 @@ subtitle: "for Freeform Architecture"
 author: "Alan Rynne"
 date: "September 2018"
 institute: "UPC - MPDA'18"
-bibliography: input/MPDABibliography.bib
+bibliography: [input/MPDABibliography.bib]
 
 # Beamer
 latex-engine: xelatex
@@ -16,7 +16,6 @@ logo: "../resources/images/logos/MPDA-logo3.png"
 
 # Reveal.js styles
 css: ../slides/slides.css
-
 # Other options
 header-includes:
   \usepackage{algorithmic}
@@ -49,8 +48,6 @@ header-includes:
 # Objective
 
 ---
-
-pandoc --filter=pandoc-svg.py -f markdown -s -N --slide-level=2 --katex -F mermaid-filter -F pandoc-crossref -F pandoc-citeproc --dpi=300 -o output/slides.pptx slides/slides.md --template /Users/alan/GitHub/MPDA_18-MasterThesis/templates/reference.pptx
 
 Discretize a given freeform surface into planks with the following properties:
 
@@ -382,11 +379,58 @@ Therefore, the procedure was modified in the following way:
 
 ## Piecewise geodesic vector-fields
 
-> Missing PG Vector Field Images!
+[^PottmanPatterns]: Image taken from @Pottmann2010-ku
+
+![Geodesic pattern example[^PottmanPatterns]](resources/images/GeodPatterns/geodPattern-figure-01.png){#fig:geodFieldExample}
+
+---
+
+The objective is to divide or *cut* the mesh into areas that will be easilly covered by a 1-pattern of geodesics [^PottmanPatterns].
+
+
+:::::::::{.columns}
+:::{.column width=50%}
+![User specified directions](resources/images/GeodPatterns/geodPattern-figure-32.png){#fig:geodFieldUser}
+:::
+:::{.column width=50%}
+![Computed geodesic vector field & cuts](resources/images/GeodPatterns/geodPattern-figure-33.png){#fig:geodFieldCuts}
+:::
+:::::::::
+
+This is done by computing a *geodesic vector field* over the surface, in a way that it aligns with several user specified directions.
 
 ## Developability of triangle meshes
 
-> MISSING K.CRANE'S IMPLEMENTATION IMAGES!
+
+[^KraneDevelop]: Image taken from @Stein2018DSF
+
+Different methods for *developalizing* meshes have been developed over the years:
+
+![Left  to  right: @julius2005d, @mitani2004making, @shatz2006paper @liu2006geometric  and @Stein2018DSF [^KraneDevelop]](resources/images/developability/developability-figure-04.png){#fig:developabilityTechniques}
+
+---
+
+![Developability of the Stanford Bunny [@Stein2018DSF][^KraneDevelop]](resources/images/developability/developability-figure-20.png){#fig:developableBunny height=70%}
+
+---
+
+![Noisy to smooth sheet [@Stein2018DSF][^KraneDevelop]](resources/images/developability/developability-figure-08.png){#fig:noisyVSsmooth}
+
+---
+
+![Developalizing a sphere. Results highly depend on the initial mesh topology[^KraneDevelop]](resources/images/developability/developability-figure-02.png){#fig:developableSpheres}
+
+---
+
+Energy applied is equivalent to forcing all vertices *angle defect* to be 0.
+
+![Any given vertex on a mesh (left) will become either flat (centre) or a hinge (right)[^KraneDevelop]](resources/images/developability/developability-figure-12.png){#fig:developableSpheres2}
+
+This will automatically create *hinges* in the vertices where it is not possible to be flat.
+
+---
+
+![Different threshold configurations[^KraneDevelop]](resources/images/developability/developability-figure-18.png){#fig:developabilityThreshold}
 
 # Analysis
 
@@ -485,13 +529,52 @@ INSERT RESULTS!!!
 
 ---
 
-* Parallel transport method is ONLY usefull when surfaces are developable or *nearly* developable.
-* Evolution Method improves upon it's predecessor but still lacks the ability to maintain equal thickness over complex surfaces.
-* *Piecewise* evolution method gives the best results overall.
-* *Level-set method* can be used to calculate geodesic webs.
-  * To cover freeform surfaces it need to be coupled with the geodesic-vector field technique.
-* *Geodesic vector fields* is an introductory step to cut the mesh into pieces that will be easily covered by a 1-pattern of geodesic curves.
-* *Developalizing* the surface is an extreme measure, since during the process, the overall smoothness of the surface will be lost. It can still be done in a controlled manner to reduce areas of high curvature.
+```{.mermaid width=3000 theme='neutral'}
+graph LR
+A[Choose a method]
+C[Parallel Transport]
+D[Evolution]
+E[Piecewise Evolution]
+F[Level-sets]
+G[Geodesic Vector Fields]
+H(Triangle mesh developability)
+
+subgraph Simple Surfaces
+C
+D
+F
+end
+
+subgraph Shape Optimization
+H
+end
+
+subgraph Pattern Generation
+C
+F --> G
+C --> D
+D --> E
+end
+
+C --> I[Results are satisfactory? ]
+D --> I
+F --> I
+G --> I
+E --> I
+I --> |No|H
+I --> |Yes| Finish!
+H --> J[Start Again]
+```
+
+---
+
+> * Parallel transport method is ONLY usefull when surfaces are developable or *nearly* developable.
+> * Evolution Method improves upon it's predecessor but still lacks the ability to maintain equal thickness over complex surfaces.
+> * *Piecewise* evolution method gives the best results overall.
+> * *Level-set method* can be used to calculate geodesic webs.
+>   * To cover freeform surfaces it need to be coupled with the geodesic-vector field technique.
+> * *Geodesic vector fields* is an introductory step to cut the mesh into pieces that will be easily covered by a 1-pattern of geodesic curves.
+> * *Developalizing* the surface is an extreme measure, since during the process, the overall smoothness of the surface will be lost. It can still be done in a controlled manner to reduce areas of high curvature.
 
 [^acknowledgments]: Special thanks to ... FILL IN LATER!  
   \
