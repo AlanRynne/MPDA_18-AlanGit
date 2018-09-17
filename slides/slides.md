@@ -84,9 +84,18 @@ Also common practice in naval engineering industry:
 
 ---
 
-NOX was one of the first to experiment with paper strips.
+The architecture studio NOX was one of the first to experiment with paper strips.
 
-> MISSING NOX IMAGE/REFERENCE!
+:::::::::{.columns}
+:::{.column width=50%}
+![NOX Strips models](resources/images/GeodPatterns/geodPattern-figure-03.png){#fig:noxStrips}
+:::
+:::{.column width=50%}
+![NOX render of strip model](resources/images/GeodPatterns/geodPattern-figure-04.png){#fig:noxRender}
+:::
+:::::::::
+
+> MISSING BIB REFERENCE HERE!!!!
 
 ## Frank Ghery
 
