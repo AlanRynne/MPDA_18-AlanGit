@@ -81,7 +81,8 @@ PANDOC_HTML_OPTIONS=\
 	-M date="Last updated: `date +"%x"`"
 PANDOC_PDF_OPTIONS=\
 	$(PDF_YAML)\
-	--include-after=input/appendix.tex
+	--include-after=input/appendix.tex\
+	--filter=pandoc-svg.py
 PANDOC_DOCX_OPTIONS=\
 	--reference-doc=templates/reference.docx
 PANDOC_EPUB_OPTIONS=\
