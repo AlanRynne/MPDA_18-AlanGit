@@ -1,17 +1,18 @@
 
+body{
+  font-family: 'Times New Roman', Times, serif;
+}
 
 section.level1 > h1 {
-  font-size: 200%;
-  color: darkcyan;
+  font-size: 150%;
 }
 
 section.level2 > h2 {
   font-size: 100%;
-  color: darkcyan;
 }
 
 .reveal section {
-  font-size: 80% !important;
+  font-size: 70% !important;
 }
 
 .reveal section img {
@@ -54,20 +55,4 @@ em
 .slide-background-content
 {
   opacity: 0.3 !important;
-}
-
-
-body:after {
-  content: "Geodesic Patterns - Alan Rynne Vidal";
-  color: white;
-  text-align: center;
-  vertical-align: middle !important;
-  line-height: 50px; 
-  position: fixed;
-  width: 100%;
-  height: 50px;
-  background-color: black;
-  top: 0em;
-  left:0em;
-  box-shadow: 1px 0px 5px #000; 
 }
