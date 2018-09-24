@@ -20,6 +20,14 @@ IMAGES = $(wildcard resources/images/svg/*.svg)
 FILE_NAME = $(notdir $(SOURCE_DOCS))
 SLIDES_NAME = $(notdir $(SLIDES_DOCS))
 
+IMAGES_PATH = resources/images/background/
+RESIZED_PATH = $(IMAGES_PATH)cropped/
+IMAGES_TO_RESIZE= $(wildcard $(IMAGES_PATH)*.jpg)
+IMAGE_NAME = $(notdir $(IMAGES_TO_RESIZE))
+
+RESIZED_IMAGES=\
+ $(addprefix $(RESIZED_PATH),$(IMAGE_NAME:.jpg=.jpg))
+
 # Remove command
 RM=/bin/rm -rf
 PANDOC=/usr/local/bin/pandoc
@@ -161,7 +169,8 @@ $(OUTPUT_PATH)$(BUNDLE_NAME).epub : $(SOURCE_DOCS)
 $(OUTPUT_PATH)$(BUNDLE_NAME).icml : $(SOURCE_DOCS)
 	$(PANDOC) $(PANDOC_OPTIONS) $(PANDOC_DOCX_OPTIONS) -o $@ $^
 
-
+$(RESIZED_PATH)%.jpg : $(IMAGES_PATH)%.jpg
+	convert $^ -geometry 1000x600^ -gravity center -crop 1000x600+0+0 $@
 
 
 # Targets and dependencies
@@ -202,3 +211,5 @@ clean-slides:
 #USEFUL RULES
 #Rule to print any variable. To use write 'make print-VARIABLE' in the terminal
 print-%  : ; @echo $* = $($*)
+
+resize: $(RESIZED_IMAGES) $(IMAGES_TO_RESIZE)
