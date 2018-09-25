@@ -23,7 +23,7 @@
 
       .Dotted-line {
         stroke-width: 0.35px;
-        stroke-dasharray: 0.01 0.6;
+        stroke-dasharray: 1 1;
       }
 
       .Dotted-line, .Surface-visible {
