@@ -14,6 +14,10 @@ header-includes:
   \usepackage{algorithm}
   \usepackage{algorithmic}
   \usepackage[export]{adjustbox}
+  \usepackage{draftwatermark}
+  \SetWatermarkText{DRAFT}
+  \SetWatermarkScale{1}
+  \SetWatermarkLightness{0.9} 
 
 # Latex Template Options
 documentclass: paper

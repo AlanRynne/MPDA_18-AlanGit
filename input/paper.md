@@ -7,7 +7,8 @@ institute: "UPC"
 date: September 2018
 logo: resources/images/logos/UPC-logo.png
 abstract:
-  In this publication, we analyze different existing techniques to obtain cladding solutions using exclusively straight planks, either wood or metal, and analyze their benefits and weaknesses from an architectural standpoint. We will concentrate on the generation of *geodesic curves*, more specifically *straightest geodesics*, which minimize distance between two points on curved surface. For cost and manufacturing reasons, geodesic planks are favorable above
+  In this publication, we implement and analyze different existing techniques to obtain cladding solutions using exclusively straight planks, either wood or metal, and analyze their benefits and weaknesses from an architectural standpoint. We will concentrate on the generation of *geodesic curves*, more specifically *straightest geodesics*, which minimize distance between two points on curved surface. For cost and manufacturing reasons, geodesic planks are favorable for cladding solutions, as they can be manufactured and assembled using inexpensive construction techniques. We will also explain some basic structural analysis concepts to check the admissibility of the generated solutions.
+
 keywords: architectural geometry, geodesic patterns, geodesic curves, freeform paneling, surface rationalization, developable surfaces
 
 bibliography: [input/MPDABibliography.bib]
@@ -20,9 +21,9 @@ nocite: "@*"
 
 With the development of advanced 3D CAD tools in the last decades, architects are now able to incorporate complex freeform surfaces into their designs.  This new capabilities have given birth to new architectural possibilities and, more importantly, new needs and challenges for the industry that can often be solved by the means of *Differential Geometry* [@DoCarmo2016kx] and, more specifically, *Discrete Differential Geometry* [@Crane2013DGP], which studies the discrete counterparts of *Differential Geometry*. This new fusion between architecture and mathematics gave birth to the field known as *Architectural Geometry* [@pottmann2008geometry; @pottmann2010architectural], which has been further developed during the past years.
 
-Given the scale architectural projects, this smooth freeform surfaces cannot be built as designed in 3D CAD applications and, therefore, must be divided in smaller, simpler parts that could be easily manufacturable. This process is called *Rationalization*, and is not a trivial task; since the *Rationalization* of a surface implies a loss of smoothness in the resulting shape, it must be done in such a way that minimizes this loss. The selected shape of the generated panels also plays a key role when approaching this problems, since it is clear the final appearance of the design will vary greatly depending on wether the panels are triangular, quad, hexagonal or long strips. Constructibility of the selected design (panel planarity, curvature, error margins) is of great concern in rationalization methods for architectural purposes, as opposed to related Computer Graphics methods.
+Given the scale architectural projects, this smooth freeform surfaces cannot be built as designed in 3D CAD applications and, therefore, must be divided in smaller, simpler parts that could be easily manufacturable. This process is called *Rationalization*, and is not a trivial task; since the *Rationalization* of a surface implies a loss of smoothness in the resulting shape, it must be done in such a way that minimizes this loss. The selected shape of the generated panels also plays a key role when approaching this problems, since it is clear the final appearance of the design will vary greatly depending on wether the panels are triangular, quad, hexagonal or long strips. Constructibility of the selected design (panel planarity, curvature, error margins) is of great concern in rationalization methods for architectural purposes, looking for robust and precise algorithms, as opposed to related Computer Graphics methods, whose main focus is usually related with execution times & speed.
 
-In this publication we center on the generation of *Geodesic Panels on Freeform Surfaces*, meaning, seamlessly covering any given surface with a pattern ***planks***; *thin, long, straight panels*, which must be *developable* and rectangular (or quasi-rectangular) in shape and must approximate the surface by being bent only on their weak axis. We will introduce the basic geometric properties behind this concept and the algorithmic implementation of several of the methods. We will also explain some concepts developed for optimizing any given shape towards *developability*.
+In this publication we center on the generation of *Geodesic Panels on Freeform Surfaces*, meaning, seamlessly covering any given surface with a pattern of ***planks***; *thin, long, straight panels*, which must be *developable* and rectangular (or quasi-rectangular) in shape and must approximate the surface by being bent only on their weak axis. We will introduce the basic geometric properties behind this concept and the algorithmic implementation of several of the methods. We will also explain some concepts developed for optimizing any given shape towards *developability*.
 
 <div id="fig:planks">
 ![](resources/images/vector/HyparPlanks.svg){#fig:hyparPlanks width=33%}
@@ -58,14 +59,14 @@ Interior view of Toyo Ito's Mina No Mori wooden lattice roof (a) and exterior vi
 ![](resources/images/background/BurjWoodCeiling.jpg){#fig:burjCeiling width=50%}
 ![](resources/images/background/burjPanneling.jpg){#fig:burjPanels width=50%}
 
-Burj Khalifa interior ceiling constructed from wooden planks (a) and final panneling solution (b).
+Burj Khalifa interior ceiling constructed from wooden planks (a) and final paneling solution (b).
 </div>
 
-In this context, it is important to mention NOX Architects, an award winning architecture firm famous for building complex shapes using planks. Their design methodology included the creation of very precise models, and manually covering these models with paper strips until a final cladding solution could be achieved  [@fig:noxBackground]
+NOX Architects, an award winning architecture firm, is famous for building complex shapes using planks. Their design methodology included the creation of very precise models, and manually covering these models with paper strips until a final cladding solution could be achieved  [@fig:noxBackground]
 
 <div id="fig:noxBackground">
-![](resources/images/GeodPatterns/geodPattern-figure-03.png){#fig:noxStrips width=49%}
-![](resources/images/GeodPatterns/geodPattern-figure-04.png){#fig:noxRender width=49%}
+![](resources/images/GeodPatterns/geodPattern-figure-03.png){#fig:noxStrips width=57%}
+![](resources/images/GeodPatterns/geodPattern-figure-04.png){#fig:noxRender width=30%}
 
 NOX Architects paper models & final rendered design solution.
 </div>
@@ -76,7 +77,7 @@ Some recently finished buildings would have also benefitted from the optimizatio
 ![](resources/images/background/shigeruYeojuConstruction.jpg){#fig:shigeruGolfPart width=49%}
 ![](resources/images/background/shigeruYeojuConstruction2.jpg){#fig:shigeruGolfConstruction width=49%}
 
-Shigeru Ban's Yeoju Golf Resort. Right: Pre-assembled complex latice. Left: Aerial view of lattice under construction.
+Shigeru Ban's Yeoju Golf Resort. Right: Pre-assembled complex lattice. Left: Aerial view of lattice under construction.
 </div>
 
 Geodesic curves on manifolds and their calculation is also important for this topic [@Surazhsky2005-al;@cheng2016solving,@Polthier1998-dn] as well as the concept of *developability* of surfaces and their discrete counterparts [see @DoCarmo2016kx, and more recently @Stein2018DSF]. In this publication, all of the geodesics will be generated with the *initial value problem*.
@@ -92,15 +93,11 @@ The concept of *mesh developability* has also been widely studied in the past, a
 Left: Any given vertex on a mesh (left) will become either flat (centre) or a hinge (right). Right: Developalizing a sphere. Results highly depend on the initial mesh topology[^KraneDevelop]
 </div>
 
-> Explain concept of noisy vs smooth developable surfaces/meshes
-
-![Noisy to smooth sheet [@Stein2018DSF][^KraneDevelop]](resources/images/developability/developability-figure-08.png){#fig:noisyVSsmooth width=100%}
-
 # Geometric properties
 
 ## Geodesic curves
 
-In differential geometry, a *geodesic curve* is the generalization of a straight line into curved spaces.
+In differential geometry, a *geodesic curve* is the generalization of a straight line into curved spaces. It is usually understood as the shortest path between two points on a given surface, although this may not always be the case.
 
 Also, in the presence of  an *affine connection*, a geodesic is defined to be a curve whose tangent vectors remain parallel if they are transported along it. We will explore the notion of vector *parallel transport* in the following sections.
 
@@ -108,7 +105,12 @@ For triangle meshes, shortest polylines cross edges at ***equal angles***.
 
 Finding the truly shortest geodesic paths requires the computation of distance fields [see @DoCarmo2016kx;@Kimmel1998-ut]
 
-![The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic curves of a torus, although $g_1$ is more than double the length of $g_0$. $g_0$ was computed solving the *initial value problem, while $g_1$ was computed using the *boundary value problem*.](resources/images/vector/ShortestGeodesics.svg){#fig:shortGeo}
+<div id="basicConcepts">
+![](resources/images/vector/ShortestGeodesics.svg){#fig:shortGeo width=50%}
+![](resources/images/vector/SpherePT.svg){#fig:SpherePT width=50%}
+
+(a) The concept of 'shortest geodesics': curves $g_0$(red) and $g_1$(green) are both geodesic curves of a torus, although $g_1$ is more than double the length of $g_0$. $g_0$ was computed solving the *initial value problem, while $g_1$ was computed using the *boundary value problem* and (b) parallel transport of a vector $\mathbf v_0$ on a 'piecewise geodesic' path.
+</div>
 
 ### Algorithmic ways of generating geodesics {-}
 
@@ -137,6 +139,10 @@ There are several ways of generating a developable surface using a curve in spac
 
 ![Developable surface generated using curve a geodesic curve. (a) using the X component of the curve's perp frame; (b) using the Y component & (c) using the Z component (tangent of the curve).](resources/images/vector/DevelopableFromCurve.svg){#fig:devFromCurve}
 
+Not all developable surfaces are of interest in an architectural sense. We must make a distiction between *noisy* and *smooth* developable surfaces, as can be seen in [@Fig:noisyVSsmooth]. We are spetially interested in generating *smooth* develpable surfaces, which can be easily manufactured, as opposed to the complex bending operations that manufacturing a *noisy* developable surface will require
+
+![Noisy to smooth sheet [@Stein2018DSF][^KraneDevelop]](resources/images/developability/developability-figure-08.png){#fig:noisyVSsmooth width=100%}
+
 ## Properties to aim for {#sec:properties-to-aim-for}
 
 We will first introduce the properties we aim for when generating geodesic panels:
@@ -154,12 +160,12 @@ We will first introduce the properties we aim for when generating geodesic panel
 > * For all other surfaces:
 >   * Assuming no gaps between panels
 >   * Panels will not be exactly rectangular when unfolded
->   * ***Requirement:*** Geodesic curves that guide the panels must have approximately constant distance from thier neighbourhood curves.
+>   * ***Requirement:*** Geodesic curves that guide the panels must have approximately constant distance from their neighborhood curves.
 
 ### Developable (or 'pure-bending') property {-}
 
 > * Bending panels on surfaces changes the distances in points only by a small amount so,
-> * A certain amount of twiting is also present in this aplications.\
+> * A certain amount of twisting is also present in this applications.\
 > ***Some methods in this chapter  do not take into account this property.***
 
 ### Objectives {-}
@@ -180,7 +186,7 @@ In this section, we will introduce the different existent methods for generating
 
 This method, described in [@Pottmann2010-ku], allows for the generation of a system of geodesic curves where either the maximum distance or the minimum distance between adjacent points occurs at a prescribed location.
 
-![Parallel transport of a vector on a 'piece-wise geodesic' path on a sphere.](resources/images/vector/SpherePT.svg){#fig:SpherePT}
+![Parallel transport method: We can parallel transport a vector along a curve placed on a surface by iteratively projecting the previous vector $\mathbf v_{i-1}$ over the tangent plane of $v_i$ and normalizing it's length.](resources/images/vector/Diagram-ParallelTransportMethod.svg){#fig:diagramPartTrans}
 
 > In differential geometry, the concept of *parallel transport* (see [@fig:parTrans]) of a vector ***V*** along a curve ***S*** contained in a surface means moving that vector along ***S*** such that:
 >
@@ -188,31 +194,30 @@ This method, described in [@Pottmann2010-ku], allows for the generation of a sys
 > 2. It changes as little as possible in direction
 > 3. It's length remains unchanged
 
-![Parallel transport along a curve $g$ lying on surface $S$ is equivalent to projecting  $\mathbf{v}_{i-1}$ onto the tangent plane on $p_i$ and subsequently normalizing $\mathbf{v}_i$.](resources/images/vector/ParallelTransportMethod.svg){#fig:parTransProc}
+![Parallel transport method. Main geodesic $g$, tangent planes at each point $p_i$, transported vectors $\mathbf v_i$, generated geodesics $h_i$.](resources/images/vector/ParallelTransportMethod.svg){#fig:parTransProc}
 
 ### Procedure {-}
 
 [29/Jul/18 - 17:00:25]: # (Algorithms will not show in any output but PDF!!!)
 
-\begin{algorithm}[h]
-\label{parTransPatterns}
-\caption{Geodesic patterns by parallel transport}
-\algsetup{indent=2em}
-\floatname{algorithm}{Procedure}
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\begin{algorithm}
+\label{alg:parTrans}
+\caption{Parallel Transport Method}
+\algsetup{indent=1em}
+\small
 \begin{algorithmic}[1]
 \REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F)
-\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
+
 \STATE Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2.
 \STATE Divide the curve into $N$ equally spaced points $p$ with distance $W$.
 \STATE Place an vector $\mathbf v$  onto $p_0$
-\STATE Parallel transport that vector along $g_x$.
+\STATE Parallel transport that vector along $g_x$ as described in [@fig:parTransProc].
 \FORALL {points $p_i$ where i = 0,...,M}
   \STATE Generate geodesic curve $+g_i$ and $-g_i$ using vector $\mathbf{v}_i$ and $\mathbf{-v}_i$ respectively.
   \STATE Join $+g_i$ and $-g_i$ together to obtain $g_i$
   \STATE Add $g_i$ to output.
 \ENDFOR
+\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
 \end{algorithmic}
 \end{algorithm}
 
@@ -234,7 +239,7 @@ Results of the parallel transport method applied to surfaces of different curvat
 
 ## Evolution Method {#sec:evolution-method}
 
-Two main concepts are covered in this section, both proposed by [@Pottmann2010-ku]: the first, what is called the *evolution method*, and a second method based on *piecewise-geodesic* vector fields.
+Two main concepts are covered in this section, both proposed by [@Pottmann2010-ku]: the first, what is called the *evolution method*, and a second method based on *piecewise-geodesic* curves, curves that are not geodesic, but are composed of several connected geodesic segments.
 
 <div id="fig:evolExample1">
 ![](resources/images/png/CuttyEvolutionMethod.png){#fig:evolSurf width=45%}
@@ -251,7 +256,6 @@ Starting from a source geodesic somewhere in the surface:
 
 * 'Next' geodesics must fulfill the condition of being at approximately constant distance from its predecessor.
 
-
 * 'Next geodesics' are as described in [@fig:bestFitGeodesic]
 
 ### Distances between geodesics {-}
@@ -259,6 +263,8 @@ Starting from a source geodesic somewhere in the surface:
 1. No straight forward solution.
     1. Only for rotational surfaces (surfaces with evenly distributed meridian curves).
 2. **But** a first-order approximation of this distance can be approximated:
+
+The method proposed in @Pottmann2010-ku is based on the calculation of *Jacobi Fields*, vector fields perpendicular to a geodesic that approximate the distance between one geodesic and the next in an infinitesimal distance.
 
 Starting at time $t=0$ with a geodesic curve $g(s)$, parametrized by arc-length $s$, and let it move within the surface.  
 A snapshot at time $t=\varepsilon$ yields a geodesic $g^+$ near $g$.
@@ -271,29 +277,31 @@ The derivative vector field $\mathbf v$ is called a *Jacobi field*. We may assum
 
 Since the distance between infinitesimally close geodesics are governed by [@Eq:jacobiField], that equation also governs the width of a strip bounded by two geodesics at a small finite distance.
 
+We propose a simpler approach to this problem, since the computation of the jacobi field can give very high margins of error and 'next' geodesic $g_{i+1}$ will still need to be computed using the initial value problem. The modification is the following: we can substitute the length of the jacobi field for the user's specified width $W$ and find the best fit geodesic that fits this *signed distances*.
+
 ### Obtaining the 'next' geodesic {-}
 
 ![Calculating the 'next' geodesic](resources/images/vector/Diagram-BestFitGeodesic.svg){#fig:bestFitGeodesic}
 
-Input:
-: A freeform surface $S$, a desired width $W$ and a starting geodesic curve $g_0$
+\begin{algorithm}
+\label{alg:bestFit}
+\caption{Calculate the best-fit geodesic}
+\algsetup{indent=1em}
+\small
+\begin{algorithmic}[1]
+\REQUIRE Curve $g_i$,perp geodesics $h^\perp$, desired width $W$ and an angle threshold $\alpha$.
 
-Output:
-: The 'next' computed geodesic on $S$
+\STATE Obtain a point $p_i$ at distance $W$ from the starting point of each $g^\perp_i$
+\STATE Select any point $p_i$ as the start point and name it $p_0$.
+\STATE Select the tangent vector $\mathbf v_T$ of $g^\perp_i$ at $p_0$.
+\STATE Rotate $\mathbf v_T$ 90º around the normal of $\Phi$ at $p_0$.
+\STATE Generate an initial geodesic $g_i$.
+\STATE Obtain error measure $\epsilon$ as the least squares difference between the desired distance $W$ and the actual distance $D$
+\STATE Find the geodesic that has the least error by rotating $v_T$ by a small amount each step.
 
-Pseudocode:
-: Given a valid $S$, $W$ and $g_0$:
-
-  1. Sample the curve $g_0$ at uniformly distributed arc-length parameters $x_i$.
-  2. Compute a a set of geodesics $h_i \perp g_0$ starting points $p(x_i)$ on $g_0$.
-  3. Select a width function $\omega(s)$ that is closest to a desired target width function $W(s)$(Width function can return a fixed value or a computed value using curvature. It could be further improved accommodate other measures).
-  4. Select a Jacobi field $\mathbf v(s)$ using $\omega(s)$ as stated in [@Eq:jacobiField].
-  5. 'Walk' the length of the vector $\mathbf v(s)$ on $h_i$ to obtain $\chi_i$. These points approximate position of the *next geodesic* "g^+_i".
-    1. A more simple solution can be obtained by directly using the desired $W$ to obtain the points $\chi_i$.
-  6. The previous step can have a very big error margin, therefore we must compute $g^+_i$:
-      1. Select a point $\chi_i$ and name it $\chi_0$.
-      2. We can compute the next geodesic by minimizing the square of the error between the width function $\omega(s)$ and the *signed distance* of the computed $g^+_i$ to $g_0$.
-  7. Return computed geodesic $g^+_i$.
+\ENSURE The next geodesic curve that best fits $W$.
+\end{algorithmic}
+\end{algorithm}
 
 Any given surface can be completely covered in this manner by recursively computing the next geodesic using the previous, given some margin of error.
 
@@ -305,19 +313,53 @@ Any given surface can be completely covered in this manner by recursively comput
 Results of the evolution method applied to surfaces of different curvature: (a) positive, (b) negative and (c) doubly curved.
 </div>
 
+\begin{algorithm}
+\label{alg:evolMethod}
+\caption{Evolution Method}
+\algsetup{indent=1em}
+\small
+\begin{algorithmic}[1]
+\REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F), a desired width $W$, and a starting geodesic curve $g_0$.
+\STATE Place a geodesic curve $g_i$ along $\Phi$ and name it $g_0$.
+\STATE Divide the curve into equally $N$ number of sample points.
+\FORALL {points $p_i$\quad where \quad $i=0,...,N$}
+\STATE Find tangent vector $\mathbf{v}^T_i$ of $g$
+\STATE Rotate $\mathbf{v}^T_i$ by $\frac{\pi}{4}$
+\STATE Generate geodesic $h^\perp_i$ from $p_i$ and $\mathbf{v}^T_g$
+\ENDFOR
+\STATE Compute BEST FIT GEODESIC $g_{i+1}$\ref{alg:bestFit}
+\IF {No best fit is found} \STATE BREAK
+\ENDIF
+\STATE Make $g_{i+1}$ the current geodesic for next iteration.
+\ENSURE Set $G$ of geodesic curves $g_i,\quad where \quad i=0,...,M$
+\end{algorithmic}
+\end{algorithm}
+
 ### Piecewise evolution method {-}
 
 We can modify the implementation of the evolution method to be able to control the distance between geodesics even in areas with a high rate of change in curvature. In order to prevent this unwanted width variations, instead of looking for the best overall geodesic, we will look for the best geodesic that fits the largest interval of $h_i$'s possible [@fig:bestPiecewiseGeodesic], given a specified threshold $\epsilon$. Once this interval is obtained, the current geodesic is split and a new geodesic will be generated. This process will be repeated until the curve crosses all $h_i$'s (some exceptions apply).
 
 ![Calculating the best piece-wise geodesic](resources/images/vector/Diagram-PieceWiseGeodesic.svg){#fig:bestPiecewiseGeodesic}
 
-<div id="fig:piecewiseEvolExample">
+\begin{algorithm}
+\label{alg:piecewise}
+\caption{Calculate the best-fit piecewise geodesic}
+\algsetup{indent=1em}
+\small
+\renewcommand{\algorithmicrequire}{\textbf{Start from:}}
+\renewcommand{\algorithmicensure}{\textbf{On end:}}
+\begin{algorithmic}[1]
+\REQUIRE Step ?? of Algorithm 3.
 
-![](resources/images/png/PiecewiseTestView2.png){#fig:piecewiseTestView2 width=45%}
-![](resources/images/png/PiecewiseTest.png){#fig:piecewiseTest width=45%}
-
-$(a)$ Perspective view; $(b)$ Top View. In red, the initial geodesic curve; in blue, the generated piecewise geodesic pattern; the red dots are breakpoints in the piecewise geodesic curves.
-</div>
+\STATE Find the largest interval $I$ of $g_{i+1}$ that does not exceed $\epsilon$ by a given %.
+\IF {$g_i$ satisfies the $\epsilon$ for all $h^\perp$'s} \STATE BREAK
+\ENDIF
+\STATE Split $g_i$
+\STATE Remove used $h^\perp$ from list.
+\STATE Start Algorithm 3 again using the new $h^\perp$, and the start/end point of $g_i$
+\ENSURE Continue from Step ?? of Algorithm 3.
+\end{algorithmic}
+\end{algorithm}
 
 <div id="piecewiseResults">
 ![](resources/images/vector/Results-PiecewiseEvolution-Positive.svg){#fig:piecewisePositiveCurv width=100%}
@@ -325,6 +367,13 @@ $(a)$ Perspective view; $(b)$ Top View. In red, the initial geodesic curve; in b
 ![](resources/images/vector/Results-PiecewiseEvolution-Double.svg){#fig:piecewiseDoubleCurv width=100%}
 
 Piecewise evolution method applied to: (a) a positive curvature surface, (b) a negative curvature surface and (c) a doubly curved surface.
+</div>
+
+<div id="fig:piecewiseEvolExample">
+![](resources/images/png/PiecewiseTestView2.png){#fig:piecewiseTestView2 width=45%}
+![](resources/images/png/PiecewiseTest.png){#fig:piecewiseTest width=45%}
+
+$(a)$ Perspective view; $(b)$ Top View. In red, the initial geodesic curve; in blue, the generated piecewise geodesic pattern; the red dots are breakpoints in the piecewise geodesic curves.
 </div>
 
 ## Level-Set Method {#sec:level-sets}
@@ -349,19 +398,9 @@ where $F_k$ measures the deviation of the scalar function geodesic property, $F_
 
 The algorithm would be started with a set of randomly placed values on each vertex of the mesh [@fig:levelSetStart]. The implementation used in this paper differs from the originally proposed in @Pottmann2010-ku, in which the Gaussian-Newton method is used for minimization and all high order derivatives are computed analytically. In our implementation, we explored the application of gradient-less minimization algorithms, in particular BOBYQA (Bound Optimization BY Quadratic Approximation) although this decision causes computation times to increase severely.
 
-<div id="fig:levelSetStart">
-![](resources/images/vector/Results-LevelSets-Start-Back.svg){width=50%}
-![](resources/images/vector/Results-LevelSets-Start-Front.svg){width=50%}
+![Starting conditions for the level set method on a double curve surface](resources/images/vector/Results-LevelSets-Start.svg){#fig:levelSetStart width=100%}
 
-Starting conditions for the level set method on a double curve surface
-</div>
-
-<div id="fig:levelSetEnd">
-![](resources/images/vector/Results-LevelSets-End-Back.svg){width=50%}
-![](resources/images/vector/Results-LevelSets-End-Front.svg){width=50%}
-
-Final result of the level set method over a complex double curve surface.
-</div>
+![Final result of the level set method over a complex double curve surface.](resources/images/vector/Results-LevelSets-End.svg){#fig:levelSetEnd width=100%}
 
 ## Geodesic Webs
 
@@ -398,7 +437,8 @@ A geodesic vector field on a surface $S$ is geodesic if it consists of tangent v
 Considering the surface $S$ as a triangle mesh (V,E,F), the vector field is represented by unit vectors $\mathbf v_f$ attached to the incenters of facef $f \in F$.
 
 > $$\mathbf v_{f_2} = \mathbf v_{f_1} + J_{f_1} \dot (m_{f_2} - m_{f_1}) + r_e$${#eq:vectorField}
-$$ where J_f = XXXX$$
+
+> $$ where J_f = XXXX$$
 
 The vector field $\mathbf v = (\mathbf v_f)_{f \in F}$ is a geodesic vector field if it's length is constant for all faces $f$, and we can find a collection of coefficients $\mathbf g = (\mathbf g_f)_{f \in F}$ with $\mathbf g_f = (g_{1,f},g_{2,f},g_{3,f})$, such that [@eq:vectorField] holds with $\mathbf r$'s bellow some theshold.
 
@@ -424,6 +464,8 @@ The second method for defining panels, once an appropriate system of geodesics h
 > * a third vector $B(t)$, *the binormal vector*
 >
 > This makes $T.N.B$ a ***moving orthogonal right-handed frame***
+
+Although this method generates mathematically correct developable surfaces, @Pottmann2010-ku describes it is unclear that the boundaries of the panels generated with this technique will correspond to real constructive requirements for the design, so we concentrate our efforts on method explained in the following section.
 
 ### Tangent-developable method {-}
 
@@ -456,15 +498,23 @@ Initial algorithm is as follows:
 
 Therefore, the procedure was modified in the following way:
 
-> 1. Compute the *tangent developable surfaces* $\Psi_i$ for all surfaces $s_i \rightarrow i=\text{even numbers}$
-> 2. Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
-> 3. Fill the holes in the rulings by interpolation (???)
-> 4. On each ruling:æ
->    1. Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
-> 5. Optimize globally the positions of points $A_i(x)$ and $B_i(x)$ such that
->     1. Trim curves are *smooth*
->     2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
->     3. The ruling segments $A_i(x)B_i(x)$ lies close to the *original surface* $\Phi$
+\begin{algorithm}
+\label{alg:panels}
+\caption{Panels: Modified Tangent-developable method}
+\algsetup{indent=1em}
+\small
+\begin{algorithmic}[1]
+\REQUIRE The reference surface $\Psi$, represented as a mesh (V,E,F) and a geodesic pattern of curves $g_{0...N}$
+\STATE Compute the *tangent developable surfaces* $\Psi_i$ for all surfaces $s_i \rightarrow i=\text{even numbers}$
+\STATE Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
+\FORALL {Rulings}
+\STATE Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
+\ENDFOR
+\STATE Trim $\Psi_i$ with the curve generated from all points $A_i(x)$ and $B_i(x)$ respectively.
+
+\ENSURE Trimmed developable surface $\Psi_i$.
+\end{algorithmic}
+\end{algorithm}
 
 This adjustments to the algorithm allow for the modeling of panels that meet the requirements of developability and approximately constant width, although it must be noted computation times increase, as double the  amount of geodesic curves need to be generated, and subsequently, the desired width function needs to be half the desired width of the panels. [@Fig:tangentDevMethod] shows the result of computing such panels and the subsequent gaps between the generated panels; these gaps need to be kept within a certain width in order to produce a successful watertight panelization of the original surface. Furthermore, material restrictions such as bending or torsion where not taken into account during the construction of the panels.
 
@@ -472,7 +522,9 @@ This adjustments to the algorithm allow for the modeling of panels that meet the
 
 ## Panel gaps
 
-![Binormal Method for panels & T.N.B. frame. On the left, the computed panels with the corresponding panel gaps highlighted in red. On the right, panels colored by distance to reference mesh.](resources/images/vector/PTPanels&DistanceToMesh.svg){#fig:panelGaps fig.pos="t"}
+Since we are generating the panels using the tangent developable method, it is inevitable that some gaps appear between panels, especially when there is a high degree of curvature in the area. We can take this into account when calculating the trim curves, and obtain the maximum gap values of the model. The gap width is strictly related to the thickness of the panel, so if the maximum width of the gaps exceeds a desired a specified distance, computing narrower panels under the same conditions should guarantee the watertightness of the solution.
+
+![. On the left, the computed panels using the *tangent developable method* with the corresponding panel gaps highlighted in red. On the right, panels colored by distance to reference mesh. Maximum gap size = ](resources/images/vector/PTPanels&DistanceToMesh.svg){#fig:panelGaps fig.pos="H"}
 
 ## Stress and strain in panels
 
@@ -482,7 +534,7 @@ The following section investigates the behavior of a rectangular strip of elasti
 * If you introduce the radius of Gaussian curvature $\rho = 1 / \sqrt{|K|}$...
 * ...the relative increment in length of the strip is:
 
-$$\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots $$ {#eq:strain}
+$$\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots$${#eq:strain}
 
 ### Tensile stress {-}
 
@@ -502,7 +554,7 @@ These values depend on the curvature $\kappa$ of the central geodesic and the ra
 
 $$\sigma = E \kappa h/2 \quad and\quad \tau = hG\theta$${#eq:bendingAndShear}
 
-It is important to note that $\tau$, measured by arc per meter, does not exceed $\sqrt{|K|} = 1/\rho$, where the maximum value ocurs in case the central geodesic's tangent happens to be an asymptotic direction of the panel surface [@DoCarmo2016kx].
+It is important to note that $\tau$, measured by arc per meter, does not exceed $\sqrt{|K|} = 1/\rho$, where the maximum value occurs in case the central geodesic's tangent happens to be an asymptotic direction of the panel surface [@DoCarmo2016kx].
 
 It is standard procedure to combine all stresses (tension, shear, bending) and use this information for checking panel admissibility.
 
@@ -513,5 +565,61 @@ Also, as one might conclude straight away, panels generated using the tangent de
 | Wood |  13000 | 80 |  0.11 |
 | Steel | 200000  | 250  | 0.05  |
 | Titanium |  |   |   |
+: Computing the constant for each material by measuring some sample values on the surface.
+
+From here we can also check the admissibility of the computed models using the formulas described above. 
+
+| Figure no.| Material | Panel Width (m) | $|K|_{max}[m^-2]$ | $\rho_{min}$ | Admissible width (m) | Admissible? |
+|:-:|---|---|---|---|---|---|
+|   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |
+: Panelization solution admissibility check.
+
+Since the examples in this publication where created for illustration purposes, many of the models will not be admissible for fabrication. However, once a max panel width is calculated, if the design is not admissible, one can calculate *narrower* panels using the maximum calculated width in order to have an admissible model.
+
+# Conclusions
+
+> TEMPORARY
+
+1. Parallel transport method and evolution method is only useful for simple surfaces of constant curvature, where the behavior of the generated geodesics can be easily predicted.
+2. Piecewise evolution method is useful for any kind of surface, but there is a lack of control over the breakpoint positions, which might be undesirable depending on the design intention of the architect.
+3. Level-set method, coupled with the geodesic vector fields, is a perfect solution to enable user interaction during the pattern design process, although in our implementation, we did not achieve sufficiently low computation times for this to be a possibility. It will also be necessary to check the deviation of the resulting curves' geodesic property, since depending on the reference surface and the user specified weights, the generated pattern can deviate from true geodesics.
+
+```{.mermaid width=3000 theme='neutral'}
+graph LR
+C[Parallel Transport]
+D[Evolution]
+E[Piecewise Evolution]
+F[Level-sets]
+G[Geodesic Vector Fields]
+H(Triangle mesh developability)
+
+subgraph Simple Surfaces
+C
+D
+F
+end
+
+subgraph Shape Optimization
+H
+end
+
+subgraph Pattern Generation
+C
+F --> G
+C --> D
+D --> E
+end
+
+C --> I[Results are satisfactory? ]
+D --> I
+F --> I
+G --> I
+E --> I
+I --> |No|H
+I --> |Yes| Finish!
+H --> J[Start Again]
+```
 
 # References
