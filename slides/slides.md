@@ -12,42 +12,36 @@ theme: metropolis
 colortheme: dove
 fonttheme: serif
 fontsize: 8pt
-logo: "../resources/images/logos/MPDA-logo3.png"
 
 # Reveal.js styles
 css: ../slides/slides.css
+
 # Other options
 header-includes:
+  \usepackage{opensans}
   \usepackage{algorithmic}
+  \usepackage{xcolor}
   \usepackage{svg}
   \usepackage{svgcolor}
-  \usepackage{pgfpages}
   \usepackage{caption}
   \renewcommand{\algorithmicrequire}{\textbf{Input:}}
   \renewcommand{\algorithmicensure}{\textbf{Output:}}
-
+  \setbeamercolor{frametitle}{fg=white,bg=black}
+  \setbeamercolor{titlepage}{fg=white,bg=black}
+  \setbeamertemplate{frametitle}{
+    \nointerlineskip
+    \begin{beamercolorbox}[ht=2.2em,wd=\paperwidth]{frametitle}{
+      \fontfamily{opensans}\selectfont
+      \vfill\hspace*{6pt}\strut\scriptsize\text{Geodesic Patterns - Alan Rynne Vidal}\break
+      \hspace*{16pt}\normalsize\insertframetitle\strut\vfill}
+    \end{beamercolorbox}}
+  # \usepackage{pgfpages}
+  # \pgfpagesuselayout{2 on 1}
 ---
-
-## Index
-
-1. [Objective](#objective)
-2. [Background](#background)
-3. [Construction technique](#construction-technique)
-4. [Algorithmic strategies](#algorithmic-strategies)
-5. [The parallel transport method](#the-parallel-transport-method)
-6. [The Evolution Method](#the-evolution-method)
-7. [The Piecewise Evolution Method](#the-piecewise-evolution-method)
-8. [The level set method](#the-level-set-method)
-9. [Modeling planks](#modeling-planks)
-10. [Optimization](#optimization)
-11. [Analysis](#analysis)
-12. [Conclusion](#conclusion)
-13. [Thanks [^acknowledgments]](#thanks-acknowledgments)
-14. [Appendix](#appendix)
 
 # Objective
 
----
+## Objective
 
 Discretize a given freeform surface into planks with the following properties:
 
@@ -58,31 +52,36 @@ Discretize a given freeform surface into planks with the following properties:
 3. Should be ***as straight as possible***
 
 4. Cannot bend by their strong axis but,
-   
+
 5. can have a twist and bend by their weak axis
 
----
+## Objective
 
 Plank
 : A plank is timber that is flat, elongated, and rectangular with parallel faces that are higher and longer than wide. ([Wikipedia](https://en.wikipedia.org/wiki/Plank_(wood)))
 
-![A straight plank laying on a cylinder on different directions.](resources/images/vector/CylinderPlaks.svg){#fig:cylinderPlanks}
+<div id="fig:planks">
+![](resources/images/vector/HyparPlanks.svg){#fig:hyparPlanks width=33%}
+![](resources/images/vector/CylinderPlanks.svg){#fig:cylinderplanks width=66%}
+
+Straight planks bent on a hyperbolic paraboloid (a) and a cylindrical surface (b).
+</div>
 
 # Background
 
----
+## Background
 
 The use of *straight developable planks* is widely used in:
 
 ![Traditional boat building](http://woodboatbuilder.com/maid-planking/sm13planks.jpg){width=60%}
 
----
+## Background
 
 Also common practice in naval engineering industry:
 
 ![Connected developable patches for boat hull design](https://github.com/AlanRynne/MPDA_18-MasterThesis/raw/master/slides/slideImages/developableHull.jpeg){width=70%}
 
----
+## Background
 
 The architecture studio NOX was one of the first to experiment with paper strips.
 
@@ -95,21 +94,27 @@ The architecture studio NOX was one of the first to experiment with paper strips
 :::
 :::::::::
 
-> MISSING BIB REFERENCE HERE!!!!
-
-## Frank Ghery
+## Background
 
 This techniques have also been used in the architecture world, mainly by **Frank Ghery**.
 
 His façades are usually a collection of connected developable surfaces.
 
----
+<div id="fig:gheryBackground">
+![](resources/images/background/guggenheim.jpg){#fig:guggenheimMuseum width=33%}
+![](resources/images/background/waltDisneyConcertHall.jpg){#fig:waltDisneyHall width=33%}
+![](resources/images/background/guggenheimAbuDhabi.jpg){#fig:guggenheimAbuDhabi  width=33%}
 
-Latest architectural work following this techniques was:
+Famous Ghery projects (right to left): Guggenheim Museum (Bilbao, 1997), Walt Disney Concert Hall (Los Angeles, 2003) and the Guggenheim Abu Dhabi winning proposal (Abu Dhabi, --)
+</div>
+
+## Background
+
+Latest architectural work following similar techniques was:
 
 ![Burj Khalifa by Frank Ghery](https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa05.jpg){width=60%}
 
----
+## Background
 
 :::::::::{.columns}
 :::{.column width=65%}
@@ -128,9 +133,29 @@ It was designed as a collection of:
 :::
 :::::::::
 
----
+## Background
 
 ![Burj Khalifa final panel solution](https://cdn.archpaper.com/wp-content/uploads/2012/04/BurjKhalifa14.jpg){#fig:burjKhalifa width=100%}
+
+## Background
+
+Other projects of interest are:
+
+<div id="fig:minaNoMori">
+![](resources/images/background/minaNoMori.jpg){#fig:minaNoMoriInterior width=50%}
+![](resources/images/background/minaNoMoriConstruction.jpg){#fig:minaNoMoriConstruction width=50%}
+
+Interior view of Toyo Ito's Mina No Mori wooden lattice roof (a) and exterior view of the lattice under construction (b).
+</div>
+
+## Background
+
+<div id="fig:shigeruGolf">
+![](resources/images/background/shigeruYeojuConstruction.jpg){#fig:shigeruGolfPart width=49%}
+![](resources/images/background/shigeruYeojuConstruction2.jpg){#fig:shigeruGolfConstruction width=49%}
+
+Shigeru Ban's Yeoju Golf Resort. Right: Interior view of finished roof lattice. Left: Aerial view of lattice under construction.
+</div>
 
 # Construction technique
 
@@ -140,34 +165,31 @@ A geodesic curve is the generalization of a *straight line* into *curved spaces*
 
 In this research, we concentrate on the concept of ***straightest geodesics***.
 
-:::::::::{.columns}
-:::{.column width=50%}
-### Some markdown content
-:::
-:::{.column width=50%}
-![Shortest geodesic on a torus](resources/images/vector/ShortestGeodesics.svg){#fig:shortestGeod}
-:::
-:::::::::
-
+![Geodesics on a torus: Although $g_0$ and $g_1$ are both geodesics, one doubles the length of the other](resources/images/vector/ShortestGeodesics.svg){#fig:shortestGeod width=50%}
 
 ## Developable surfaces
 
 ![Surfaces with ***0 gaussian curvature***. Meaning, they can be flattened onto a plane ***without distortion***](resources/images/vector/DevelopableFromCurve.svg){#fig:devFromCurve}
 
----
+## Developable panels
+
+We are interested in:\
+\
+\
 
 > Developable surfaces
 > : \
 >   
 >   * surfaces that can be flattened.
 >   * can be generated by a single curve.  
+\
 
 > Geodesic curves
 > : \
 >   
 >   * are straight lines in a curved space.
 
----
+## Developable panels
 
 If
 : Panels are generated using geodesic curves on the surface
@@ -175,18 +197,35 @@ If
 Then
 : Resulting panels will be ***developable*** and mostly ***straight*** when flat.
 
-![A straight plank laying on a hyperbolic paraboloid](resources/images/vector/HyparPlanks.svg){#fig:hyparPlank width=40%}
+<div id="fig:planksAgain">
+![](resources/images/vector/HyparPlanks.svg){#fig:hyparPlanks width=33%}
+![](resources/images/vector/CylinderPlanks.svg){#fig:cylinderplanks width=66%}
 
----
+Straight planks bent on a hyperbolic paraboloid (a) and a cylindrical surface (b).
+</div>
+
+## Developable panels
 
 In other words
 : \
   
   We wish to cover a given freeform surface with a pattern of **geodesic curves** with equal spacing.
 
-  This can only be achieved if the provided surface is already *developable*.\
+  This can only be achieved if the provided surface is already ***developable***.\
   \
-  A compromise exists between the *curve spacing* and the *curve's geodesic curvature*
+  A compromise exists between the ***curve spacing*** and the ***curve's geodesic curvature***
+
+## Properties we aim for
+
+Geodesic property
+:  \ Look for ***straight*** or ***as straight as possible*** curves.\
+
+Constant width property
+: \ Curves that are ***equally spaced*** on the surface\
+
+
+Developable property
+: \ Surfaces generated from the curves ***MUST*** be developable.\
 
 # Algorithmic strategies
 
@@ -205,16 +244,25 @@ These are the main methods for the obtaining successful geodesic patterns:
 
 ![Parallel transport of a vector over a path on a sphere](resources/images/vector/SpherePT.svg){#fig:ptSphere width=50%}
 
----
+## Vector parallel transport
 
 ![Parallel transport over two adjacent mesh faces](resources/images/vector/Diagram-ParallelTransport.svg){#fig:ptDiagram}
 
-## P.T. Implementation
+## The parallel transport method
 
+![Parallel transport method over a positive curvature surface](resources/images/vector/ParallelTransportMethod.svg){#fig:ptPositiveCurvature}
+
+## The parallel transport method
+
+![Parallel transport method diagram](resources/images/vector/Diagram-ParallelTransportMethod.svg){#fig:diagramPartTrans}
+
+## The parallel transport method
+
+\algsetup{indent=1em}
 \small
 \begin{algorithmic}[1]
 \REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F)
-\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
+
 \STATE Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2.
 \STATE Divide the curve into $N$ equally spaced points $p$ with distance $W$.
 \STATE Place an vector $\mathbf v$  onto $p_0$
@@ -224,9 +272,10 @@ These are the main methods for the obtaining successful geodesic patterns:
   \STATE Join $+g_i$ and $-g_i$ together to obtain $g_i$
   \STATE Add $g_i$ to output.
 \ENDFOR
+\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
 \end{algorithmic}
 
----
+## The parallel transport method
 
 There are **three** *extreme* cases depending on the ***local gaussian curvature*** where $g$ lies on $\Phi$:
 
@@ -239,75 +288,139 @@ Negative curvature
 0 gaussian curvature:
 : Panels will be  of equal width
 
-## P.T. Example
+<div id="parTransResults">
 
-![Parallel transport method over a positive curvature surface](resources/images/vector/ParallelTransportMethod.svg){#fig:ptPositiveCurvature}
+![](resources/images/vector/Results-ParallelTransport-Positive.svg){#fig:parTransPositiveCurv width=30%}
+![](resources/images/vector/Results-ParallelTransport-Negative.svg){#fig:parTransNegativeCurv width=30%}
+![](resources/images/vector/Results-ParallelTransport-Double.svg){#fig:parTransDoubleCurv width=30%}
+</div>
 
-## P.T. Results
+## The parallel transport results
 
-![TNB generated panels & distance to original mesh](resources/images/vector/PTPanels&DistanceToMesh.svg){#fig:ptPanels}
+![Parallel transport results over a positive curvature surface. Starting geodesic (red) and geodesic pattern (white). **Máximum** distance between curves occur on $g$.](resources/images/vector/Results-ParallelTransport-Positive.svg){#fig:parTransPositiveCurv2}
+
+## The parallel transport results
+
+![Parallel transport results over a negative curvature surface. Starting geodesic $g$ (red) and geodesic pattern (white). **Minimum** distance between panels occur on $g$](resources/images/vector/Results-ParallelTransport-Negative.svg){#fig:parTransNegativeCurv2}
+
+## The parallel transport results
+
+![Parallel transport results over a doubly curved surface. Starting geodesic (red) and geodesic pattern (white).](resources/images/vector/Results-ParallelTransport-Double.svg){#fig:parTransDoubleCurv2}
 
 # The Evolution Method
 
----
+## The Evolution Method
 
 ![Calculating the best-fit geodesic](resources/images/vector/Diagram-BestFitGeodesic.svg){#fig:bestFitGeodesic}
 
 ## Evolution Implementation
 
-\small
-\begin{algorithmic}[1]
-\REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F)
-\ENSURE Set of geodesic curves $g_i,\quad where \quad i=0,...,M$
-\STATE Place a geodesic curve $g_x$ along $S$ such that it divides the surface completely in 2.
-\STATE Divide the curve into $N$ equally spaced points $p$ with distance $W$.
-\STATE Place an vector $\mathbf v$  onto $p_0$
-\STATE Parallel transport that vector along $g_x$ as described in [@fig:parTransProc].
-\FORALL {points $p_i$ where i = 0,...,M}
-\STATE Generate geodesic curve $+g_i$ and $-g_i$ using vector $\mathbf{v}_i$ and $\mathbf{-v}_i$ respectively.
-\STATE Join $+g_i$ and $-g_i$ together to obtain $g_i$
-\STATE Add $g_i$ to output.
-\ENDFOR
-\end{algorithmic}
-
-## Evolution Method Results
-
 :::::::::{.columns}
 :::{.column width=50%}
-![Evolution method example](resources/images/png/CuttyEvolutionMethod.png){#fig:evolutionExample}
+\small
+\begin{algorithmic}[1]
+\REQUIRE Curve $g_i$,perp geodesics $h^\perp$, desired width $W$ and an angle threshold $\alpha$.
+
+\STATE Obtain a point $p_i$ at distance $W$ from the starting point of each $g^\perp_i$
+\STATE Select any point $p_i$ as the start point and name it $p_0$.
+\STATE Select the tangent vector $\mathbf v_T$ of $g^\perp_i$ at $p_0$.
+\STATE Rotate $\mathbf v_T$ 90º around the normal of $\Phi$ at $p_0$.
+\STATE Generate an initial geodesic $g_i$.
+\STATE Obtain error measure $\epsilon$ as the least squares difference between the desired distance $W$ and the actual distance $D$
+\STATE Find the geodesic that has the least error by rotating $v_T$ by a small amount each step.
+
+\ENSURE The next geodesic curve that best fits $W$.
+\end{algorithmic}
 :::
 :::{.column width=50%}
-![Evolution method problems](resources/images/png/CuttyEvolutionMethod2.png){#fig:evolutionProblems}
+\small
+\begin{algorithmic}[1]
+\REQUIRE A surface $\Phi$, represented as a triangular mesh (V,E,F), a desired width $W$, and a starting geodesic curve $g_0$.
+\STATE Place a geodesic curve $g_i$ along $\Phi$ and name it $g_0$.
+\STATE Divide the curve into equally $N$ number of sample points.
+\FORALL {points $p_i$\quad where \quad $i=0,...,N$}
+\STATE Find tangent vector $\mathbf{v}^T_i$ of $g$
+\STATE Rotate $\mathbf{v}^T_i$ by $\frac{\pi}{4}$
+\STATE Generate geodesic $h^\perp_i$ from $p_i$ and $\mathbf{v}^T_g$
+\ENDFOR
+\STATE Compute BEST FIT GEODESIC $g_{i+1}$\ref{alg:bestFit}
+\IF {No best fit is found} \STATE BREAK
+\ENDIF
+\STATE Make $g_{i+1}$ the current geodesic for next iteration.
+\ENSURE Set $G$ of geodesic curves $g_i,\quad where \quad i=0,...,M$
+\end{algorithmic}
 :::
 :::::::::
 
----
+
+## Evolution Method Results
+
+![Evolution method results over a positive curvature surface. Starting geodesic (red), geodesic pattern (white) and results from [@fig:parTransPositiveCurv2] (dashed gray lines).](resources/images/vector/Results-Evolution-Positive.svg){#fig:evolPositiveCurv width=100%}
+
+## Evolution Method Results
+
+![Evolution method results over a negative curvature surface. Starting geodesic (red), geodesic pattern (white) and results from [@fig:parTransNegativeCurv2] (dashed gray lines).](resources/images/vector/Results-Evolution-Negative.svg){#fig:evolNegativeCurv width=100%}
+
+## Evolution Method Results
+
+![Evolution method results over a doubly curved surface. Starting geodesic (red), geodesic pattern (white) and results from [@fig:parTransDoubleCurv2] (dashed gray lines).](resources/images/vector/Results-Evolution-Double.svg){#fig:evolDoubleCurvature width=100%}
+
+## Evolution Method Results
 
 Local changes in curvature produce:
 
 * Sharp panel endings in positive curvature areas
 * Panel width increase in negative curvature areas
 
+<div id="evolMethodExample">
+![](resources/images/png/CuttyEvolutionMethod.png){#fig:evolutionExample width=45%}
+![](resources/images/png/CuttyEvolutionMethod2.png){#fig:evolutionProblems width=45%}
+
+Evolution method example: top view (a), perspective view (b) with highlighted unwanted results.
+</div>
+
 # The Piecewise Evolution Method
 
----
+## The Piecewise Evolution Method
 
 ![Calculating the best piece-wise geodesic](resources/images/vector/Diagram-PieceWiseGeodesic.svg){#fig:bestPiecewiseGeodesic}
 
 ## Piecewise Ev. Implementation
 
-> INSERT ALGORITHM HERE
+\small
+\renewcommand{\algorithmicrequire}{\textbf{Start from:}}
+\renewcommand{\algorithmicensure}{\textbf{On end:}}
+\begin{algorithmic}[1]
+\REQUIRE Step ?? of Algorithm 3.
+
+\STATE Find the largest interval $I$ of $g_{i+1}$ that does not exceed $\epsilon$ by a given %.
+\IF {$g_i$ satisfies the $\epsilon$ for all $h^\perp$'s} \STATE BREAK
+\ENDIF
+\STATE Split $g_i$
+\STATE Remove used $h^\perp$ from list.
+\STATE Start Algorithm 3 again using the new $h^\perp$, and the start/end point of $g_i$
+\ENSURE Continue from Step ?? of Algorithm 3.
+\end{algorithmic}
 
 ## Piecewise Ev. Results
 
-:::::::::{.columns}
-:::{.column width=50%}
+![](resources/images/vector/Results-PiecewiseEvolution-Positive.svg){#fig:piecewisePositiveCurv width=100%}
+
+## Piecewise Ev. Results
+
+![](resources/images/vector/Results-PiecewiseEvolution-Negative.svg){#fig:piecewiseNegativeCurv width=100%}
+
+## Piecewise Ev. Results
+
+![](resources/images/vector/Results-PiecewiseEvolution-Double.svg){#fig:piecewiseDoubleCurv width=100%}
+
+## Piecewise Ev. Results
+
 ![Piecewise Test](resources/images/png/PiecewiseTestView2.png){#fig:piecewiseTestView2}
-:::
-:::{.column width=50%}
+
+## Piecewise Ev. Results
+
 ![Piecewise Test](resources/images/png/PiecewiseTest.png){#fig:piecewiseTest}
-:::
-:::::::::
 
 # The level set method
 
@@ -315,43 +428,52 @@ Local changes in curvature produce:
 
 ![Level set on a single mesh face](resources/images/vector/LevelSet-SingleTriangle.svg){#fig:levelSetFace}
 
-## Level-set Implementation
+## Level-set Start Condition
 
-> INSERT ALGORITHM HERE
+![Starting conditions for the level set method on a double curve surface](resources/images/vector/Results-LevelSets-Start.svg){#fig:levelSetStart width=100%}
 
-## Results
+## Computed level sets
+
+![Final result of the level set method over a complex double curve surface.](resources/images/vector/Results-LevelSets-End.svg){#fig:levelSetEnd width=100%}
+
+# Piecewise geodesic vector-fields
+
+[^PottmanPatterns]: Image taken from @Pottmann2010-ku
+
+## Piecewise geodesic vector-fields
+
+![Geodesic pattern example[^PottmanPatterns]](resources/images/GeodPatterns/geodPattern-figure-01.png){#fig:geodFieldExample}
+
+## Piecewise geodesic vector-fields
+
+The objective is to divide or *cut* the mesh into areas that will be easilly covered by a 1-pattern of geodesics [^PottmanPatterns].
 
 :::::::::{.columns}
 :::{.column width=50%}
-MISSING TEXT
+![User specified directions](resources/images/GeodPatterns/geodPattern-figure-32.png){#fig:geodFieldUser}
 :::
 :::{.column width=50%}
-> MISSING IMAGE
+![Computed geodesic vector field & cuts](resources/images/GeodPatterns/geodPattern-figure-33.png){#fig:geodFieldCuts}
 :::
 :::::::::
+
+This is done by computing a *geodesic vector field* over the surface, in a way that it aligns with several user specified directions.
 
 # Modeling planks
 
 ## Tangent-developable method
 
----
 
-:::::::::{.columns}
-:::{.column width=50%}
 Given any point in $g$:
 
 1. Assuming $T(x)$ is tangent $g$.  
 2. Compute $U(x)$ as $T(x)\times N_\Phi(x)$
 
 > The union of all $U(x)$ is a developable ruled surface $\Psi$.
-:::
-:::{.column width=50%}
+
 ![Tangent developable method for panels](resources/images/vector/Panels-TangentDevelopable.svg){#fig:tangDevPanels}
-:::
-:::::::::
 
-
----
+## Tangent-developable method
 
 Initial algorithm is as follows:
 
@@ -366,86 +488,28 @@ Initial algorithm is as follows:
 1. The rulings of tangent developable may behave in weird ways
 2. The intersection of the neighboring $\Psi_i$'s is often *ill-defined*.
 
----
+## Tangent-developable method
 
 Therefore, the procedure was modified in the following way:
 
-1. Compute the *tangent developable surfaces* $\Psi_i$ for all surfaces $s_i \rightarrow i=\text{even numbers}$
-2. Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
-3. Fill the holes in the rulings by interpolation (???)
-4. On each ruling:
-  1. Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
-5. Optimize globally the positions of points $A_i(x)$ and $B_i(x)$ such that
-  1. Trim curves are *smooth*
-  2. $A_i(x)$ and $B_i(x)$ are close to geodesics $s_{i-1}$ and $s_{i+1}$
-  3. The ruling segments $A_i(x)B_i(x)$ lies close to the *original surface* $\Phi$
+\small
+\begin{algorithmic}[1]
+\REQUIRE The reference surface $\Psi$, represented as a mesh (V,E,F) and a geodesic pattern of curves $g_{0...N}$
+\STATE Compute the *tangent developable surfaces* $\Psi_i$ for all surfaces $s_i \rightarrow i=\text{even numbers}$
+\STATE Delete all rulings where the angle enclose with the tangent $\alpha$ is smaller than a certain threshold (i.e. 20º).
+\FORALL {Rulings}
+\STATE Determine points $A_i(x)$ and $B_i(x)$ which are the closest to geodesics $s_{i-1}$ and $s_{i+1}$. This serves for trimming the surface $\Psi_i$.
+\ENDFOR
+\STATE Trim $\Psi_i$ with the curve generated from all points $A_i(x)$ and $B_i(x)$ respectively.
 
----
+\ENSURE Trimmed developable surface $\Psi_i$.
+\end{algorithmic}
+
+## Tangent-developable method
 
 ![Panels computed using the using the modified tangent developable method.](resources/images/vector/Panels-TangentDevelopableModified.svg){#fig:tangentDevMethod}
 
-# Optimization
-
-## Piecewise geodesic vector-fields
-
-[^PottmanPatterns]: Image taken from @Pottmann2010-ku
-
-![Geodesic pattern example[^PottmanPatterns]](resources/images/GeodPatterns/geodPattern-figure-01.png){#fig:geodFieldExample}
-
----
-
-The objective is to divide or *cut* the mesh into areas that will be easilly covered by a 1-pattern of geodesics [^PottmanPatterns].
-
-
-:::::::::{.columns}
-:::{.column width=50%}
-![User specified directions](resources/images/GeodPatterns/geodPattern-figure-32.png){#fig:geodFieldUser}
-:::
-:::{.column width=50%}
-![Computed geodesic vector field & cuts](resources/images/GeodPatterns/geodPattern-figure-33.png){#fig:geodFieldCuts}
-:::
-:::::::::
-
-This is done by computing a *geodesic vector field* over the surface, in a way that it aligns with several user specified directions.
-
-## Developability of triangle meshes
-
-
-[^KraneDevelop]: Image taken from @Stein2018DSF
-
-Different methods for *developalizing* meshes have been developed over the years:
-
-![Left  to  right: @julius2005d, @mitani2004making, @shatz2006paper @liu2006geometric  and @Stein2018DSF [^KraneDevelop]](resources/images/developability/developability-figure-04.png){#fig:developabilityTechniques}
-
----
-
-![Developability of the Stanford Bunny [@Stein2018DSF][^KraneDevelop]](resources/images/developability/developability-figure-20.png){#fig:developableBunny height=70%}
-
----
-
-![Noisy to smooth sheet [@Stein2018DSF][^KraneDevelop]](resources/images/developability/developability-figure-08.png){#fig:noisyVSsmooth}
-
----
-
-![Developalizing a sphere. Results highly depend on the initial mesh topology[^KraneDevelop]](resources/images/developability/developability-figure-02.png){#fig:developableSpheres}
-
----
-
-Energy applied is equivalent to forcing all vertices *angle defect* to be 0.
-
-![Any given vertex on a mesh (left) will become either flat (centre) or a hinge (right)[^KraneDevelop]](resources/images/developability/developability-figure-12.png){#fig:developableSpheres2}
-
-This will automatically create *hinges* in the vertices where it is not possible to be flat.
-
----
-
-![Different threshold configurations[^KraneDevelop]](resources/images/developability/developability-figure-18.png){#fig:developabilityThreshold}
-
 # Analysis
-
-## Gaps in panelization
-
-> ???
 
 ## Stress in panels
 
@@ -459,30 +523,38 @@ This will automatically create *hinges* in the vertices where it is not possible
 
 * Lines parallel to $m$ at distance $d/2$ are not only bent but also stretched.
 
----
+## Stress in panels
 
 If we introduce the radius of Gaussian curvature $\rho = 1 / \sqrt{|K|}$
 
 the relative increment in length $\varepsilon$ (strain) of the strip is:
 
+:::::::::{.columns}
+:::{.column width=50%}
+\
 $$\varepsilon=\frac{1}{2}(d/2\rho)^2+\cdots $$ {#eq:strain}
 
-where $d$ is the planks width.
+:::
+:::{.column width=50%}
+### Where:
 
----
+* $d$ is the plank width
+* $\rho$ is the radius of gausian curvature
+:::
+:::::::::
 
-### Tensile stress
+## Tensile stress
 
 Tensile stress can be expressed as $\sigma = E\varepsilon$[^safety], which yields:
 
 $$ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}}$$
 
 $$\sigma_{max} = \text{maximum admissible stress}$$
-$$E = \text {Young's modulus}$$ 
+$$E = \text {Young's modulus}$$
 
 [^safety]: Since this calculation is an approximation, a safety factor must be used when choosing $\sigma_{max}$.
 
----
+## Admissible panel width
 
 $$ d/2\rho\leq C,\quad{with}\quad{C=\sqrt{\sigma _{max}/E}}$$
 
@@ -490,7 +562,7 @@ Since $C$ is a material constant. We obtain the maximum admissible width with:
 
 $$d_{max} = 2\rho_{min}C$$
 
----
+## C constant
 
 > Maybe missing an image here?
 
@@ -501,6 +573,10 @@ $$d_{max} = 2\rho_{min}C$$
 | Others? | ? | | |
 : Example calculation of constant $C$ for some of the most suitable materials.
 
+## Admissibility for models
+
+> INSERT IMAGE!!!
+
 ## Bending and shear stress
 
 > **Only for panels with thin rectangular cross-sections ($h/d \ll 1$)**
@@ -509,7 +585,7 @@ Bending ($\sigma$) and shear stresses ($\tau$) depend on:
 
 Panel thickness $h$ but ***not*** on the panel width $d$.
 
----
+## Temp Title
 
 Maximum values occur on the outer surface of the panel [@Wallner2010tiling] and depend on:
 
@@ -520,15 +596,15 @@ Maximum values occur on the outer surface of the panel [@Wallner2010tiling] and 
 
 Where $G$ is the shear modulus.
 
----
+## Temp Title
 
-$\tau$, measured by arc per meter, does not exceed $\sqrt{|K|} = 1/\rho$, 
+$\tau$, measured by arc per meter, does not exceed $\sqrt{|K|} = 1/\rho$,
 
 maximum value ocurs if:
 
 * the central geodesic's tangent is an asymptotic direction of the panel surface [@DoCarmo2016kx].
 
----
+## Temp Title
 
 It is standard procedure to combine all streses (tension, shear, bending) and use this information for checking panel admissibility.
 
@@ -536,7 +612,7 @@ INSERT RESULTS!!!
 
 # Conclusion
 
----
+## Temp Title
 
 ```{.mermaid width=3000 theme='neutral'}
 graph LR
@@ -575,15 +651,15 @@ I --> |Yes| Finish!
 H --> J[Start Again]
 ```
 
----
+## Temp Title
 
-> * Parallel transport method is ONLY usefull when surfaces are developable or *nearly* developable.
-> * Evolution Method improves upon it's predecessor but still lacks the ability to maintain equal thickness over complex surfaces.
-> * *Piecewise* evolution method gives the best results overall.
-> * *Level-set method* can be used to calculate geodesic webs.
->   * To cover freeform surfaces it need to be coupled with the geodesic-vector field technique.
-> * *Geodesic vector fields* is an introductory step to cut the mesh into pieces that will be easily covered by a 1-pattern of geodesic curves.
-> * *Developalizing* the surface is an extreme measure, since during the process, the overall smoothness of the surface will be lost. It can still be done in a controlled manner to reduce areas of high curvature.
+* Parallel transport method is ONLY usefull when surfaces are developable or *nearly* developable.
+* Evolution Method improves upon it's predecessor but still lacks the ability to maintain equal thickness over complex surfaces.
+* *Piecewise* evolution method gives the best results overall.
+* *Level-set method* can be used to calculate geodesic webs.
+  * To cover freeform surfaces it need to be coupled with the geodesic-vector field technique.
+* *Geodesic vector fields* is an introductory step to cut the mesh into pieces that will be easily covered by a 1-pattern of geodesic curves.
+* *Developalizing* the surface is an extreme measure, since during the process, the overall smoothness of the surface will be lost. It can still be done in a controlled manner to reduce areas of high curvature.
 
 [^acknowledgments]: Special thanks to ... FILL IN LATER!  
   \
@@ -598,4 +674,3 @@ H --> J[Start Again]
 > PUT LINKS TO GH COMPONENTS HERE + OTHER NICE SOFTWARE!
 
 ## References {.allowframebreaks}
-

@@ -165,8 +165,7 @@ We will first introduce the properties we aim for when generating geodesic panel
 ### Developable (or 'pure-bending') property {-}
 
 > * Bending panels on surfaces changes the distances in points only by a small amount so,
-> * A certain amount of twisting is also present in this applications.\
-> ***Some methods in this chapter  do not take into account this property.***
+> * A certain amount of twisting is also present in this applications.
 
 ### Objectives {-}
 
